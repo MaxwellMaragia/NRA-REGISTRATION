@@ -53,7 +53,7 @@ Feature: [SUC:01-10] De-Register Taxpayer_Organization
     Then Enter TIN number "C0028116"
     And Click on search
     Then Click Cancel "DeregisterRegime:Cancel"
-    Then Verify abandon process "http://18.202.88.7:8001/trips-ui/faces/login/Welcome.xhtml"
+    Then Verify abandon process "http://trips-nra:8001/trips-ui/faces/login/Welcome.xhtml"
 
   @SUC:01-10 @UAT_TCS-01.15.5
   Scenario Outline: UAT_TCS 01.15.5 To verify the process of Rejecting Taxpayer Deregistration Application

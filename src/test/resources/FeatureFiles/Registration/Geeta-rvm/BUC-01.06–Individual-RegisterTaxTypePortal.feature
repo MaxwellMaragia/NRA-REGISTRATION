@@ -6,14 +6,14 @@ Feature: SUC:01-24 Taxpayer Portal Registration (Individual)
   Scenario Outline: UAT_TCS 04.05.2 To Verify the Process of Registering a Tax Type in the Taxpayer Portal
     Given User navigates to the Portal login page
     When User clicks login as Taxpayer
-    And Enters the Portal username "registertax" and password "Codei@maseno2020" to login
+    And Enters the Portal username "JuliusCeaser" and password "Password@123" to login
     Then is logged in to taxpayer portal
     Given user navigates to my tax>>taxtype request
     And enters taxtype as <TaxType>
     And enters an effective date
     And enters taxtype taxable turnover <amount>
     And enters number of employees as "1"
-    And Select document type as "National ID"
+    And Select document type as "Business Registration Certificate"
     And Enter document name as "BRC123"
     Then Select attachment as "C:\ronaldo.png"
     And clicks taxtype registration Save Button
@@ -33,8 +33,8 @@ Feature: SUC:01-24 Taxpayer Portal Registration (Individual)
     Then Click save CRM
     Then Status should be "Rejected"
     Examples:
-      | TaxType | amount   |
-      | PAYE    | 10000000 |
+      | TaxType         | amount   |
+      | Pay As You Earn | 10000000 |
 
   @SUC:01-24 @UAT_TCS-04.05.4
   Scenario: UAT_TCS 04.05.4-To Verify the Process of Income Tax Suspension with other tax types still active

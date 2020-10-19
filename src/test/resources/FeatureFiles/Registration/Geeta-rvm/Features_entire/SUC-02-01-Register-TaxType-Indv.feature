@@ -5,7 +5,7 @@ Feature: SUC:02-01 Register Tax Type-Indv
     When Enters the username "tripsuser" and password "Passw0rd"
     Then User should be logged in
 
-#@SUC:02-01
+  @SUC:02-01 @UAT_TCS-01.20.2
   Scenario Outline: UAT_TCS 01.19.1-UAT_TCS 01.19.2-To Verify the Process of Registering a Tax Type
     Given navigate to Registration>>Register Tax Type
     When Select Taxpayer Classification Type as <Type>
@@ -20,18 +20,26 @@ Feature: SUC:02-01 Register Tax Type-Indv
     And clicks ok on tax type details
     Then message is displayed "Record Added"
     And clicks tax type registration submit button
-    Then success message is displayed "Processing completed"
-#Given navigate to Registration>>Register Tax Type
-#When Select Taxpayer Classification Type as <Type>
-#And enters TIN as <TIN>
-#And clicks find entity search button
-#Then <Tax type> taxtype is displayed
-
+    Then Verify save success message "Processing Completed - Reference Number"
+    Then Obtain reference number "Processing Completed - Reference Number - ARN"
+    Then Open CRM and close modal
+    Then Click on registration application link
+    Then switch to frame
+    Then search for reference number
+    Then Click on reference number
+    And Click on NextStage button
+    Then switch to frame
+    Then Goto view AttachmentDetails screen
+    And Download the Attachment
+    Then switch to frame
+    Then clicks Approve from the dropdown <Approve>
+    Then Click on Save button
+    And Verify the String "<Read>"
     Examples:
-      | Type       | TIN      | Tax type             |
-      | Individual | P0020797 | Withholding Tax(WHT) |
+      | Type       | TIN         | Tax type        | Approve  | Read     |
+      | Individual | N0000027634 | Pay As You Earn | Tax Type | Approved |
 
-  @SUC:02-01 @UAT_TCS-01.20.2
+
   Scenario Outline:  Register TaxType Individual Taxpayer Approve Scenario
     Given Open CRM URL Module
     And Close Popup Window

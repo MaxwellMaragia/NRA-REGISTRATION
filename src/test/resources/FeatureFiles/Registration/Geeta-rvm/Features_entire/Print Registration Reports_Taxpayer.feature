@@ -11,10 +11,10 @@ Feature: Print Registration Reports
     Then Select report to print "Taxpayer Registrations Summary of Transactions"
     Then Select report file type "PDF"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Taxpayer Registrations Summary of Transactions.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Taxpayer Registrations Summary of Transactions.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Taxpayer Registrations Summary of Transactions.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Taxpayer Registrations Summary of Transactions.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.27.2
   Scenario: UAT_TCS 01.27.2-To Verify the Process of printing Taxpayer Reports - De-Registered Taxpayer List
@@ -24,10 +24,10 @@ Feature: Print Registration Reports
     Then Select business sector "All"
     Then Select district "All"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "De-Registered Taxpayer List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "De-Registered Taxpayer List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "De-Registered Taxpayer List.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "De-Registered Taxpayer List.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
 
   @UAT_TCS-01.27.3
@@ -39,10 +39,10 @@ Feature: Print Registration Reports
     Then Select district "All"
     Then Select source "Trips"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Registered Taxpayer List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Registered Taxpayer List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Registered Taxpayer List.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Registered Taxpayer List.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.27.4
   Scenario: UAT_TCS 01.27.4-To Verify the Process of printing Taxpayer Reports - Registrations Awaiting Approval Report
@@ -51,10 +51,10 @@ Feature: Print Registration Reports
     Then Select tax office "All"
     Then Select reason "All"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Registrations Awaiting Approval Report.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Registrations Awaiting Approval Report.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Registrations Awaiting Approval Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Registrations Awaiting Approval Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.27.5
   Scenario: UAT_TCS 01.27.5-To Verify the Process of printing Taxpayer Reports - Taxpayer Profile Amendment Report
@@ -63,10 +63,10 @@ Feature: Print Registration Reports
     Then Select tax office "All"
     Then Select taxpayer category "Individual"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Taxpayer Profile Amendment Report.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Taxpayer Profile Amendment Report.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Taxpayer Profile Amendment Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Taxpayer Profile Amendment Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.27.6
   Scenario: UAT_TCS 01.27.6-To Verify the Process of printing Taxpayer Reports - Transferred Taxpayer List
@@ -75,10 +75,10 @@ Feature: Print Registration Reports
     Then Select tax office from "Balaka"
     Then Select tax office to "Blantyre MTO"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Transferred Taxpayers List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Transferred Taxpayers List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Transferred Taxpayers List.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Transferred Taxpayers List.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.27.7
   Scenario: UAT_TCS 01.27.7-To Verify the Process of printing Taxpayer Reports - De-Registration Awaiting Approval Report
@@ -87,10 +87,10 @@ Feature: Print Registration Reports
     Then Select tax office "All"
     Then Select reason "All"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "De-Registrations Awaiting Approval Report.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "De-Registrations Awaiting Approval Report.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "De-Registrations Awaiting Approval Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "De-Registrations Awaiting Approval Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.27.8
   Scenario: UAT_TCS 01.27.8-To Verify the Process of printing  Taxpayer Reports - Registrations Awaiting Processing Report
@@ -99,10 +99,10 @@ Feature: Print Registration Reports
     Then Select tax office "All"
     Then Select reason "All"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Registrations Awaiting Processing Report.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Registrations Awaiting Processing Report.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Registrations Awaiting Processing Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Registrations Awaiting Processing Report.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
 
   @UAT_TCS-01.27.9
@@ -122,7 +122,7 @@ Feature: Print Registration Reports
     Then Select report to print "Taxpayer Registrations Summary of Transactions"
     Then Select report file type "PDF"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Taxpayer Registrations Summary of Transactions.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Taxpayer Registrations Summary of Transactions.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Taxpayer Registrations Summary of Transactions.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Taxpayer Registrations Summary of Transactions.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
