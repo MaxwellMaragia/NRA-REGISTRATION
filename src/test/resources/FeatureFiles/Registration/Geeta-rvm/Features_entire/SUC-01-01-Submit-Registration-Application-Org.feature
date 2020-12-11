@@ -8,7 +8,7 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     When I Fill the Organization Taxpayer Registration form
     And I enter valid data on the pages of Organization
       | CategoryValue          | Co-operative Society (Other) | 0     |
-      | Organization Name      | CODEI                          | 1     |
+      | Organization Name      | CODEI                        | 1     |
       | RGD Number             | kujh                         | 2     |
       | DOE                    | 12092018                     | 3     |
       | DOC                    | 12092020                     | 4     |
@@ -29,16 +29,16 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
       | EndYearMonth           | February                     | 19    |
       | EndYeadDay             | 01                           | 20    |
     And Enter Attachment Tab details
-      | Attachments                 | Attachments                           | 19 0 |
-      | Attachment Date             | 21082016                              | 20 1 |
-      | Attachment Pasport          | Business Registration Certificate     | 21 2 |
-      | Reference number            | ug                                    | 22 3 |
-      | File upload                 | C:\id_doc.png | 23 4 |
-      | Attachments                 | Doccument                             | 24 5 |
-      | Attachments                 | Certificate of Incorporation          | 25 6 |
-      | Attachments                 | Letter Of Authorization               | 26 7 |
-      | Attachment Reference number | 78u                                   | 27 8 |
-      | Attachment Reference number | 98t                                   | 28 9 |
+      | Attachments                 | Attachments                       | 19 0 |
+      | Attachment Date             | 21082016                          | 20 1 |
+      | Attachment Pasport          | Business Registration Certificate | 21 2 |
+      | Reference number            | ug                                | 22 3 |
+      | File upload                 | C:\id_doc.png                     | 23 4 |
+      | Attachments                 | Doccument                         | 24 5 |
+      | Attachments                 | Certificate of Incorporation      | 25 6 |
+      | Attachments                 | Letter Of Authorization           | 26 7 |
+      | Attachment Reference number | 78u                               | 27 8 |
+      | Attachment Reference number | 98t                               | 28 9 |
     And enters director "P0017167" and "startDate"
     Then Click On Organization Page Submit Button
     Then wait for webpage to load

@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class stepDefinitions extends BaseClass {
 
     public static sharedatastep sharedata;
-    public String ReferenceNumber = "ARN/00022245/2020";
+    public String ReferenceNumber = "ARN/00022810/2020";
     public String propertyID;
     public String organizationPropertyID;
 
@@ -5979,7 +5979,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Click on NextStage button$")
     public void click_on_NextStage_button() throws Throwable {
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        Thread.sleep(10000);
        // driver.findElement(By.xpath(Pro.getProperty("Individual_NextStage_Button_XPATH"))).click();
         driver.findElement(By.id("stageAdvanceActionContainer")).click();
         Thread.sleep(8000);
@@ -5992,9 +5992,15 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^wait for duplicate check$")
     public void wait_for_duplicate_check() throws Throwable {
-//        driver.switchTo().defaultContent();
-        WebDriverWait wait = new WebDriverWait(driver, 160);
-
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("contentIFrame1");
+        WebDriverWait wait = new WebDriverWait(driver, 100);
+        WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_RegistrationApplicationAngular")));
+        driver.switchTo().frame(frame);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[text()='First Name']")));
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("contentIFrame1");
+        Thread.sleep(3000);
         WebElement validation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("stageAdvanceActionContainer")));
         validation.click();
     }
@@ -6010,15 +6016,6 @@ public class stepDefinitions extends BaseClass {
         boolean isPresent = false;
         File dir = new File(downloadpath);
         File[] dir_contents = dir.listFiles();
-
-        assert dir_contents != null;
-        for (File dir_content : dir_contents) {
-            if (dir_content.getName().equals("MRA_AUTOMATION_DEMO.txt"))
-                isPresent = true;
-            dir_content.delete();
-        }
-        Thread.sleep(4000);
-        Assert.assertTrue(isPresent);
 
         for (File dir_content : dir_contents) {
             if (dir_content.getName().equals("id_doc.png"))
@@ -6040,7 +6037,10 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Select Identification Outcome dropdown value for Individual Taxpayer Approval$")
     public void select_Identification_Outcome_dropdown_value_for_Individual_Taxpayer_Approval() throws Throwable {
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("contentIFrame1");
         driver.findElement(By.xpath("//span[text()='click to enter']")).click();
+
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
     }
@@ -6065,7 +6065,7 @@ public class stepDefinitions extends BaseClass {
         WebDriverWait wait1 = new WebDriverWait(driver, 30);
         WebElement specificframe = wait1.until(ExpectedConditions.visibilityOfElementLocated(By.id(Pro.getProperty("NextStage_Frame_ID"))));
         driver.switchTo().frame(specificframe);
-        Thread.sleep(3000);
+        Thread.sleep(9000);
 
         driver.findElement(By.xpath("//div[@data-attributename='tbg_approvaloutcome']")).click();
         Actions action = new Actions(driver);
@@ -6141,6 +6141,10 @@ public class stepDefinitions extends BaseClass {
 
     }
 
+    @Then("download file")
+    public void downloadFile(String filepath) throws Throwable{
+        driver.findElement(By.xpath("")).click();
+    }
 
     @Then("^Click on Save button$")
     public void click_on_Save_button() throws Throwable {
@@ -6587,7 +6591,7 @@ public class stepDefinitions extends BaseClass {
     public void switch_to_frame() throws Throwable {
         driver.switchTo().defaultContent();
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        WebElement specificframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(Pro.getProperty("NextStage_Frame_ID"))));
+        WebElement specificframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("contentIFrame0")));
         driver.switchTo().frame(specificframe);
         Thread.sleep(3000);
 
@@ -6631,6 +6635,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Goto view AttachmentDetails screen$")
     public void goto_view_AttachmentDetails_screen() throws Throwable {
+        driver.switchTo().frame("contentIFrame1");
         driver.switchTo().frame("WebResource_RegistrationApplicationAngular");
 
         Thread.sleep(3000);
