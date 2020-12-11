@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class stepDefinitions extends BaseClass {
 
     public static sharedatastep sharedata;
-    public String ReferenceNumber;
+    public String ReferenceNumber = "ARN/00022245/2020";
     public String propertyID;
     public String organizationPropertyID;
 
@@ -97,7 +97,7 @@ public class stepDefinitions extends BaseClass {
 
     @And("^clicks find entity search button$")
     public void clicks_find_entity_search_button() throws Throwable {
-        driver.findElement(By.id("SearchForm:j_idt42")).click();
+        driver.findElement(By.id("SearchForm:j_idt40")).click();
 
         Thread.sleep(5000);
     }
@@ -1550,8 +1550,9 @@ public class stepDefinitions extends BaseClass {
         driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[2]/a")).click();
         WebElement Identification1=driver.findElement(By.id(Pro.getProperty("Identification_Add_ID")));
         Identification1.click();
-        Thread.sleep(5000);
-        WebElement  idfnframe= driver.findElement(By.tagName("iframe"));
+        WebDriverWait wait = new WebDriverWait(driver,100);
+        //WebElement  idfnframe= driver.findElement(By.tagName("iframe"));
+        WebElement  idfnframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
         driver.switchTo().frame(idfnframe);
 
         Thread.sleep(6000);
@@ -1896,9 +1897,11 @@ public class stepDefinitions extends BaseClass {
         }
         driver.findElement(By.xpath(Pro.getProperty("ContactMethods_ADD_XPATH"))).click();
         Thread.sleep(5000);
-        WebElement  ContMethodframe= driver.findElement(By.tagName("iframe"));
-        driver.switchTo().frame(ContMethodframe);
         WebDriverWait Purpose=new WebDriverWait(driver,50);
+
+        WebElement  ContMethodframe= Purpose.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
+        driver.switchTo().frame(ContMethodframe);
+
         Purpose.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("ContactMethods_Purpose_XPATH")))).click();
         List<WebElement> PurposeValue = driver.findElements(By.xpath(Pro.getProperty("ContactMethods_Purpose_ITEM_XPATH")));
         for(WebElement option : PurposeValue){
@@ -5977,7 +5980,8 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click on NextStage button$")
     public void click_on_NextStage_button() throws Throwable {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath(Pro.getProperty("Individual_NextStage_Button_XPATH"))).click();
+       // driver.findElement(By.xpath(Pro.getProperty("Individual_NextStage_Button_XPATH"))).click();
+        driver.findElement(By.id("stageAdvanceActionContainer")).click();
         Thread.sleep(8000);
         WebElement specificframe2 = (driver.findElement(By.id(Pro.getProperty("Individual_NextStage_RefNum_DownloadFrame_ID"))));
         driver.switchTo().frame(specificframe2);
@@ -6628,6 +6632,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^Goto view AttachmentDetails screen$")
     public void goto_view_AttachmentDetails_screen() throws Throwable {
         driver.switchTo().frame("WebResource_RegistrationApplicationAngular");
+
         Thread.sleep(3000);
         List<WebElement> element = driver.findElements(By.xpath(Pro.getProperty("Individual_NextStage_RefNum_DownloadFrame_DownloadLink_XPATH")));
         for (WebElement ele : element) {

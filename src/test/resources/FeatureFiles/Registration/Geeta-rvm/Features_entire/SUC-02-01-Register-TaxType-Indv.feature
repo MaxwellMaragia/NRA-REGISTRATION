@@ -7,21 +7,21 @@ Feature: SUC:02-01 Register Tax Type-Indv
 
   @SUC:02-01 @UAT_TCS-01.20.2
   Scenario Outline: UAT_TCS 01.19.1-UAT_TCS 01.19.2-To Verify the Process of Registering a Tax Type
-    Given navigate to Registration>>Register Tax Type
-    When Select Taxpayer Classification Type as <Type>
-    And enters TIN as <TIN>
-    And clicks find entity search button
-    Then TaxTypes are displayed
-    Given Click Register Tax Type button
-    And Selects <Tax type>  from Tax Type drop down
-    And enters date of mission
-    And enters EDR
-    And checks forced registration
-    And clicks ok on tax type details
-    Then message is displayed "Record Added"
-    And clicks tax type registration submit button
-    Then Verify save success message "Processing Completed - Reference Number"
-    Then Obtain reference number "Processing Completed - Reference Number - ARN"
+#    Given navigate to Registration>>Register Tax Type
+#    When Select Taxpayer Classification Type as <Type>
+#    And enters TIN as <TIN>
+#    And clicks find entity search button
+#    Then TaxTypes are displayed
+#    Given Click Register Tax Type button
+#    And Selects <Tax type>  from Tax Type drop down
+#    And enters date of mission
+#    And enters EDR
+#    And checks forced registration
+#    And clicks ok on tax type details
+#    Then message is displayed "Record Added"
+#    And clicks tax type registration submit button
+#    Then Verify save success message "Processing Completed - Reference Number"
+#    Then Obtain reference number "Processing Completed - Reference Number - ARN"
     Then Open CRM and close modal
     Then Click on registration application link
     Then switch to frame
@@ -37,7 +37,7 @@ Feature: SUC:02-01 Register Tax Type-Indv
     And Verify the String "<Read>"
     Examples:
       | Type       | TIN         | Tax type        | Approve  | Read     |
-      | Individual | N0000027634 | Pay As You Earn | Tax Type | Approved |
+      | Individual | N0000027642 | Pay As You Earn | Tax Type | Approved |
 
 
   Scenario Outline:  Register TaxType Individual Taxpayer Approve Scenario
