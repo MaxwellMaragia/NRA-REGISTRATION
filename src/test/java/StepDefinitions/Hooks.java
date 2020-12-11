@@ -25,13 +25,11 @@ public class Hooks extends BaseClass {
 	@After(order=1)
 	public void AfterSelenium()
 	{
-
 		//driver.close();
 	}
 
 	@After(order=2)
 	public void AftersaveScreenshot(Scenario scenario) {
-
 		File destPath;
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy_hh.mm.ss");
