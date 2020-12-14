@@ -8047,6 +8047,265 @@ public class stepDefinitions extends BaseClass {
         driver.findElement(By.xpath("//li[contains(text(),'" + category + "')]")).click();
     }
 
+    @Then("^Select title as \"([^\"]*)\"$")
+    public void select_title(String title) throws Throwable {
+
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:Title\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + title + "')]")).click();
+    }
+
+    @Then("^Select gender \"([^\"]*)\"$")
+    public void select_gender(String gender) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:Gender\"]/div[3]")).click();
+        Thread.sleep(1500);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ENTER).perform();
+        //        driver.findElement(By.xpath("//li[contains(text(),'" + gender + "')]")).click();
+    }
+
+    @Then("^Select marital status \"([^\"]*)\"$")
+    public void select_marital_status(String maritalStatus) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:MaritalStatus\"]/div[3]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//li[contains(text(),'" + maritalStatus + "')]")).click();
+    }
+
+    @Then("^Enter date of birth \"([^\"]*)\"$")
+    public void enter_date_of_birth(String dob) throws Throwable {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementById('RegisterIndividual:individualAccordion:DOB_input').setAttribute('value', '" + dob + "')");
+    }
+
+    @Then("^Select nationality \"([^\"]*)\"$")
+    public void select_nationality(String nationality) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:Nationality\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'Kenya')]")).click();
+    }
+
+    @Then("^Select country of residence \"([^\"]*)\"$")
+    public void select_country_of_residence(String nationality) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:CountryOfResidence\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + nationality + "')]")).click();
+    }
+
+    @Then("^Enter place of birth \"([^\"]*)\"$")
+    public void enter_place_of_birth(String placeOfBirth) throws Throwable {
+        driver.findElement(By.id("RegisterIndividual:individualAccordion:PlaceOfBirth")).sendKeys(placeOfBirth);
+    }
+
+    @Then("^Select reason for tin application \"([^\"]*)\"$")
+    public void select_reason_for_tin_application_individual(String reasonForApplication) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:ReasonForTIN\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + reasonForApplication + "')]")).click();
+    }
+
+    @Then("^Select reason for tin application : organization \"([^\"]*)\"$")
+    public void select_reason_for_tin_application_organization(String reasonForApplication) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion:ReasonForTIN\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + reasonForApplication + "')]")).click();
+    }
+
+    @Then("^Select occupation status \"([^\"]*)\"$")
+    public void select_occupation_status(String occupationStatus) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:occupationStatus\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + occupationStatus + "')]")).click();
+    }
+
+    @Then("^Select main category \"([^\"]*)\"$")
+    public void select_main_category(String mainCategory) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:MainCategory\"]/div[3]")).click();
+        Thread.sleep(1500);
+        //driver.findElement(By.xpath("//li[contains(text(),'" + mainCategory + "')]")).click();
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ENTER).perform();
+    }
+
+    @Then("^Select Precise category \"([^\"]*)\"$")
+    public void select_precise_category(String preciseCategory) throws Throwable {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:PreciseCategory\"]/div[3]")).click();
+        Thread.sleep(1500);
+        //driver.findElement(By.xpath("//li[contains(text(),'" + preciseCategory + "')]")).click();
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ENTER).perform();
+    }
+
+    @And("^Click occupation - business interest tab$")
+    public void click_occupation_business_interest_tab() {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[4]/a")).click();
+    }
+
+    @And("^Click on identification tab$")
+    public void click_on_identification_tab() {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[2]/a")).click();
+    }
+
+    @Then("^Select identification \"([^\"]*)\"$")
+    public void select_identification(String identification) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"Identification:IdentificationType\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + identification + "')]")).click();
+    }
+
+    @Then("^Enter identification number \"([^\"]*)\"$")
+    public void enter_identification_number(String idNumber) throws Throwable {
+        Thread.sleep(4000);
+        driver.findElement(By.id("Identification:IdentificationNumber")).sendKeys(idNumber);
+    }
+
+    @Then("^Enter date of issue \"([^\"]*)\"$")
+    public void enter_date_of_issue(String dateOfIssue) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementById('Identification:IdentificationEffectiveDate_input').setAttribute('value', '" + dateOfIssue + "')");
+    }
+
+    @Then("^Enter expiry date \"([^\"]*)\"$")
+    public void enter_expiry_date(String expiryDate) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementById('Identification:ExpiryDate_input').setAttribute('value', '" + expiryDate + "')");
+    }
+
+    @Then("^Enter E-permit number \"([^\"]*)\" and E-permit type$")
+    public void enter_epermit_number_something_and_epermit_type(String enumber) throws Throwable {
+        driver.findElement(By.id("Identification:ePermitNumber")).sendKeys(enumber);
+        driver.findElement(By.xpath("//*[@id=\"Identification:ePermitType\"]/div[3]")).click();
+        Thread.sleep(1500);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ENTER).perform();
+    }
+
+    @Then("^Select country of issue \"([^\"]*)\"$")
+    public void select_country_of_issue(String countryOfIssue) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"Identification:CountryOfIssue\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + countryOfIssue + "')]")).click();
+    }
+
+    @Then("^Click employment details tab$")
+    public void click_employment_details_tab() throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[3]/a")).click();
+    }
+
+    @Then("^Enter employers name \"([^\"]*)\" and employment start date \"([^\"]*)\"$")
+    public void enter_employers_details(String employersName, String startDate) throws Throwable {
+        Thread.sleep(3000);
+        driver.findElement(By.id("EmploymentDetails:employersName")).sendKeys(employersName);
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementById('EmploymentDetails:StartDate_input').setAttribute('value', '" + startDate + "')");
+    }
+
+    @Then("^Click address tab$")
+    public void click_address_tab_individual() {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[5]/a")).click();
+    }
+
+    @Then("^Then enter town \"([^\"]*)\"$")
+    public void then_enter_town(String town) throws Throwable {
+        Thread.sleep(2500);
+        driver.findElement(By.id("AddressDetails:City")).sendKeys(town);
+    }
+
+    @Then("^Select region \"([^\"]*)\" and district \"([^\"]*)\"$")
+    public void select_region_and_district(String region, String district) throws Throwable {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//*[@id=\"AddressDetails:PostalRegion\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + region + "')]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//*[@id=\"AddressDetails:District\"]/div[3]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//li[contains(text(),'" + district + "')]")).click();
+    }
+
+    @Then("^Click Contact methods tab$")
+    public void click_contact_methods_tab() {
+        driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[6]/a")).click();
+    }
+
+    @Then("^Select purpose$")
+    public void select_purpose() throws Throwable {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//*[@id=\"ContactDetails:Purpose\"]/div[3]")).click();
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ENTER).perform();
+    }
+
+    @Then("^Enter contact details \"([^\"]*)\"$")
+    public void enter_contact_details(String email) {
+        driver.findElement(By.id("ContactDetails:ContactMethodDetailForWeb")).sendKeys(email);
+    }
+
+    @Then("^Select Account end day \"([^\"]*)\"$")
+    public void select_account_end_day(String endDay) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion:AccountYearEndDateDD\"]/div[3]")).click();
+        Thread.sleep(1500);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ENTER).perform();
+    }
+
+    @Then("^Select Account end month \"([^\"]*)\"$")
+    public void select_account_end_month(String endMonth) throws Throwable {
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion:AccountYearEndDateMM\"]/div[3]")).click();
+        Thread.sleep(1500);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ENTER).perform();
+    }
+
+    @Then("^Enter source of capital \"([^\"]*)\"$")
+    public void enter_source_of_capital(String sourceOfCapital) {
+        driver.findElement(By.id("OrganisationSummaryDetails:organisationAccordion:SourceOfCapital")).sendKeys(sourceOfCapital);
+    }
+
+    @Then("^Select place of incorporation \"([^\"]*)\"$")
+    public void select_place_of_incorporation(String nationality) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion:PlaceOfIncorporation\"]/div[3]")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//li[contains(text(),'" + nationality + "')]")).click();
+    }
+
+    @Then("^Select business sector$")
+    public void select_business_sector() throws Throwable {
+        //driver.findElement(By.id("OrganisationSummaryDetails:organisationAccordion:businessDetailsHandler:AddBusinessSD")).click();
+        driver.findElement(By.xpath("//*[@id=\"BusinessSectorDetails:BusinessCode\"]/div[3]")).click();
+        Thread.sleep(1500);
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+    }
+
+    @Then("^Click primary indicator checkbox \"([^\"]*)\"$")
+    public void click_primary_indicator_checkbox(String primaryID) throws Throwable {
+        driver.findElement(By.id(primaryID)).click();
+    }
+
+    @Then("^Click address tab : organization$")
+    public void click_address_tab_organization() {
+        driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion\"]/ul/li[2]/a")).click();
+    }
+
+    @And("^Click directors tab$")
+    public void click_on_directors_tab() {
+        driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion\"]/ul/li[14]/a")).click();
+    }
+
+    @Then("^Click continue \"([^\"]*)\"$")
+    public void click_continue(String continueID) throws Throwable {
+        Thread.sleep(2000);
+        driver.findElement(By.id(continueID)).click();
+    }
+
+    @Then("^Enter director start date \"([^\"]*)\"$")
+    public void enter_director_start_date(String directorStartDate) throws Throwable {
+        Thread.sleep(2000);
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementById('DirectorsDetails:PositionHeldSince_input').setAttribute('value', '" + directorStartDate + "')");
+    }
 
 
 }
