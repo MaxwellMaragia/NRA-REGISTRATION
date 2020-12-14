@@ -140,7 +140,7 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation- Transfer Taxpayer
       | username  | password | ClasificationType | TIN      | NewOffice    | DateOfTransfer | Reason                                     | ARN                                           |
       | tripsuser | Passw0rd | Organisation      | P0018004 | Blantyre MTO | 06/04/2025     | The Organisation taxpayer location changed | Processing Completed - Reference Number - ARN |
 
-  @SUC:01-09
+  #@SUC:01-09
   Scenario Outline:  Trnsfer TaxPayer Organisation Taxpayer reject Scenario
     Given Open CRM URL Module
     And Close Popup Window
