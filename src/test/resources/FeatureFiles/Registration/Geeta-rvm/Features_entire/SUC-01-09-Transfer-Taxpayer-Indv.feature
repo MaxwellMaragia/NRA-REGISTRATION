@@ -136,6 +136,7 @@ Feature: [SUC:01-09] Transfer Taxpayer	Individual - Transfer Taxpayer
     And Select Date of transfer "<DateOfTransfer>"
     And Select Reason "<Reason>"
     Then Click on tarnsfer
+
     And  Verify the ARN number "<ARN>"
     Then wait for webpage to load
 
