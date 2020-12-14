@@ -4134,7 +4134,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Click on search$")
     public void click_on_search() throws Throwable {
-        driver.findElement(By.id(Pro.getProperty("Registration_ManageTaxPayer_TransferTaxPayer_Individual_Search_ID"))).click();
+        driver.findElement(By.xpath("//*[text()='Search']")).click();
 
     }
 
@@ -5978,7 +5978,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Click on NextStage button$")
     public void click_on_NextStage_button() throws Throwable {
-        Thread.sleep(10000);
+        Thread.sleep(3000);
        // driver.findElement(By.xpath(Pro.getProperty("Individual_NextStage_Button_XPATH"))).click();
         driver.findElement(By.id("stageAdvanceActionContainer")).click();
         Thread.sleep(8000);
@@ -6158,7 +6158,6 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Verify the String \"([^\"]*)\"$")
     public void verify_the_String(String Status) throws Throwable {
-        driver.switchTo().frame("contentIFrame0");
         WebDriverWait wait = new WebDriverWait(driver, 100);
         Thread.sleep(3000);
         WebElement statusLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'" + Status + "')]")));
@@ -6590,7 +6589,7 @@ public class stepDefinitions extends BaseClass {
     public void switch_to_frame() throws Throwable {
         driver.switchTo().defaultContent();
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        WebElement specificframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("contentIFrame0")));
+        WebElement specificframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("contentIFrame1")));
         driver.switchTo().frame(specificframe);
         Thread.sleep(3000);
 
@@ -6600,8 +6599,8 @@ public class stepDefinitions extends BaseClass {
     public void enters_in_search_results() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         WebElement search = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search")));
-        search.sendKeys(sharedatastep.A_CRMARN);
-//    	search.sendKeys("ARN/00020934/2020");
+//        search.sendKeys(sharedatastep.A_CRMARN);
+    	search.sendKeys(" ARN/00022833/2020");
 
         search.sendKeys(Keys.ENTER);
 
@@ -7457,7 +7456,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(ReferenceNumber);
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00022835/2020");
         driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
 
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
@@ -7566,10 +7565,13 @@ public class stepDefinitions extends BaseClass {
         rgdField.sendKeys(rgd);
     }
 
-    @Then("^Switch to frame 2$")
+    @Then("^switch to frame0$")
     public void shift_focus_to_second_frame() throws Throwable {
-        Thread.sleep(2000);
-        driver.switchTo().frame(1);
+        driver.switchTo().defaultContent();
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement specificframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("contentIFrame0")));
+        driver.switchTo().frame(specificframe);
+        Thread.sleep(3000);
     }
 
     @Then("^Switch to frame$")
