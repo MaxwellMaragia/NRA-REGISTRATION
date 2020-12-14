@@ -168,7 +168,7 @@ Feature: [SUC:01-09] Transfer Taxpayer	Individual - Transfer Taxpayer
       | Read     | Reject             | Notes                 |
       | Rejected | Current Tax Office | Invalid Documentation |
 
-  @SUC:01-09
+  #@SUC:01-09
   Scenario Outline:  UAT_TCS 01.13.6 To verify the process of Transferring a De-registered Taxpayer
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
