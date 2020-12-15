@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class stepDefinitions extends BaseClass {
 
     public static sharedatastep sharedata;
-    public String ReferenceNumber = "ARN/00022813/2020";
+    public String ReferenceNumber = "ARN/00022841/2020";
     public String propertyID;
     public String organizationPropertyID;
 
@@ -6002,16 +6002,17 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(3000);
         WebElement validation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("stageAdvanceActionContainer")));
         validation.click();
+        driver.switchTo().defaultContent();
     }
 
-    @Then("^Download the Attachment$")
-    public void download_the_Attachment() throws Throwable {
+    @Then("^Download the Attachment \"([^\"]*)\"$")
+    public void download_the_Attachment(String downloadpath) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 150);
 
         WebElement downloadAttach = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Download']")));
         downloadAttach.click();
         Thread.sleep(9000);
-        String downloadpath = "C:\\Users\\barnaby.kamau\\Downloads";
+
         boolean isPresent = false;
         File dir = new File(downloadpath);
         File[] dir_contents = dir.listFiles();
@@ -6023,7 +6024,7 @@ public class stepDefinitions extends BaseClass {
         }
         Thread.sleep(4000);
         Assert.assertTrue(isPresent);
-
+        driver.switchTo().defaultContent();
     }
 
     @And("^click validate documentation screen$")
@@ -6036,8 +6037,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Select Identification Outcome dropdown value for Individual Taxpayer Approval$")
     public void select_Identification_Outcome_dropdown_value_for_Individual_Taxpayer_Approval() throws Throwable {
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame("contentIFrame1");
+
         driver.findElement(By.xpath("//span[text()='click to enter']")).click();
 
         Actions action = new Actions(driver);
@@ -6069,6 +6069,7 @@ public class stepDefinitions extends BaseClass {
         driver.findElement(By.xpath("//div[@data-attributename='tbg_approvaloutcome']")).click();
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+        driver.switchTo().defaultContent();
     }
 
     @Then("^Select Reject outcome dropdown value to Approve\"([^\"]*)\"$")
@@ -6092,6 +6093,7 @@ public class stepDefinitions extends BaseClass {
 
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+        driver.switchTo().defaultContent();
     }
 
     @Then("^Select Revise outcome dropdown value to Approve\"([^\"]*)\"$")
@@ -6148,7 +6150,6 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click on Save button$")
     public void click_on_Save_button() throws Throwable {
         Thread.sleep(2000);
-        driver.switchTo().defaultContent();
 //            WebElement  specificframe3= (driver.findElement(By.id(Pro.getProperty("SearchResult_Frame_ID"))));
 //            driver.switchTo().frame(specificframe3);
         driver.findElement(By.id("tbg_registrationapplication|NoRelationship|Form|Mscrm.Form.tbg_registrationapplication.Save")).click();
@@ -6158,7 +6159,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Verify the String \"([^\"]*)\"$")
     public void verify_the_String(String Status) throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 100);
+        WebDriverWait wait = new WebDriverWait(driver, 200);
         Thread.sleep(3000);
         WebElement statusLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'" + Status + "')]")));
         if (statusLabel.isDisplayed()) {
@@ -6633,7 +6634,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Goto view AttachmentDetails screen$")
     public void goto_view_AttachmentDetails_screen() throws Throwable {
-        driver.switchTo().frame("contentIFrame1");
+
         driver.switchTo().frame("WebResource_RegistrationApplicationAngular");
 
         Thread.sleep(3000);
@@ -6775,7 +6776,6 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click next stage button$")
     public void Click_next_stage() throws Throwable {
 
-        driver.switchTo().frame("contentIFrame1");
         //        Thread.sleep(15000);
         //        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         //        driver.findElement(By.id("stageAdvanceActionContainer")).click();
@@ -7456,8 +7456,8 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00022835/2020");
-        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
+        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(ReferenceNumber);
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
 
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
     }
@@ -8293,7 +8293,7 @@ public class stepDefinitions extends BaseClass {
         driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion\"]/ul/li[2]/a")).click();
     }
 
-    @And("^Click directors tab$")
+    @And("^Clickelect Approval outcome dropdown value to Approve directors tab$")
     public void click_on_directors_tab() {
         driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion\"]/ul/li[14]/a")).click();
     }
