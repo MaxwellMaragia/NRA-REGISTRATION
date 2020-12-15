@@ -7456,7 +7456,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00022835/2020");
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00022844/2020");
         driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
 
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
@@ -7464,11 +7464,11 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Wait for text \"([^\"]*)\" to load in frame \"([^\"]*)\"$")
     public void wait_for_text_to_load_in_frame(String text, String frameID) throws Throwable {
-        driver.switchTo().frame("contentIFrame1");
-        WebDriverWait wait = new WebDriverWait(driver,300);
+//        driver.switchTo().frame("contentIFrame1");
+        WebDriverWait wait = new WebDriverWait(driver,30);
         WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(frameID)));
         driver.switchTo().frame(frame);
-        WebDriverWait wait2 = new WebDriverWait(driver,300);
+        WebDriverWait wait2 = new WebDriverWait(driver,30);
         wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'" + text + "')]")));
         driver.switchTo().defaultContent();
     }
