@@ -75,9 +75,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click on Save button
     Then switch to frame
     And Verify the String "<Read>"
-
-#  Change names and atttachment numbers after each run
-
+    #  Change names and atttachment numbers after each run
     Examples:
       | DOB      | DOI        | IED        | ESD        | Approve    | Read     |
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | First Name | Approved |
