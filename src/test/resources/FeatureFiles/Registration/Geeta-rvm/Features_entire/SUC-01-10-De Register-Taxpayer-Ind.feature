@@ -9,7 +9,7 @@ Feature: [SUC:01-10] De-Register Taxpayer_Organization
     And Goto DeRegister
 
   @SUC:01-10 @UAT_TCS-01.15.1
-  Scenario Outline: UAT_TCS 01.15.1 To verify the Process of Deregistering a Tax type
+  Scenario Outline: UAT_TCS 01.15.1 To verify the Process of Deregistering a Taxpayer
     And Select Taxpayer Classification Type "<ClasificationType>"
     And Enter TIN number "<TIN>"
     And Click on search
@@ -21,39 +21,40 @@ Feature: [SUC:01-10] De-Register Taxpayer_Organization
     Then Obtain reference number "Processing Completed - Reference Number"
     Then Open CRM and close modal
     Then Click on registration application link
-    Then switch to frame
+    Then switch to frame0
     Then search for reference number
     Then Click on reference number
     Then Click next stage button
-    Then Wait for text "Tax Type To De-Register" to load in frame "WebResource_RegistrationApplicationAngular"
+    Then switch to frame
+    Then Wait for text "Reason for De-Registration" to load in frame "WebResource_RegistrationApplicationAngular"
     Then Approve taxtype deregistration from dropdown
     Then Click save CRM
-    Then Status should be "Approved"
+    Then switch to frame
+    And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN      | EDD        | Reason      |
-      | Individual        | P0020699 | 06/04/2029 | Liquidation |
+      | ClasificationType | TIN         | EDD        | Reason      |Read|
+      | Individual        | N0000033456 | 06/04/2029 | Liquidation |Approved|
 
   @SUC:01-10 @UAT_TCS-01.15.2
   Scenario: UAT_TCS-01.15.2-To verify the process of not finding a Taxpayer for Deregistration
-    Then Enter TIN number "P0028182"
+    Then Enter TIN number "N0000033456"
     And Click on search
     Then Verify no data is found in table
 
   @SUC:01-10 @UAT_TCS-01.15.3
   Scenario: UAT_TCS-01.15.3-To verify the process of checking Validation error during Deregistration
-    Then Enter TIN number "C0028116"
+    Then Enter TIN number "C0000019402"
     And Click on search
-    Then Click table column "//*[@id='DeregisterRegime:deregTable_data']/tr[1]/td[3]"
     And Select EDD "06/04/2029"
     Then Click on DeRegister button
     Then Verify error message "Reason: Validation Error: Value is required."
 
   @SUC:01-10 @UAT_TCS-01.15.4
   Scenario: UAT_TCS-01.15.4-To verify the process of Abandoning Deregistration process
-    Then Enter TIN number "C0028116"
+    Then Enter TIN number "C0000019402"
     And Click on search
     Then Click Cancel "DeregisterRegime:Cancel"
-    Then Verify abandon process "http://trips-nra:8001/trips-ui/faces/login/Welcome.xhtml"
+    Then Verify abandon process "http://34.241.245.79:8080/trips-ui/faces/login/Welcome.xhtml"
 
   @SUC:01-10 @UAT_TCS-01.15.5
   Scenario Outline: UAT_TCS 01.15.5 To verify the process of Rejecting Taxpayer Deregistration Application
@@ -68,18 +69,20 @@ Feature: [SUC:01-10] De-Register Taxpayer_Organization
     Then Obtain reference number "Processing Completed - Reference Number"
     Then Open CRM and close modal
     Then Click on registration application link
-    Then switch to frame
+    Then switch to frame0
     Then search for reference number
     Then Click on reference number
     Then Click next stage button
+    Then switch to frame
     Then Wait for text "Reason for De-Registration" to load in frame "WebResource_RegistrationApplicationAngular"
     And Select rejection option on taxtype deregistration
     Then Enter Outcome Notes "Invalid data"
     And Enter Outcome Reason for Taxtype deregistration
     Then Click save CRM
-    Then Status should be "Rejected"
+    Then switch to frame
+    And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN      | EDD        | Reason      |
-      | Individual        | P0020706 | 06/04/2029 | Liquidation |
+      | ClasificationType | TIN         | EDD        | Reason      | Read     |
+      | Individual        | N0000033472 | 06/04/2029 | Liquidation | Rejected |
 
 
