@@ -7541,9 +7541,9 @@ public class stepDefinitions extends BaseClass {
     }
 
 
-    @Then("^Click search : id \"([^\"]*)\"$")
-    public void click_search_id(String searchID) throws Throwable {
-        driver.findElement(By.id(searchID)).click();
+    @Then("^Click search : id")
+    public void click_search_id() throws Throwable {
+        driver.findElement(By.xpath("//*[text()=\"Search\"]")).click();
     }
 
     //...............AMEND REQUEST FROM RGD...............................................................//
@@ -7973,9 +7973,9 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click on registration > register taxpayer > process registration application$")
     public void accessProcessRegistrationScreen(){
         WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[1]/a"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()=\"Registration\"]"))).click();
 
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[1]/ul/li[1]/a")).click();
+        driver.findElement(By.xpath("//*[text()=\"Register Taxpayer\"]")).click();
         driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[4]/a")).click();
     }
 
