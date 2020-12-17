@@ -1,3 +1,4 @@
+
 Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
 
   @SUC:02-03 @UAT_TCS-01.21.1
@@ -12,7 +13,7 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     And Enter TIN number "<TIN>"
     And Click on search
 #    And CLick on taxtype in grid
-    Then Click table column "//td[contains(text(),'Non Resident Tax(NRT)')]"
+    Then Click table column taxtype "Personal Income Tax"
     And Select EDD "<EDD>"
     And Select de register Reason "<Reason>"
     Then Click on DeRegister button
@@ -20,17 +21,19 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     Then Obtain reference number "Processing Completed - Reference Number"
     Then Open CRM and close modal
     Then Click on registration application link
-    Then switch to frame
+    Then switch to frame0
     Then search for reference number
     Then Click on reference number
     Then Click next stage button
+    Then switch to frame
     Then Wait for text "Tax Type To De-Register" to load in frame "WebResource_RegistrationApplicationAngular"
     Then Approve taxtype deregistration from dropdown
     Then Click save CRM
-    Then Status should be "Approved"
+    Then switch to frame
+    And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN      | EDD        | Reason      |
-      | Individual        | P0020706 | 06/04/2029 | Liquidation |
+      | ClasificationType | TIN      | EDD        | Reason      | Read     |
+      | Individual        | N0000033472 | 06/04/2029 | Liquidation | Approved |
 
   @SUC:02-03 @UAT_TCS-01.21.2
   Scenario: UAT_TCS-01.21.2	To verify the Process of Validation Error during Deregister Tax Type
@@ -41,7 +44,7 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     And Goto Manage taxpayer
     And Goto DeRegister
     And Select Taxpayer Classification Type "Individual"
-    And Enter TIN number "P0017167"
+    And Enter TIN number "N0000033472"
     And Click on search
     And CLick on taxtype in grid
     And Select EDD "06/04/2029"
@@ -59,7 +62,8 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     And Select Taxpayer Classification Type "<ClasificationType>"
     And Enter TIN number "<TIN>"
     And Click on search
-    Then Click table column "//td[contains(text(),'PAYE')]"
+#    And CLick on taxtype in grid
+    Then Click table column taxtype "Personal Income Tax"
     And Select EDD "<EDD>"
     And Select de register Reason "<Reason>"
     Then Click on DeRegister button
@@ -67,18 +71,21 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     Then Obtain reference number "Processing Completed - Reference Number"
     Then Open CRM and close modal
     Then Click on registration application link
-    Then switch to frame
+    Then switch to frame0
     Then search for reference number
     Then Click on reference number
+    Then Click next stage button
+    Then switch to frame
     Then Wait for text "Tax Type To De-Register" to load in frame "WebResource_RegistrationApplicationAngular"
     And Select rejection option on taxtype deregistration
     Then Enter Outcome Notes "Invalid data"
     And Enter Outcome Reason for Taxtype deregistration
     Then Click save CRM
-    Then Status should be "Rejected"
+    Then switch to frame
+    And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN      | EDD        | Reason      |
-      | Individual        | P0015169 | 06/04/2029 | Liquidation |
+      | ClasificationType | TIN      | EDD        | Reason      |Read|
+      | Individual        | P0015169 | 06/04/2029 | Liquidation |Rejected|
 
   @SUC:02-03 @UAT_TCS-01.21.4
   Scenario: UAT_TCS-01.21.4	To verify the Process of Deregistering Personal Income Tax when other Taxes are active
@@ -91,7 +98,7 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "P0015169"
     And Click on search
-    Then Click table column "//td[contains(text(),'Personal Income Tax')]"
+    Then Click table column taxtype "Personal Income Tax"
     And Select EDD "06/04/2029"
     And Select de register Reason "Liquidation"
     Then Click on DeRegister button
@@ -108,7 +115,7 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "C0019788"
     And Click on search
-    Then Click table column "//td[contains(text(),'Withholding Tax(WHT)')]"
+    Then Click table column taxtype "Withholding Tax(WHT)"
     And Select EDD "06/04/2029"
     And Select de register Reason "Liquidation"
     Then Click on DeRegister button
@@ -125,7 +132,7 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "P0015169"
     And Click on search
-    Then Click table column "//td[contains(text(),'PAYE')]"
+    Then Click table column taxtype "Withholding Tax(WHT)"
     And Select EDD "06/04/2029"
     And Select de register Reason "Liquidation"
     Then Click on DeRegister button
@@ -142,7 +149,7 @@ Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
     And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "P0020653"
     And Click on search
-    Then Click table column "//td[contains(text(),'Capital Gain Tax(CGT)')]"
+    Then Click table column taxtype "Capital Gain Tax(CGT)"
     And Select EDD "06/04/2029"
     And Select de register Reason "Liquidation"
     Then Click on DeRegister button

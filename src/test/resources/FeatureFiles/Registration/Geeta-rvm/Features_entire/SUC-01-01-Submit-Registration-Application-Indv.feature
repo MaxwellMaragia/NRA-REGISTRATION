@@ -7,7 +7,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     When I Fill the Individual Taxpayer Registration form
     And I enter valid data on the Individualpage and Submit
       | First Name        | Max      | 0 |
-      | Last Name         | One      | 1 |
+      | Last Name         | Tano      | 1 |
       | CategoryValue     | Employee | 2 |
       | Title Value       | MR       | 3 |
       | Gender            | M        | 4 |
@@ -19,18 +19,18 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | ReasonForTin Value | A Contractor or Sub-contractor | 3 |
       | Nationality Value  | Albania                        | 4 |
 
-    Then Select residence permit identification with number "211257"
+    Then Select residence permit identification with number "2112566"
     And Enter identification Date of Issue "<DOI>"
       | Identification      | Identification       | 0 |
       | Identification Type | Passport             | 1 |
-      | Identification num  | 1000h182             | 2 |
+      | Identification num  | 1000h170             | 2 |
       | Country of Issue    | Albania              | 3 |
-      | epermit num         | jhbak1256              | 4 |
+      | epermit num         | jhbak1249              | 4 |
       | epermit type        | Asylum Seeker Permit | 5 |
 
     And Enter identification Expiry Date "<IED>"
       | Identification Type | Driving Licence    | 0 |
-      | Identification num  | account12894       | 1 |
+      | Identification num  | account12881       | 1 |
       | Register Ind        | Employment Details | 2 |
       | Employment Position | Senior Executive   | 3 |
       | Employer's Name     | SiddharthReddy     | 4 |
@@ -51,7 +51,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | ContactTypeValue         | Email                                                                   | 34 13 |
       | ContactDetails           | margiewambui11@gmail.com                                                | 35 14 |
 #  And enters attachment details "National ID"  with number "00000003" and path "C:\Users\v-bakam\Downloads\id_doc.png"
-    And enters attachment details "Passport"  with number "00100" and path "C:\id_doc.png"
+    And enters attachment details "Passport"  with number "00104" and path "C:\id_doc.png"
     Then Click On Individual Page Submit Button
     Then Verify save success message "Processing Completed - Reference Number"
     Then Obtain reference number "Processing Completed - Reference Number - ARN"
@@ -64,7 +64,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\users\v-maxmar\downloads"
+    And Download the Attachment "C:\Users\barnaby.kamau\Downloads"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
