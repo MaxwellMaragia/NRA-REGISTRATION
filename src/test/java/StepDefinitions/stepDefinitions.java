@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class stepDefinitions extends BaseClass {
 
     public static sharedatastep sharedata;
-    public String ReferenceNumber = "ARN/00022841/2020";
+    public String ReferenceNumber = "ARN/00022845/2020";
     public String propertyID;
     public String organizationPropertyID;
 
@@ -7466,7 +7466,6 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-
 //        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025753/2020");
         driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
