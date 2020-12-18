@@ -12,6 +12,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | Title Value       | MR          | 3 |
       | Gender            | M           | 4 |
       | MothersMaidenName | Wambui      | 5 |
+
     And Enter Date Of Birth in additional info tab"<DOB>"
       | Marital Status     | Married                        | 0 |
       | Place Of Birth     | Mumbai                         | 1 |
@@ -64,7 +65,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\users\v-maxmar\downloads"
+    And Download the Attachment "C:\Users\barnaby.kamau\Downloads"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
