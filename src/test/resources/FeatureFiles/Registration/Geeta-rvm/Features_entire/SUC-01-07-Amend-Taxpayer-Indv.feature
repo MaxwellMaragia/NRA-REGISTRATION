@@ -13,14 +13,6 @@ Feature: [SUC:01-07] Amend Taxpayer	Individual - Amend Taxpayer
       | Amend Reson             | Change of Additional Details | 4 |
     Then ARN number will generate
       | ARN number | Processing Completed - Reference Number - ARN | 0 |
-    Then wait for webpage to load
-
-    Examples:
-      | username  | password |
-      | tripsuser | Passw0rd |
-
-  @SUC:01-07
-  Scenario Outline:  Update Individual Taxpayer Reject Scenario
     Given Open CRM URL Module
     And Close Popup Window
     And Click start search
@@ -35,49 +27,9 @@ Feature: [SUC:01-07] Amend Taxpayer	Individual - Amend Taxpayer
     And Select Approval outcome dropdown value to Approve <Approve>
     Then Click on Save button
     And Verify the String "<Read>"
-
     Examples:
       | Approve    | Read     |
       | First Name | Approved |
-
-  Scenario Outline: UAT_TCS 01.07.1	To verify the process of Amend Taxpayer Data
-    Given User navigates to the login page
-    When Enters the username "tripsuser" and password "Passw0rd"
-    Then User should be logged in
-    When I enter valid data on the Update Individual page
-      | TaxpayerClassificationT | Individual                   | 0 |
-      | TaxPayer_TIN            | C0018547                     | 1 |
-      | Last Name               | four                         | 2 |
-      | DOB                     | 16/09/1987                   | 3 |
-      | Amend Reson             | Change of Additional Details | 4 |
-    Then ARN number will generate
-      | ARN number | Processing Completed - Reference Number - ARN | 0 |
-    Then wait for webpage to load
-
-    Examples:
-      | username  | password |
-      | tripsuser | Passw0rd |
-
-#  @[SUC:01-07]
-  Scenario Outline:  Update Individual Taxpayer Reject Scenario
-    Given Open CRM URL Module
-    And Close Popup Window
-    And Click start search
-    Then switch to frame
-    When enters reference number in search results
-    And Pick registration case
-    And Click on NextStage button
-    Then switch to frame
-    Then wait for duplicate check
-    And Click on NextStage button
-    Then switch to frame
-    And Select Reject outcome dropdown value to Approve"<Approve>"
-    Then Click on Save button
-    And Verify the String "<Read>"
-
-    Examples:
-      | Approve | Read     |
-      | Approve | Approved |
 
   @SUC:01-07 @UAT_TCS-01.07.2
   Scenario Outline: UAT_TCS 01.07.2-To verify the process of amendment Request received from RGD (sole proprietors)
@@ -85,7 +37,7 @@ Feature: [SUC:01-07] Amend Taxpayer	Individual - Amend Taxpayer
     When Enters the username "tripsuser" and password "Passw0rd"
     Then User should be logged in
     Then Go to registration > manage taxpayer > update taxpayer
-    Then Enter tin as "C0020598"
+    Then Enter tin as "N0000033537"
     Then Click search : id "SearchForm:j_idt42"
     Then Select reason for amendment "<amendmentReason>"
     Then Click Sole proprietor additional details tab

@@ -152,7 +152,7 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     Then Click on reference number
     Then Click next stage button
     Then Goto view AttachmentDetails screen
-    And Download the Attachment
+    And Download the Attachment "C:\users\v-maxmar\downloads"
 #    Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
