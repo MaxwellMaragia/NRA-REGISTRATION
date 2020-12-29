@@ -31,10 +31,6 @@ Feature: [SUC:02-04] Re-register Tax Type Individual: Reregister Tax Type
       | Approve                            | Read     |
       | Taxable Turnover exceeds threshold | Approved |
 
-    Examples:
-      | Approve                            | Read     |
-      | Taxable Turnover exceeds threshold | Approved |
-
     #  @[SUC:02-04]
   Scenario Outline: UAT_TCS 01.11.2(UAT_TCS 01.17.1) To verify the process of Successful Registration application search,
     Given User navigates to the login page
