@@ -96,7 +96,7 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
       | Validate                                           |
       | Address should have at least one primary indicator |
 
-  @[SUC:01-01]
+  @[SUC:01-01] @UAT_TCS-01.02.4
   Scenario Outline:UAT_TCS 01.02.4	To verify the process of Registering an Organisation successfully with mandatory fields
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -104,8 +104,8 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     When I Fill the Organization Taxpayer Registration form
     And I enter valid data on the pages of Organization
       | CategoryValue          | Co-operative Society (Other) | 0  |
-      | Organization Name      | A&C                          | 1  |
-      | RGD Number             | kuji                         | 2  |
+      | Organization Name      | Codei Two                    | 1  |
+      | RGD Number             | codeione                     | 2  |
       | DOE                    | 12092018                     | 3  |
       | DOC                    | 12092020                     | 4  |
       | Source of Capital      | Home Loan                    | 5  |
@@ -121,27 +121,47 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
       | Contact Method         | Contact Methods              | 15 |
       | Purpose Value          | Business                     | 16 |
       | ContactTypeValue       | Email                        | 17 |
-      | ContactDetails         | v-bakam@microsoft.com        | 18 |
+      | ContactDetails         | margiewambui11@gmail.com     | 18 |
       | EndYearMonth           | February                     | 19 |
       | EndYeadDay             | 01                           | 20 |
     And Enter Attachment Tab details
-      | Attachments                 | Attachments                                                         | 19 0 |
-      | Attachment Date             | 21082016                                                            | 20 1 |
-      | Attachment Pasport          | Certificate of Incorporation                                  | 21 2 |
-      | Reference number            | uh                                                                  | 22 3 |
-      | File upload                 | C:\id_doc.png                                                       | 23 4 |
-      | Attachments                 | Doccument                                                           | 24 5 |
-      | Attachments                 | Certificate of Incorporation                                        | 25 6 |
+      | Attachments                 | Attachments                        | 19 0 |
+      | Attachment Date             | 21082016                           | 20 1 |
+      | Attachment Pasport          | Certificate of Incorporation       | 21 2 |
+      | Reference number            | uh                                 | 22 3 |
+      | File upload                 | C:\id_doc.png                      | 23 4 |
+      | Attachments                 | Doccument                          | 24 5 |
+      | Attachments                 | Certificate of Incorporation       | 25 6 |
       | Attachments                 | Approval Letter from Line Ministry | 26 7 |
-      | Attachment Reference number | 78c                                                                 | 27 8 |
-      | Attachment Reference number | 98c                                                                 | 28 9 |
+      | Attachment Reference number | 78c                                | 27 8 |
+      | Attachment Reference number | 98c                                | 28 9 |
     And enters director "P0017167" and "startDate"
     Then Click On Organization Page Submit Button
-    And  Verify the ARN number "<ARN>"
-
+    Then Verify save success message "Processing Completed - Reference Number"
+    Then Obtain reference number "Processing Completed - Reference Number - ARN"
+    Then Open CRM and close modal
+    Then Click on registration application link
+    Then switch to frame0
+    Then search for reference number
+    Then Click on reference number
+    Then switch to frame
+    Then Click next stage button
+    Then switch to frame
+    Then Goto view AttachmentDetails screen
+    And Download the Attachment "C:\Users\v-maxmar\Downloads"
+    Then switch to frame
+    Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
+    And Click on NextStage button
+    Then wait for duplicate check
+    Then switch to frame
+    And Select Approval outcome dropdown value to Approve <Approve>
+    Then Click on Save button
+    Then switch to frame
+    And Verify the String "<Read>"
+    #  Change names and atttachment numbers after each run
     Examples:
-      | ARN                                           |
-      | Processing Completed - Reference Number - ARN |
+      | Approve    | Read     |
+      | First Name | Approved |
 
   @[SUC:01-01]
   Scenario Outline: UAT_TCS 02.02.1	To verify the process of Approving Organisation Registration
@@ -165,5 +185,5 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     And Verify the String "<Read>"
 
     Examples:
-      | Approve    | Read    |
+      | Approve    | Read     |
       | First Name | Approved |

@@ -1,14 +1,5 @@
-
-
-
 package runner;
-
-import java.io.File;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
@@ -17,7 +8,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
 		features = "src\\test\\resources\\FeatureFiles",
 		glue = "StepDefinitions" ,
-		tags = "@UAT_TCS-01.07.3",
+		tags = "@UAT_TCS-01.02.4",
 		dryRun = false,    //checks whether each feature has a mapped step definition
 		monochrome = true,// neat output after tc run
 
