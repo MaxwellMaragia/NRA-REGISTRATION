@@ -62,8 +62,8 @@ Feature: [SUC:02-04] Re-register Tax Type Organisation: Reregister Tax Type
       | EDR                     | 16091990                           | 4 |
       | Amend Reson             | Incur Taxable Income               | 5 |
       | Return Type             | Personal Income Tax                | 6 |
-#    And click reRegister Button
-#    Then message is displayed "The Tax Type Re-registration Date must be greater than the Tax Type De-registration date"
+    And click reRegister Button
+    Then message is displayed "The Tax Type Re-registration Date must be greater than the Tax Type De-registration date"
 
 
   @UAT_TCS-01.24.4
@@ -99,13 +99,13 @@ Feature: [SUC:02-04] Re-register Tax Type Organisation: Reregister Tax Type
       | Taxable Turnover exceeds threshold | Approved |
 
   @UAT_TCS-01.24.5
-  Scenario: UAT_TCS 01.24.5	To verify the Process of Rejecting Reregistering Tax type
+  Scenario Outline: UAT_TCS 01.24.5	To verify the Process of Rejecting Reregistering Tax type
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
     Then User should be logged in
     When I enter valid data on the Re-RegisterTaxType Individual page
       | Re-Register Tax         | Re-Register Tax                    | 0 |
-      | TaxpayerClassificationT | Organisation                         | 1 |
+      | TaxpayerClassificationT | Organisation                       | 1 |
       | TaxPayer_TIN            | N0000033472                        | 2 |
       | Re-Reg Reason           | Taxable Turnover exceeds threshold | 3 |
       | EOR                     | 16092002                           | 4 |
@@ -129,7 +129,7 @@ Feature: [SUC:02-04] Re-register Tax Type Organisation: Reregister Tax Type
     And Verify the String "<Read>"
 
     Examples:
-      | Read     | Reject   | Notes                 |
+      | Read     | Reject                  | Notes                 |
       | Rejected | Tax Type To Re-Register | Error in data capture |
 
     
