@@ -4096,7 +4096,6 @@ public class stepDefinitions extends BaseClass {
         Actions action = new Actions(driver);
         WebElement manage = driver.findElement(By.xpath(Pro.getProperty("ManageTaxpayer_LINK_XPATH")));
         action.doubleClick(manage).build().perform();
-        //action.build().perform();
 
 
     }
@@ -4147,6 +4146,15 @@ public class stepDefinitions extends BaseClass {
     public void click_on_search() throws Throwable {
         driver.findElement(By.xpath("//*[text()='Search']")).click();
 
+    }
+
+    @Then("^Click table column TaxDetails \"([^\"]*)\"$")
+    public void click_table_column_taxdetails_something(String strArg1) throws Throwable {
+        WebDriverWait waitReason = new WebDriverWait(driver, 10);
+        WebElement taxTypeGrid =waitReason.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(("//td[contains(text(),'"+strArg1+"')]"))));
+//        Assert.assertTrue(taxTypeGrid.isDisplayed());
+//        WebElement parent = taxTypeGrid.findElement(By.xpath("./.."));
+        taxTypeGrid.click();
     }
 
     @Then("^Select New Office \"([^\"]*)\"$")
@@ -4497,8 +4505,11 @@ public class stepDefinitions extends BaseClass {
     // Suspend Individual TaxType
     @Then("^Goto Suspend TaxType \"([^\"]*)\"$")
     public void goto_Suspend_TaxType(String SuspendTaxType) throws Throwable {
+        Thread.sleep(2000);
+//        driver.findElement(By.xpath("//a[text()='"+SuspendTaxType+"']")).click();
+        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[3]/a")).click();
 
-        driver.findElement(By.xpath(Pro.getProperty("SuspendTaxtType_XPATH"))).click();
+
 
     }
 
@@ -7469,7 +7480,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025799/2020");
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025813/2020");
         driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
     }

@@ -8,7 +8,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
 		features = "src\\test\\resources\\FeatureFiles",
 		glue = "StepDefinitions" ,
-		tags = "@UAT_TCS-01.23.3",
+		tags = "@UAT_TCS-01.25.5",
 		dryRun = false,    //checks whether each feature has a mapped step definition
 		monochrome = true,// neat output after tc run
 
