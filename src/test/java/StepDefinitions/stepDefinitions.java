@@ -4339,7 +4339,7 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(1000);
         driver.findElement(By.id(Pro.getProperty("Registration_ManageTaxPayer_UpdateTaxPayer_TIN_ID"))).sendKeys(data.get(2).get(1));
         Thread.sleep(1000);
-        driver.findElement(By.id(Pro.getProperty("Registration_ManageTaxPayer_UpdateTaxPayer_Search_ID"))).click();
+        driver.findElement(By.xpath(Pro.getProperty("Registration_ManageTaxPayer_UpdateTaxPayer_Search_ID"))).click();
         Thread.sleep(5000);
 
         List<WebElement> element = driver.findElements(By.id(Pro.getProperty("Registration_ManageTaxPayer_Re-RegisterTax_Search_ReregisterTax_ScrollToView_ID")));
@@ -4358,7 +4358,10 @@ public class stepDefinitions extends BaseClass {
 
         WebElement EDR = driver.findElement(By.id("ReregisterRegime:EDRR_input"));
 //            EDR.sendKeys(tomorrowsDate());
-        EDR.sendKeys("07042029");
+        EDR.clear();
+        EDR.sendKeys(data.get(4).get(1));
+        action.sendKeys(Keys.TAB);
+
         Thread.sleep(3000);
 
         driver.findElement(By.xpath(Pro.getProperty("Registration_ManageTaxPayer_Re-RegisterTax_Search_Reason_XPATH"))).click();
@@ -7466,7 +7469,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025753/2020");
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025799/2020");
         driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
     }
