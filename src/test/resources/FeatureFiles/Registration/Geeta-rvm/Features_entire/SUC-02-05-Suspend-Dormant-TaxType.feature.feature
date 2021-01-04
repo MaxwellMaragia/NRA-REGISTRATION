@@ -85,24 +85,24 @@ Feature: SUC:02-05 Suspend/Dormant Tax Type
     And Click suspend
     Then Verify error message "Suspension Start Date must be greater than Effective Date of Registration"
 
-# ********************************DOESTN'T WORK IN NRA,PIT CAN BE SUSPENDED WHEN OTHER TAXTYPES PRESENT ****************************
+# ********************************DOESN'T WORK IN NRA,PIT CAN BE SUSPENDED WHEN OTHER TAXTYPES PRESENT ****************************
 #  @SUC:02-05 @UAT_TCS-01.25.5
-#  Scenario:  UAT_TCS 01.25.5 To verify the Process of Suspending Personal Income Tax when other Taxes are active
-#    Given User navigates to the login page
-#    When Enters the username "tripsuser" and password "Passw0rd"
-#    Then User should be logged in
-#    And  Click on regisration link
-#    And  Goto Manage taxpayer
-#    And Goto Suspend TaxType "Suspend Tax Type"
-#    And Select Taxpayer Classification Type "Individual"
-#    And Enter TIN number "N0000019925"
-#    And Click on search
-#    Then Click table column TaxDetails "Personal Income Tax"
-#    And Enter suspension start date as todays date
-#    And Enter Suspension End Date as "03/09/2021"
-#    And Select outcome reason for suspension
-#    And Click suspend
-#    Then Verify error message "Personal Income tax should be the LAST tax type to be Suspended/Dormant"
+  Scenario:  UAT_TCS 01.25.5 To verify the Process of Suspending Personal Income Tax when other Taxes are active
+    Given User navigates to the login page
+    When Enters the username "tripsuser" and password "Passw0rd"
+    Then User should be logged in
+    And  Click on regisration link
+    And  Goto Manage taxpayer
+    And Goto Suspend TaxType "Suspend Tax Type"
+    And Select Taxpayer Classification Type "Individual"
+    And Enter TIN number "N0000019925"
+    And Click on search
+    Then Click table column TaxDetails "Personal Income Tax"
+    And Enter suspension start date as todays date
+    And Enter Suspension End Date as "03/09/2021"
+    And Select outcome reason for suspension
+    And Click suspend
+    Then Verify error message "Personal Income tax should be the LAST tax type to be Suspended/Dormant"
 
 
   @SUC:02-05 @UAT_TCS-01.25.7
