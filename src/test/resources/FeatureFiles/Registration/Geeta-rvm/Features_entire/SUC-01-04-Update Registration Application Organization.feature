@@ -2,9 +2,9 @@ Feature: SUC:01-04-Update Registration Application Organization
 
   @UAT_TCS-01.04.2
   Scenario Outline: UAT_TCS 01.04.2-To verify the process of checking validation error
-    Given Browser is launched and trips URL loaded in address bar
-    And User logged in as revenue officer
-      | tripsuser | Passw0rd |
+    Given User navigates to the login page
+    When Enters the username "tripsuser" and password "Passw0rd"
+    Then User should be logged in
     Then Click on registration > register taxpayer > register organization
     Then Select category : organization "<Category>"
     Then Enter Organization name "<name>"

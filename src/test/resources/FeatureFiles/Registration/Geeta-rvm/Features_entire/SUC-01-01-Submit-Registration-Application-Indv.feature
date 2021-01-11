@@ -7,12 +7,12 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then User should be logged in
     When I Fill the Individual Taxpayer Registration form
     And I enter valid data on the Individualpage and Submit
-      | First Name        | Max                | 0 |
-      | Last Name         | PortalTaxtype1     | 1 |
-      | CategoryValue     | Employee           | 2 |
-      | Title Value       | MR                 | 3 |
-      | Gender            | M                  | 4 |
-      | MothersMaidenName | Wambui             | 5 |
+      | First Name        | Max              | 0 |
+      | Last Name         | CreditAdjustment | 1 |
+      | CategoryValue     | Employee         | 2 |
+      | Title Value       | MR               | 3 |
+      | Gender            | M                | 4 |
+      | MothersMaidenName | Wambui           | 5 |
     And Enter Date Of Birth in additional info tab"<DOB>"
       | Marital Status     | Married                        | 0 |
       | Place Of Birth     | Mumbai                         | 1 |
@@ -22,13 +22,13 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     And Enter identification Date of Issue "<DOI>"
       | Identification      | Identification       | 0 |
       | Identification Type | Passport             | 1 |
-      | Identification num  | 43534471             | 2 |
+      | Identification num  | 43534472             | 2 |
       | Country of Issue    | Albania              | 3 |
-      | epermit num         | jhb                  | 4 |
+      | epermit num         | jhb1                  | 4 |
       | epermit type        | Asylum Seeker Permit | 5 |
     And Enter identification Expiry Date "<IED>"
       | Identification Type | Driving Licence    | 0 |
-      | Identification num  | uioj72             | 1 |
+      | Identification num  | uioj7233             | 1 |
       | Register Ind        | Employment Details | 2 |
       | Employment Position | Senior Executive   | 3 |
       | Employer's Name     | SiddharthReddy     | 4 |
@@ -49,7 +49,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | ContactTypeValue         | Email                                                                   | 34 13 |
       | ContactDetails           | margiewambui11@gmail.com                                                | 35 14 |
 #    And enters attachment details "National ID"  with number "5000670120" and path "C:\id_doc.png"
-    And enters attachment details "Passport"  with number "987000000450" and path "C:\id_doc.png"
+    And enters attachment details "Passport"  with number "9870000004503" and path "C:\id_doc.png"
     Then Click On Individual Page Submit Button
     And  Verify the ARN number "<ARN>"
 #    Then wait for webpage to load
@@ -513,121 +513,124 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click on Save button
     And Verify the String "<Read>"
 
+
+
+
     Examples:
       | Approve    | Read        |
       | First Name | In progress |
 
-  @UAT_TCS-01.02.1
-  Scenario Outline: UAT_TCS 01.02.1-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
-    Given Browser is launched and trips URL loaded in address bar
-    And User logged in as revenue officer
-      | tripsuser | Passw0rd |
-    Then Click on registration > register taxpayer > register organization
-    Then Select category : organization "<Category>"
-    Then Enter Organization name "<name>"
-    Then Select Account end day "<endDay>"
-    Then Select Account end month "<endMonth>"
-    Then Enter source of capital "<sourceOfCapital>"
-    Then Select place of incorporation "<Nationality>"
-    Then Select reason for tin application : organization "<reasonForApplication>"
-    And Click attachments tab : organization
-    Then Click add "OrganisationSummaryDetails:organisationAccordion:attachmentTableHandler:AddAttachment"
-    Then Switch to frame
-    Then Select document type "<documentType>"
-    Then Enter document number "<idNumber>"
-    Then Browse for attachment "<path>"
-    Then Click ok: xpath "//*[@id='AttachmentDetails:Ok']"
-    Then Click save "OrganisationSummaryDetails:Save"
-    Then Verify error message "Address should have at least one primary indicator"
-    Examples:
-      | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital |
-      | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           |
-
-  @UAT_TCS-01.02.2
-  Scenario Outline: UAT_TCS 01.02.2-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
-    Given Browser is launched and trips URL loaded in address bar
-    And User logged in as revenue officer
-      | tripsuser | Passw0rd |
-    Then Click on registration > register taxpayer > register organization
-    Then Select category : organization "<Category>"
-    Then Enter Organization name "<name>"
-    Then Select Account end day "<endDay>"
-    Then Select Account end month "<endMonth>"
-    Then Enter source of capital "<sourceOfCapital>"
-    Then Select place of incorporation "<Nationality>"
-    Then Select business sector
-    Then Select reason for tin application : organization "<reasonForApplication>"
-    #    And Click attachments tab : organization
-    #    Then Click add "OrganisationSummaryDetails:organisationAccordion:attachmentTableHandler:AddAttachment"
-    #    Then Switch to frame
-    #    Then Select document type "<documentType>"
-    #    Then Enter document number "<idNumber>"
-    #    Then Browse for attachment "<path>"
-    #    Then Click ok: xpath "//*[@id='AttachmentDetails:Ok']"
-    Then Click address tab : organization
-    Then Click add "OrganisationSummaryDetails:organisationAccordion:addressTableHandler:AddAddress"
-    Then Switch to frame
-    Then Select address type "<addressType>"
-    Then Uncheck primary indicator checkbox
-    Then Then enter town "<town>"
-    Then Select region "<region>" and district "<district>"
-    Then Click ok: xpath "//*[@id='AddressDetails:addOk']"
-    Then Click save "OrganisationSummaryDetails:Save"
-    Then Verify error message "Following necessary attachments should be supplied"
-    Examples:
-      | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital | addressType          | town     | region         | district |
-      | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           | Local Postal Address | Lilongwe | Central Region | Lilongwe |
-
-
-  @UAT_TCS-01.02.3
-  Scenario Outline: UAT_TCS 01.02.3-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
-    Given Browser is launched and trips URL loaded in address bar
-    And User logged in as revenue officer
-      | tripsuser | Passw0rd |
-    Then Click on registration > register taxpayer > register organization
-    Then Select category : organization "<Category>"
-    Then Enter Organization name "<name>"
-    Then Select Account end day "<endDay>"
-    Then Select Account end month "<endMonth>"
-    Then Enter source of capital "<sourceOfCapital>"
-    Then Select place of incorporation "<Nationality>"
-    Then Select reason for tin application : organization "<reasonForApplication>"
-    Then Click add "OrganisationSummaryDetails:organisationAccordion:businessDetailsHandler:AddBusinessSD"
-    Then Switch to frame
-    Then Select business sector
-    Then Click primary indicator checkbox "BusinessSectorDetails:PrimaryIndicator"
-    And Click attachments tab : organization
-    Then Click add "OrganisationSummaryDetails:organisationAccordion:attachmentTableHandler:AddAttachment"
-    Then Switch to frame
-    Then Select document type "<documentType>"
-    Then Enter document number "<idNumber>"
-    Then Browse for attachment "<path>"
-    Then Click ok: xpath "//*[@id='AttachmentDetails:Ok']"
-    Then Click address tab : organization
-    Then Click add "OrganisationSummaryDetails:organisationAccordion:addressTableHandler:AddAddress"
-    Then Switch to frame
-    Then Select address type "<addressType>"
-    Then Uncheck primary indicator checkbox
-    Then Then enter town "<town>"
-    Then Select region "<region>" and district "<district>"
-    Then Click ok: xpath "//*[@id='AddressDetails:addOk']"
-    And Click directors tab
-    Then Click add "OrganisationSummaryDetails:organisationAccordion:directorsTableHandler:AddDirectors"
-    Then Switch to frame
-    Then Click find "DirectorsDetails:FindTin"
-    Then Switch to default
-    Then Switch to frame 2
-    Then Click search : id "SearchForm:j_idt21"
-    Then Click table column "//*[@id='SearchForm:resultsDataTable_data']/tr[1]/td[4]"
-    Then Click continue "SearchForm:j_id16"
-    Then Switch to frame
-    Then Enter director start date "<directorStartDate>"
-    Then Click save "OrganisationSummaryDetails:Save"
-    Then Verify error message "Address should have at least one primary indicator"
-    Examples:
-      | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital | addressType          | town     | region         | district | directorStartDate |
-      | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           | Local Postal Address | Lilongwe | Central Region | Lilongwe | 11/07/2019        |
-
-    
-  
+#  @UAT_TCS-01.02.1
+#  Scenario Outline: UAT_TCS 01.02.1-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
+#    Given Browser is launched and trips URL loaded in address bar
+#    And User logged in as revenue officer
+#      | tripsuser | Passw0rd |
+#    Then Click on registration > register taxpayer > register organization
+#    Then Select category : organization "<Category>"
+#    Then Enter Organization name "<name>"
+#    Then Select Account end day "<endDay>"
+#    Then Select Account end month "<endMonth>"
+#    Then Enter source of capital "<sourceOfCapital>"
+#    Then Select place of incorporation "<Nationality>"
+#    Then Select reason for tin application : organization "<reasonForApplication>"
+#    And Click attachments tab : organization
+#    Then Click add "OrganisationSummaryDetails:organisationAccordion:attachmentTableHandler:AddAttachment"
+#    Then Switch to frame
+#    Then Select document type "<documentType>"
+#    Then Enter document number "<idNumber>"
+#    Then Browse for attachment "<path>"
+#    Then Click ok: xpath "//*[@id='AttachmentDetails:Ok']"
+#    Then Click save "OrganisationSummaryDetails:Save"
+#    Then Verify error message "Address should have at least one primary indicator"
+#    Examples:
+#      | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital |
+#      | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           |
+#
+#  @UAT_TCS-01.02.2
+#  Scenario Outline: UAT_TCS 01.02.2-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
+#    Given Browser is launched and trips URL loaded in address bar
+#    And User logged in as revenue officer
+#      | tripsuser | Passw0rd |
+#    Then Click on registration > register taxpayer > register organization
+#    Then Select category : organization "<Category>"
+#    Then Enter Organization name "<name>"
+#    Then Select Account end day "<endDay>"
+#    Then Select Account end month "<endMonth>"
+#    Then Enter source of capital "<sourceOfCapital>"
+#    Then Select place of incorporation "<Nationality>"
+#    Then Select business sector
+#    Then Select reason for tin application : organization "<reasonForApplication>"
+#    #    And Click attachments tab : organization
+#    #    Then Click add "OrganisationSummaryDetails:organisationAccordion:attachmentTableHandler:AddAttachment"
+#    #    Then Switch to frame
+#    #    Then Select document type "<documentType>"
+#    #    Then Enter document number "<idNumber>"
+#    #    Then Browse for attachment "<path>"
+#    #    Then Click ok: xpath "//*[@id='AttachmentDetails:Ok']"
+#    Then Click address tab : organization
+#    Then Click add "OrganisationSummaryDetails:organisationAccordion:addressTableHandler:AddAddress"
+#    Then Switch to frame
+#    Then Select address type "<addressType>"
+#    Then Uncheck primary indicator checkbox
+#    Then Then enter town "<town>"
+#    Then Select region "<region>" and district "<district>"
+#    Then Click ok: xpath "//*[@id='AddressDetails:addOk']"
+#    Then Click save "OrganisationSummaryDetails:Save"
+#    Then Verify error message "Following necessary attachments should be supplied"
+#    Examples:
+#      | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital | addressType          | town     | region         | district |
+#      | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           | Local Postal Address | Lilongwe | Central Region | Lilongwe |
+#
+#
+#  @UAT_TCS-01.02.3
+#  Scenario Outline: UAT_TCS 01.02.3-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
+#    Given Browser is launched and trips URL loaded in address bar
+#    And User logged in as revenue officer
+#      | tripsuser | Passw0rd |
+#    Then Click on registration > register taxpayer > register organization
+#    Then Select category : organization "<Category>"
+#    Then Enter Organization name "<name>"
+#    Then Select Account end day "<endDay>"
+#    Then Select Account end month "<endMonth>"
+#    Then Enter source of capital "<sourceOfCapital>"
+#    Then Select place of incorporation "<Nationality>"
+#    Then Select reason for tin application : organization "<reasonForApplication>"
+#    Then Click add "OrganisationSummaryDetails:organisationAccordion:businessDetailsHandler:AddBusinessSD"
+#    Then Switch to frame
+#    Then Select business sector
+#    Then Click primary indicator checkbox "BusinessSectorDetails:PrimaryIndicator"
+#    And Click attachments tab : organization
+#    Then Click add "OrganisationSummaryDetails:organisationAccordion:attachmentTableHandler:AddAttachment"
+#    Then Switch to frame
+#    Then Select document type "<documentType>"
+#    Then Enter document number "<idNumber>"
+#    Then Browse for attachment "<path>"
+#    Then Click ok: xpath "//*[@id='AttachmentDetails:Ok']"
+#    Then Click address tab : organization
+#    Then Click add "OrganisationSummaryDetails:organisationAccordion:addressTableHandler:AddAddress"
+#    Then Switch to frame
+#    Then Select address type "<addressType>"
+#    Then Uncheck primary indicator checkbox
+#    Then Then enter town "<town>"
+#    Then Select region "<region>" and district "<district>"
+#    Then Click ok: xpath "//*[@id='AddressDetails:addOk']"
+#    And Click directors tab
+#    Then Click add "OrganisationSummaryDetails:organisationAccordion:directorsTableHandler:AddDirectors"
+#    Then Switch to frame
+#    Then Click find "DirectorsDetails:FindTin"
+#    Then Switch to default
+#    Then Switch to frame 2
+#    Then Click search : id "SearchForm:j_idt21"
+#    Then Click table column "//*[@id='SearchForm:resultsDataTable_data']/tr[1]/td[4]"
+#    Then Click continue "SearchForm:j_id16"
+#    Then Switch to frame
+#    Then Enter director start date "<directorStartDate>"
+#    Then Click save "OrganisationSummaryDetails:Save"
+#    Then Verify error message "Address should have at least one primary indicator"
+#    Examples:
+#      | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital | addressType          | town     | region         | district | directorStartDate |
+#      | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           | Local Postal Address | Lilongwe | Central Region | Lilongwe | 11/07/2019        |
+#
+#
+#
     
