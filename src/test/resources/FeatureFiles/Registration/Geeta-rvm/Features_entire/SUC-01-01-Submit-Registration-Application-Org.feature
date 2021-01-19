@@ -95,7 +95,11 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
       | Address should have at least one primary indicator |
 
   @[SUC:01-01] @UAT_TCS-01.02.4
+<<<<<<< HEAD
   Scenario Outline: UAT_TCS 01.02.4 To verify the process of Registering an Organisation successfully with mandatory fields
+=======
+  Scenario Outline:UAT_TCS 01.02.4	To verify the process of Registering an Organisation successfully with mandatory fields
+>>>>>>> 0e47447b65810dc21b3738ab669b5750fba21f32
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
     Then User should be logged in
@@ -137,7 +141,6 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     Then Click On Organization Page Submit Button
     Then Verify save success message "Processing Completed - Reference Number"
     Then Obtain reference number "Processing Completed - Reference Number - ARN"
-    Then wait for webpage to load
     Then Open CRM and close modal
     Then Click on registration application link
     Then switch to frame0
@@ -147,7 +150,7 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\users\Maxwell Maragia\downloads"
+    And Download the Attachment "C:\Users\v-maxmar\Downloads"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
@@ -158,8 +161,9 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | ARN                                           | Approve    | Read     |
-      | Processing Completed - Reference Number - ARN | First Name | Approved |
+      | Approve    | Read     |
+      | First Name | Approved |
+
 
   @[SUC:01-01]
   Scenario Outline: UAT_TCS 02.02.1	To verify the process of Approving Organisation Registration

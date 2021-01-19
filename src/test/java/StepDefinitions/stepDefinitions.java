@@ -76,8 +76,6 @@ public class stepDefinitions extends BaseClass {
     @Given("^navigate to Registration>>Register Tax Type$")
     public void navigate_to_registrationregister_tax_type() throws Throwable {
         driver.findElement(By.xpath(Pro.getProperty("registration_XPATH"))).click();
-        driver.findElement(By.xpath(Pro.getProperty("manageTaxpayer_XPATH"))).click();
-        Thread.sleep(2000);
         driver.findElement(By.xpath(Pro.getProperty("registerTaxtype_XPATH"))).click();
         Thread.sleep(2000);
     }
@@ -101,6 +99,13 @@ public class stepDefinitions extends BaseClass {
     @And("^clicks find entity search button$")
     public void clicks_find_entity_search_button() throws Throwable {
         driver.findElement(By.id("SearchForm:j_idt40")).click();
+
+        Thread.sleep(5000);
+    }
+
+    @And("^click taxtpes field$")
+    public void click_taxtpes_field() throws Throwable {
+        driver.findElement(By.xpath("//*[text()=\"Tax Types\"]")).click();
 
         Thread.sleep(5000);
     }
@@ -284,9 +289,15 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(5000);
     }
 
+    @Then("^TaxTypes are displayed2$")
+    public void TaxTypes_are_displayed2() throws Throwable {
+        WebElement table = driver.findElement(By.id("RegisterIndividual:individualAccordion:TaxtypesTableHandler:j_idt166"));
+        Assert.assertTrue(table.isDisplayed());
+    }
+
     @Then("^TaxTypes are displayed$")
     public void TaxTypes_are_displayed() throws Throwable {
-        WebElement table = driver.findElement(By.xpath("//*[@id=\"RegisterRegime:RegimeTable\"]/div[2]/table"));
+        WebElement table = driver.findElement(By.id("RegisterRegime:RegimeTable_data"));
         Assert.assertTrue(table.isDisplayed());
     }
 
@@ -327,7 +338,7 @@ public class stepDefinitions extends BaseClass {
     public void individual_details_displayed() throws Throwable {
         Thread.sleep(5000);
         WebElement individualDetailsHeader = driver.findElement(By.id("RegisterIndividual:individualummaryLabel"));
-        Assert.assertEquals("Individual Details", individualDetailsHeader.getText());
+        Assert.assertEquals("Individual Summary Details", individualDetailsHeader.getText());
 
     }
 
@@ -4122,7 +4133,6 @@ public class stepDefinitions extends BaseClass {
         Actions action = new Actions(driver);
         WebElement manage = driver.findElement(By.xpath(Pro.getProperty("ManageTaxpayer_LINK_XPATH")));
         action.doubleClick(manage).build().perform();
-        //action.build().perform();
 
 
     }
@@ -4173,6 +4183,15 @@ public class stepDefinitions extends BaseClass {
     public void click_on_search() throws Throwable {
         driver.findElement(By.xpath("//*[text()='Search']")).click();
 
+    }
+
+    @Then("^Click table column TaxDetails \"([^\"]*)\"$")
+    public void click_table_column_taxdetails_something(String strArg1) throws Throwable {
+        WebDriverWait waitReason = new WebDriverWait(driver, 10);
+        WebElement taxTypeGrid =waitReason.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(("//td[contains(text(),'"+strArg1+"')]"))));
+//        Assert.assertTrue(taxTypeGrid.isDisplayed());
+//        WebElement parent = taxTypeGrid.findElement(By.xpath("./.."));
+        taxTypeGrid.click();
     }
 
     @Then("^Select New Office \"([^\"]*)\"$")
@@ -4365,7 +4384,7 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(1000);
         driver.findElement(By.id(Pro.getProperty("Registration_ManageTaxPayer_UpdateTaxPayer_TIN_ID"))).sendKeys(data.get(2).get(1));
         Thread.sleep(1000);
-        driver.findElement(By.id(Pro.getProperty("Registration_ManageTaxPayer_UpdateTaxPayer_Search_ID"))).click();
+        driver.findElement(By.xpath(Pro.getProperty("Registration_ManageTaxPayer_UpdateTaxPayer_Search_ID"))).click();
         Thread.sleep(5000);
 
         List<WebElement> element = driver.findElements(By.id(Pro.getProperty("Registration_ManageTaxPayer_Re-RegisterTax_Search_ReregisterTax_ScrollToView_ID")));
@@ -4384,7 +4403,10 @@ public class stepDefinitions extends BaseClass {
 
         WebElement EDR = driver.findElement(By.id("ReregisterRegime:EDRR_input"));
 //            EDR.sendKeys(tomorrowsDate());
-        EDR.sendKeys("07042029");
+        EDR.clear();
+        EDR.sendKeys(data.get(4).get(1));
+        action.sendKeys(Keys.TAB);
+
         Thread.sleep(3000);
 
         driver.findElement(By.xpath(Pro.getProperty("Registration_ManageTaxPayer_Re-RegisterTax_Search_Reason_XPATH"))).click();
@@ -4520,8 +4542,11 @@ public class stepDefinitions extends BaseClass {
     // Suspend Individual TaxType
     @Then("^Goto Suspend TaxType \"([^\"]*)\"$")
     public void goto_Suspend_TaxType(String SuspendTaxType) throws Throwable {
+        Thread.sleep(2000);
+//        driver.findElement(By.xpath("//a[text()='"+SuspendTaxType+"']")).click();
+        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[3]/a")).click();
 
-        driver.findElement(By.xpath(Pro.getProperty("SuspendTaxtType_XPATH"))).click();
+
 
     }
 
@@ -6187,8 +6212,6 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click on Save button$")
     public void click_on_Save_button() throws Throwable {
         Thread.sleep(2000);
-//            WebElement  specificframe3= (driver.findElement(By.id(Pro.getProperty("SearchResult_Frame_ID"))));
-//            driver.switchTo().frame(specificframe3);
         driver.findElement(By.id("tbg_registrationapplication|NoRelationship|Form|Mscrm.Form.tbg_registrationapplication.Save")).click();
 
 
@@ -6939,10 +6962,10 @@ public class stepDefinitions extends BaseClass {
 
     //......................................SUSPEND DORMANT TAXTYPE.............................................................//
 
-    @Then("^Click table column \"([^\"]*)\"$")
-    public void click_table_column(String ColumnXpath) throws Throwable {
+    @Then("^Click table column taxtype \"([^\"]*)\"$")
+    public void click_table_column_taxtype(String TaxType) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 60);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ColumnXpath))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'"+TaxType+"')]"))).click();
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ENTER);
     }
@@ -7006,6 +7029,7 @@ public class stepDefinitions extends BaseClass {
         System.out.println(FullMessage);
         //Processing Completed - Reference Number - CRAL/000001959/2020
         ReferenceNumber = FullMessage.substring(41);
+        sharedatastep.A_CRMARN=ReferenceNumber;
         System.out.println(ReferenceNumber);
     }
 
@@ -7518,9 +7542,8 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00022844/2020");
-        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(ReferenceNumber);
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025816/2021");
+        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
     }
 
@@ -8052,7 +8075,9 @@ public class stepDefinitions extends BaseClass {
         WebElement dropDown = driver.findElement(By.id("viewoption"));
         //WebElement dropDown = driver.findElement(By.xpath("//*[@id=\"statuscode_i\"]"));
         dropDown.click();
-        driver.findElement(By.xpath("//option[text()='Duplicate entity found']")).click();
+        driver.findElement(By.xpath("//option[text()='Error in data capture']")).click();
+
+        driver.switchTo().defaultContent();
     }
 
     @Then("^Enter Outcome Reason for Taxtype registration rejection \"([^\"]*)\"$")
