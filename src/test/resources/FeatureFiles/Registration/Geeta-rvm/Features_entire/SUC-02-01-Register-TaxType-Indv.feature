@@ -3,25 +3,24 @@ Feature: SUC:02-01 Register Tax Type-Indv
   Background:
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
-    Then User should be logged in
 
   @SUC:02-01 @UAT_TCS-01.20.2
   Scenario Outline: UAT_TCS 01.19.1-UAT_TCS 01.19.2-To Verify the Process of Registering a Tax Type
-#    Given navigate to Registration>>Register Tax Type
-#    When Select Taxpayer Classification Type as <Type>
-#    And enters TIN as <TIN>
-#    And clicks find entity search button
-#    Then TaxTypes are displayed
-#    Given Click Register Tax Type button
-#    And Selects <Tax type>  from Tax Type drop down
-#    And enters date of mission
-#    And enters EDR
-#    And checks forced registration
-#    And clicks ok on tax type details
-#    Then message is displayed "Record Added"
-#    And clicks tax type registration submit button
-#    Then Verify save success message "Processing Completed - Reference Number"
-#    Then Obtain reference number "Processing Completed - Reference Number - ARN"
+    Given navigate to Registration>>Register Tax Type
+    When Select Taxpayer Classification Type as <Type>
+    And enters TIN as <TIN>
+    And clicks find entity search button
+    Then TaxTypes are displayed
+    Given Click Register Tax Type button
+    And Selects <Tax type>  from Tax Type drop down
+    And enters date of mission
+    And enters EDR
+    And checks forced registration
+    And clicks ok on tax type details
+    Then message is displayed "Record Added"
+    And clicks tax type registration submit button
+    Then Verify save success message "Processing Completed - Reference Number"
+    Then Obtain reference number "Processing Completed - Reference Number - ARN"
     Then Open CRM and close modal
     Then Click on registration application link
     Then switch to frame
@@ -30,14 +29,14 @@ Feature: SUC:02-01 Register Tax Type-Indv
     And Click on NextStage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment
+    And Download the Attachment "C:\users\Maxwell Maragia\downloads"
     Then switch to frame
     Then clicks Approve from the dropdown <Approve>
     Then Click on Save button
     And Verify the String "<Read>"
     Examples:
       | Type       | TIN         | Tax type        | Approve  | Read     |
-      | Individual | N0000027642 | Pay As You Earn | Tax Type | Approved |
+      | Individual | N0000036250 | Pay As You Earn | Tax Type | Approved |
 
 
   Scenario Outline:  Register TaxType Individual Taxpayer Approve Scenario

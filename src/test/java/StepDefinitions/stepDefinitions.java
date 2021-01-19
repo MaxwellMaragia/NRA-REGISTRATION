@@ -17,6 +17,7 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class stepDefinitions extends BaseClass {
 
     public static sharedatastep sharedata;
-    public String ReferenceNumber = "ARN/00022845/2020";
+    public String ReferenceNumber = "ARN/00025810/2020";
     public String propertyID;
     public String organizationPropertyID;
 
@@ -50,7 +51,9 @@ public class stepDefinitions extends BaseClass {
 
     @When("^Enters the username \"([^\"]*)\" and password \"([^\"]*)\"$")
     public void enters_the_username_and_password(String strArg1, String strArg2) throws Throwable {
+        driver.findElement(By.id("loginForm:username")).clear();
         driver.findElement(By.id("loginForm:username")).sendKeys(strArg1);
+        driver.findElement(By.id("loginForm:password")).clear();
         driver.findElement(By.id("loginForm:password")).sendKeys(strArg2);
         driver.findElement(By.xpath("//*[@id=\"loginForm:j_idt18\"]")).click();
     }
@@ -373,10 +376,37 @@ public class stepDefinitions extends BaseClass {
     @Then("^is logged in to taxpayer portal$")
     public void is_logged_in_to_taxpayer_portal() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        WebElement welcomeImage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("id_btnMyTaxToggle")));
+        WebElement welcomeImage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("id_btnMyTax")));
         Assert.assertTrue(welcomeImage.isDisplayed());
     }
 
+
+    @Then("^user navigates to my account$")
+    public void user_navigates_to_myaccount() throws Throwable {
+        Thread.sleep(3000);
+        WebElement myTaxDropdown = driver.findElement(By.id("id_btnMyAccount"));
+        myTaxDropdown.click();
+    }
+
+    @Then("^user clicks save button after amend name$")
+    public void user_clicks_save_button_after_amend_name() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btnSave"))).click();
+    }
+
+    @Then("^user modifies second name to \"([^\"]*)\"$")
+    public void user_modifies_name(String name) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 100);
+        WebElement nameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("id_lastName")));
+        nameField.clear();
+        nameField.sendKeys(name);
+    }
+
+    @Then("^user clicks edit button to edit account details$")
+    public void user_clicks_edit_button_to_edit_account_details() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("btnEdit"))).click();
+    }
 
     @Given("^user navigates to my tax>>taxtype request$")
     public void user_navigates_to_my_taxtaxtype_request() throws Throwable {
@@ -1545,7 +1575,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Select residence permit identification with number \"([^\"]*)\"$")
     public void select_residence_permit_identification_with_number_something(String number) throws Throwable {
-
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         Thread.sleep(5000);
         driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[2]/a")).click();
         WebElement Identification1=driver.findElement(By.id(Pro.getProperty("Identification_Add_ID")));
@@ -1560,11 +1590,11 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//li[contains(text(),'Residence Permit')]")).click();
         Thread.sleep(5000);
-        driver.findElement(By.id(Pro.getProperty("Identification_Number_ID"))).sendKeys(number);
+        driver.findElement(By.id(Pro.getProperty("Identification_Number_ID"))).sendKeys(String.valueOf(timestamp.getTime()));
 
         Thread.sleep(4000);
         driver.findElement(By.id(Pro.getProperty("Identification_Frame_OK_ID"))).click();
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.switchTo().defaultContent();
 
 
@@ -1610,7 +1640,8 @@ public class stepDefinitions extends BaseClass {
 
         Thread.sleep(2000);
         WebElement identificationNumber=driver.findElement(By.id(Pro.getProperty("Identification_Number_ID")));
-        identificationNumber.sendKeys(data.get(2).get(1));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        identificationNumber.sendKeys(String.valueOf(timestamp.getTime()));
 
         WebDriverWait Iwait=new WebDriverWait(driver,60);
         Iwait.until(ExpectedConditions.elementToBeClickable(By.xpath(Pro.getProperty("IdenificationType_CLICK_XPATH")))).click();
@@ -1684,7 +1715,8 @@ public class stepDefinitions extends BaseClass {
         driver.switchTo().frame(idfnframe);
 
         Thread.sleep(6000);
-        driver.findElement(By.id(Pro.getProperty("Identification_Number_ID"))).sendKeys(data.get(1).get(1));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.id(Pro.getProperty("Identification_Number_ID"))).sendKeys(String.valueOf(timestamp.getTime()));
         Thread.sleep(2000);
 
         WebDriverWait Irecidentwait=new WebDriverWait(driver,60);
@@ -1732,7 +1764,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^wait for webpage to load$")
     public void wait_for_webpage_to_load() throws Throwable {
-        Thread.sleep(30000);
+        Thread.sleep(10000);
 
     }
 
@@ -1764,8 +1796,9 @@ public class stepDefinitions extends BaseClass {
             passport.click();
         }
 
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         WebElement docNumber=driver.findElement(By.id("AttachmentDetails:Reference"));
-        docNumber.sendKeys(strArg2);
+        docNumber.sendKeys(String.valueOf(timestamp.getTime()));
 
         Thread.sleep(2000);
         driver.findElement(By.id("AttachmentDetails:AttachmentPath_input")).sendKeys(strArg3);
@@ -2303,7 +2336,8 @@ public class stepDefinitions extends BaseClass {
 
         }
         Thread.sleep(3000);
-        driver.findElement(By.id(Pro.getProperty("Organisation_AdditionalDetails_RGDNO_ID"))).sendKeys(data.get(2).get(1));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.id(Pro.getProperty("Organisation_AdditionalDetails_RGDNO_ID"))).sendKeys(String.valueOf(timestamp.getTime()));
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         Thread.sleep(3000);
         // Boolean status=driver.findElement(By.id(Pro.getProperty("Organisation_AdditionalDetails_DateOfIncorporation_ID"))).isEnabled();
@@ -2599,7 +2633,8 @@ public class stepDefinitions extends BaseClass {
             }
         }
         Thread.sleep(2000);
-        driver.findElement(By.xpath(Pro.getProperty("Attachments_ADD_RefferenceNumber_XPATH"))).sendKeys(data.get(3).get(1));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.xpath(Pro.getProperty("Attachments_ADD_RefferenceNumber_XPATH"))).sendKeys(String.valueOf(timestamp.getTime()));
         Thread.sleep(2000);
         WebElement uploadBtn = driver.findElement(By.id(Pro.getProperty("Attachment_Upload_BUTTON_ID")));
         // action.click(uploadBtn).build().perform();
@@ -2661,7 +2696,8 @@ public class stepDefinitions extends BaseClass {
             }
         }
         Thread.sleep(2000);
-        driver.findElement(By.xpath(Pro.getProperty("Attachments_ADD_RefferenceNumber_XPATH"))).sendKeys(data.get(5).get(1));
+        Timestamp timestamptwo = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.xpath(Pro.getProperty("Attachments_ADD_RefferenceNumber_XPATH"))).sendKeys(String.valueOf(timestamptwo.getTime()));
         Thread.sleep(2000);
 
         WebElement dateRecieved3 = driver.findElement(By.id("AttachmentDetails:DateReceived_input"));
@@ -2725,7 +2761,8 @@ public class stepDefinitions extends BaseClass {
             }
         }
         Thread.sleep(4000);
-        driver.findElement(By.xpath(Pro.getProperty("Attachments_ADD_RefferenceNumber_XPATH"))).sendKeys(data.get(9).get(1));
+        Timestamp timestampthree = new Timestamp(System.currentTimeMillis());
+        driver.findElement(By.xpath(Pro.getProperty("Attachments_ADD_RefferenceNumber_XPATH"))).sendKeys(String.valueOf(timestampthree.getTime()));
         Thread.sleep(4000);
         WebElement CertiBtn = driver.findElement(By.id(Pro.getProperty("Attachment_Upload_BUTTON_ID")));
         CertiBtn.click();
@@ -6682,7 +6719,7 @@ public class stepDefinitions extends BaseClass {
     public void enter_suspension_start_date() throws Throwable {
         WebElement StartDate = driver.findElement(By.id("id_suspensionStartDate"));
         Thread.sleep(2000);
-        StartDate.sendKeys(todaysDatePortal());
+        StartDate.sendKeys(tomorrowsDatePortal());
         Thread.sleep(1000);
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.TAB).perform();
@@ -6720,7 +6757,20 @@ public class stepDefinitions extends BaseClass {
 
     @And("^Click save to suspend taxtype$")
     public void click_save_to_suspend_taxtype() throws Throwable {
-        driver.findElement(By.id("btnSubmit")).click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("btnSubmit"))).click();
+    }
+
+    @Then("^Verify portal save success message \"([^\"]*)\"$")
+    public void verify_portal_success_message(String Message) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(),'" + Message + "')]")));
+        if (successMessage.isDisplayed()) {
+            System.out.println("Success message ('" + Message + "') has been displayed");
+            Assert.assertTrue(true);
+        } else {
+            Assert.fail();
+        }
     }
 
     @Then("^Verify success message \"([^\"]*)\"$")
@@ -6738,11 +6788,22 @@ public class stepDefinitions extends BaseClass {
     @Then("^Obtain reference number from portal success message \"([^\"]*)\"$")
     public void split_string_to_obtain_reference_number(String SuccessMessage) {
         //get full message
-        String FullMessage = driver.findElement(By.xpath("//span[div(text(),'" + SuccessMessage + "')]")).getText();
+        String FullMessage = driver.findElement(By.xpath("//div[contains(text(),'" + SuccessMessage + "')]")).getText();
         System.out.println(FullMessage);
         //Processing Completed - Reference Number - CRAL/000001959/2020
-        //Your tax type registration request has been successfully submitted. Your reference number is
-        String ReferenceNumber = FullMessage.substring(92);
+        //Your tax type registration request has been successfully submitted. Your reference number is :
+        ReferenceNumber = FullMessage.substring(94);
+        System.out.println(ReferenceNumber);
+    }
+
+    @Then("^Obtain reference number from portal success message for suspend \"([^\"]*)\"$")
+    public void split_string_to_obtain_reference_number_from_suspend_action(String SuccessMessage) {
+        //get full message
+        String FullMessage = driver.findElement(By.xpath("//div[contains(text(),'" + SuccessMessage + "')]")).getText();
+        System.out.println(FullMessage);
+        //Your Suspend tax type request has been successfully submitted. Your reference number is : ARN/00025810/2020
+        //Your tax type registration request has been successfully submitted. Your reference number is :
+        ReferenceNumber = FullMessage.substring(89);
         System.out.println(ReferenceNumber);
     }
 
@@ -6790,7 +6851,7 @@ public class stepDefinitions extends BaseClass {
 
     @And("^clicks Decline from the dropdown$")
     public void clicks_Decline_from_the_dropdown() throws Throwable {
-        driver.switchTo().frame("contentIFrame1");
+
         Thread.sleep(10000);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -6961,7 +7022,6 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^approve transaction$")
     public void approve_transaction() throws Throwable {
-        driver.switchTo().frame("contentIFrame1");
         Thread.sleep(9000);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -6978,6 +7038,8 @@ public class stepDefinitions extends BaseClass {
             Outcome.click();
             action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
         }
+
+        driver.switchTo().defaultContent();
     }
 
     @Then("^Verify suspended tax type \"([^\"]*)\" is not present in the table$")
@@ -7473,6 +7535,17 @@ public class stepDefinitions extends BaseClass {
         driver.switchTo().defaultContent();
     }
 
+    @Then("^Wait for duplicate check \"([^\"]*)\" to load in frame \"([^\"]*)\"$")
+    public void wait_for_duplicate_text_to_load_in_frame(String text, String frameID) throws Throwable {
+//        driver.switchTo().frame("contentIFrame1");
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(frameID)));
+        driver.switchTo().frame(frame);
+        WebDriverWait wait2 = new WebDriverWait(driver,30);
+        wait2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'" + text + "')]")));
+        driver.switchTo().defaultContent();
+    }
+
     @Then("^Verify no data is found in table$")
     public void verify_no_data_is_found_in_table() throws Throwable {
         WebElement noDataXpath = driver.findElement(By.xpath("//td[contains(text(),'No records found.')]"));
@@ -7505,16 +7578,29 @@ public class stepDefinitions extends BaseClass {
     @Then("^Go to registration > manage taxpayer > update taxpayer$")
     public void go_to_registration_manage_taxpayer_update_taxpayer() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver,30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[1]"))).click();
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[1]/ul/li[2]")).click();
-        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[2]")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[1]/a"))).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[1]/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[1]/a")).click();
+    }
+
+    @Then("^Go to registration > manage taxpayer > find taxpayer$")
+    public void go_to_registration_manage_taxpayer_find_taxpayer() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[1]/a"))).click();
+        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt27\"]/ul/li[1]/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[2]/a")).click();
     }
 
     @Then("^Enter tin as \"([^\"]*)\"$")
     public void enter_tin_as(String tin) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver,30);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SearchForm:accountNumber"))).sendKeys(tin);
+    }
 
+    @Then("^Click search : id \"([^\"]*)\"$")
+    public void click_search(String search) throws Throwable {
+       WebDriverWait wait = new WebDriverWait(driver,30);
+       wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(search))).click();
     }
 
     @Then("^Select reason for amendment \"([^\"]*)\"$")
@@ -7529,6 +7615,7 @@ public class stepDefinitions extends BaseClass {
 
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.ENTER).perform();
+        Thread.sleep(2000);
     }
 
     @Then("^Select reason for amendment : organization \"([^\"]*)\"$")
@@ -7581,6 +7668,12 @@ public class stepDefinitions extends BaseClass {
         driver.switchTo().frame(Iframe);
     }
 
+    @Then("^Switch to frame 2$")
+    public void shift_focus_to_second_frame_two() throws Throwable {
+        Thread.sleep(2000);
+        driver.switchTo().frame(1);
+    }
+
     @Then("^Switch to default$")
     public void switch_to_default() throws Throwable {
         Thread.sleep(1000);
@@ -7602,7 +7695,9 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Click save \"([^\"]*)\"$")
     public void click_save(String saveID) throws Throwable {
-        driver.findElement(By.id(saveID)).click();
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(saveID))).click();
+
     }
 
     @Then("^Select category as \"([^\"]*)\"$")
@@ -7618,18 +7713,18 @@ public class stepDefinitions extends BaseClass {
     public void enter_names(String firstName, String lastName) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver,100);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("RegisterIndividual:FirstName"))).clear();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         driver.findElement(By.id("RegisterIndividual:FirstName")).sendKeys(firstName);
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         driver.findElement(By.id("RegisterIndividual:LastName")).clear();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         driver.findElement(By.id("RegisterIndividual:LastName")).sendKeys(lastName);
         Thread.sleep(2000);
     }
 
     @Then("^Verify duplicate check returns duplicates$")
     public void verifyDuplicateCheck() throws Throwable {
-        driver.switchTo().frame("contentIFrame1");
+
         Actions action=new Actions(driver);
         WebElement Outcome=driver.findElement(By.id("header_process_tbg_approvaloutcome4"));
         WebElement hasLoaded= driver.findElement(By.id("header_process_tbg_approvaloutcome_lock"));
@@ -7652,8 +7747,9 @@ public class stepDefinitions extends BaseClass {
     @Then("^Delete case$")
     public void deleteCase() throws Throwable {
         driver.switchTo().defaultContent();
-        driver.findElement(By.id("tbg_registrationapplication|NoRelationship|Form|Mscrm.Form.tbg_registrationapplication.Delete")).click();
         WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("tbg_registrationapplication|NoRelationship|Form|Mscrm.Form.tbg_registrationapplication.Delete"))).click();
+
         WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("InlineDialog_Iframe")));
         driver.switchTo().frame(frame);
         Thread.sleep(4000);
@@ -7683,7 +7779,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click relationships tab : organization$")
     public void click_relationship_tab_organization() {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion\"]/ul/li[10]/a"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Relationships')]"))).click();
 
     }
 
@@ -7719,14 +7815,14 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click properties tab$")
     public void click_properties_tab_individual() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[16]/a"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Property Details')]"))).click();
 
     }
 
     @Then("^Click properties tab : organization$")
     public void click_properties_tab_organization() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion\"]/ul/li[12]/a"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Property Details')]"))).click();
 
     }
 
@@ -7759,7 +7855,7 @@ public class stepDefinitions extends BaseClass {
     public void search_for_taxpayer_to_transfer_property_to(String tin) throws Throwable {
         Thread.sleep(3000);
         driver.findElement(By.id("SearchForm:accountNumber")).sendKeys(tin);
-        driver.findElement(By.id("SearchForm:j_idt42")).click();
+        driver.findElement(By.id("SearchForm:j_idt40")).click();
     }
 
     @Then("^Validate transfer of property by checking property id$")
@@ -7957,6 +8053,16 @@ public class stepDefinitions extends BaseClass {
         //WebElement dropDown = driver.findElement(By.xpath("//*[@id=\"statuscode_i\"]"));
         dropDown.click();
         driver.findElement(By.xpath("//option[text()='Duplicate entity found']")).click();
+    }
+
+    @Then("^Enter Outcome Reason for Taxtype registration rejection \"([^\"]*)\"$")
+    public void enter_Outcome_Reason_for_taxtype_registration_rejections(String reason) throws Throwable {
+        WebElement specificframe = driver.findElement(By.id("WebResource_tbg_rejectionRefernceData"));
+        driver.switchTo().frame(specificframe);
+        WebElement dropDown = driver.findElement(By.id("viewoption"));
+        //WebElement dropDown = driver.findElement(By.xpath("//*[@id=\"statuscode_i\"]"));
+        dropDown.click();
+        driver.findElement(By.xpath("//option[text()='"+reason+"']")).click();
     }
 
     @Then("^Enter Organization name \"([^\"]*)\"$")
@@ -8247,6 +8353,7 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Select Account end day \"([^\"]*)\"$")
     public void select_account_end_day(String endDay) throws Throwable {
+
         driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion:AccountYearEndDateDD\"]/div[3]")).click();
         Thread.sleep(1500);
         Actions action = new Actions(driver);
