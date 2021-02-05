@@ -8,12 +8,12 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     When Enters the username "tripsuser" and password "Passw0rd"
     When I Fill the Individual Taxpayer Registration form
     And I enter valid data on the Individualpage and Submit
-      | First Name        | Max        | 0 |
-      | Last Name         | Accounting | 1 |
-      | CategoryValue     | Employee   | 2 |
-      | Title Value       | MR         | 3 |
-      | Gender            | M          | 4 |
-      | MothersMaidenName | Wambui     | 5 |
+      | First Name        | Max          | 0 |
+      | Last Name         | PortalSanity | 1 |
+      | CategoryValue     | Employee     | 2 |
+      | Title Value       | MR           | 3 |
+      | Gender            | M            | 4 |
+      | MothersMaidenName | Wambui       | 5 |
     And Enter Date Of Birth in additional info tab"<DOB>"
       | Marital Status     | Married                        | 0 |
       | Place Of Birth     | Mumbai                         | 1 |

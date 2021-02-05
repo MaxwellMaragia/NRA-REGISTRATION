@@ -5857,25 +5857,6 @@ public class stepDefinitions extends BaseClass {
 
     }
 
-    @Then("^Open CRM URL for Accounting Module$")
-    public void open_CRM_URL_for_Accounting_Module() throws Throwable {
-        driver.get(Pro.getProperty("CRM_NRA_Accounting_Module_URL"));
-    }
-
-
-//        @When("^Close Popup Window$")
-//        public void close_Popup_Window() throws Throwable {
-//
-//            driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-//            WebElement  specificframe= (driver.findElement(By.id(Pro.getProperty("CRM_ExploreCrmWindow_Frame__ID"))));
-//            driver.switchTo().frame(specificframe);
-//            WebDriverWait CloseWindow=new WebDriverWait(driver,60);
-//            CloseWindow.until(ExpectedConditions.elementToBeClickable(By.id(Pro.getProperty("CRM_ExploreCrmWindow_Frame_Close_ID")))).click();
-//
-//
-//
-//        }
-
     @When("^Click on Case management Sub module$")
     public void click_on_Case_management_Sub_module() throws Throwable {
         Actions action = new Actions(driver);
@@ -7542,8 +7523,8 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025816/2021");
-        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
+        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025896/2021");
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
     }
 
@@ -7571,7 +7552,8 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Verify no data is found in table$")
     public void verify_no_data_is_found_in_table() throws Throwable {
-        WebElement noDataXpath = driver.findElement(By.xpath("//td[contains(text(),'No records found.')]"));
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        WebElement noDataXpath = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'No records found.')]")));
         if (noDataXpath.isDisplayed()) {
             Assert.assertTrue("No data found in table", true);
         } else {

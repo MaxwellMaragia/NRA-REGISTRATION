@@ -98,7 +98,7 @@ Feature: SUC:02-01 Register Tax Type-Indv
 
     Examples:
       | Type       | TIN         | Tax type            | Tax type2    | Approve  | Read     |
-      | Individual | N0000036099 | Personal Income Tax | Domestic VAT | Tax Type | Approved |
+      | Individual | N0000036250 | Personal Income Tax | Domestic VAT | Tax Type | Approved |
 
 
   @UAT_TCS-01.19.4
