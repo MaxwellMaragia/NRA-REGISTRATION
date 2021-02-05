@@ -12,10 +12,10 @@ Feature: Print Registration Reports TaxType
     Then Select report file type "PDF"
     Then Select tax office "All"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Reactivated Tax Type List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Reactivated Tax Type List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Reactivated Tax Type List.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Reactivated Tax Type List.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.32.2
   Scenario: UAT_TCS 01.32.2-To Verify the Process of printing Tax Type Reports - Tax Type Registration Summary of Transactions
@@ -24,10 +24,10 @@ Feature: Print Registration Reports TaxType
     Then Select tax office "All"
     Then Select tax type "All"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Tax Type Registration Summary Of Transactions.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Tax Type Registration Summary Of Transactions.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Tax Type Registration Summary Of Transactions.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Tax Type Registration Summary Of Transactions.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.32.3
   Scenario: UAT_TCS 01.32.3-To Verify the Process of printing Tax Type Reports- Suspended Tax Type List
@@ -36,10 +36,10 @@ Feature: Print Registration Reports TaxType
     Then Select tax office "All"
     Then Select tax type "PAYE"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Suspended Tax Type List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Suspended Tax Type List.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "Suspended Tax Type List.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "Suspended Tax Type List.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
 
   @UAT_TCS-01.32.4
@@ -50,10 +50,10 @@ Feature: Print Registration Reports TaxType
     Then Select taxpayer category "Individual"
     Then Select tax type "PAYE"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "TaxTypeRegistrationReport.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "TaxTypeRegistrationReport.pdf" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
     Then Select report file type "EXCEL"
     Then Click run report "frmReportDetails:RunReport"
-    Then Verify file "TaxTypeRegistrationReport.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
+    Then Verify file "TaxTypeRegistrationReport.xls" has been downloaded in downloads directory "C:\\Users\\Maxwell Maragia\\Downloads"
 
   @UAT_TCS-01.32.5
   Scenario: UAT_TCS 01.32.5-To Verify the Process of printing Tax Type Reports -  Validation Error

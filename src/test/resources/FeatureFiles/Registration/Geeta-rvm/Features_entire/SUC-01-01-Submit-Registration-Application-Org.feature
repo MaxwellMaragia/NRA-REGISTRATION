@@ -1,6 +1,6 @@
 Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Taxpayer
 
-#  @[SUC:01-01]
+#  @UAT_TCS-01.02.2
   Scenario Outline: UAT_TCS 01.02.2 To verify the process of Unsuccessful Registration for Organisation due to incomplete mandatory fields
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -8,8 +8,8 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     When I Fill the Organization Taxpayer Registration form
     And I enter valid data on the pages of Organization
       | CategoryValue          | Co-operative Society (Other) | 0     |
-      | Organization Name      | M&N                          | 1     |
-      | RGD Number             | kujh                         | 2     |
+      | Organization Name      | CODEI                        | 1     |
+      | RGD Number             | kuii                         | 2     |
       | DOE                    | 12092018                     | 3     |
       | DOC                    | 12092020                     | 4     |
       | Source of Capital      | Home Loan                    | 5     |
@@ -29,16 +29,16 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
       | EndYearMonth           | February                     | 19    |
       | EndYeadDay             | 01                           | 20    |
     And Enter Attachment Tab details
-      | Attachments                 | Attachments                           | 19 0 |
-      | Attachment Date             | 21082016                              | 20 1 |
-      | Attachment Pasport          | Business Registration Certificate     | 21 2 |
-      | Reference number            | ug                                    | 22 3 |
-      | File upload                 | C:\Users\v-bakam\Downloads\id_doc.png | 23 4 |
-      | Attachments                 | Doccument                             | 24 5 |
-      | Attachments                 | Certificate of Incorporation          | 25 6 |
-      | Attachments                 | Letter Of Authorization               | 26 7 |
-      | Attachment Reference number | 78u                                   | 27 8 |
-      | Attachment Reference number | 98t                                   | 28 9 |
+      | Attachments                 | Attachments                       | 19 0 |
+      | Attachment Date             | 21082016                          | 20 1 |
+      | Attachment Pasport          | Business Registration Certificate | 21 2 |
+      | Reference number            | ug                                | 22 3 |
+      | File upload                 | C:\id_doc.png                     | 23 4 |
+      | Attachments                 | Doccument                         | 24 5 |
+      | Attachments                 | Certificate of Incorporation      | 25 6 |
+      | Attachments                 | Letter Of Authorization           | 26 7 |
+      | Attachment Reference number | 78v                               | 27 8 |
+      | Attachment Reference number | 98u                               | 28 9 |
     And enters director "P0017167" and "startDate"
     Then Click On Organization Page Submit Button
     Then wait for webpage to load
@@ -96,7 +96,8 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
       | Validate                                           |
       | Address should have at least one primary indicator |
 
-  @UAT_TCS-01.02.4
+
+  @[SUC:01-01] @UAT_TCS-01.02.4
   Scenario Outline:UAT_TCS 01.02.4	To verify the process of Registering an Organisation successfully with mandatory fields
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -148,24 +149,87 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     Given Open CRM URL Module
     And Close Popup Window
     And Click start search
+      | CategoryValue          | Co-operative Society (Other) | 0  |
+      | Organization Name      | Codei Two                    | 1  |
+      | RGD Number             | codeione                     | 2  |
+      | DOE                    | 12092018                     | 3  |
+      | DOC                    | 12092020                     | 4  |
+      | Source of Capital      | Home Loan                    | 5  |
+      | Place Of Incorporation | ALBANIA                      | 6  |
+      | ReasonForTin Value     | Exporting goods              | 7  |
+      | Business Sector Value  | 0112 - Growing of rice       | 8  |
+      | Address Submodule      | Addresses                    | 9  |
+      | AddressValue           | Local Postal Address         | 10 |
+      | SName                  | United States                | 11 |
+      | City                   | United States                | 12 |
+      | ProvisionValue         | Koinadugu                    | 13 |
+      | ReogonValue            | North                        | 14 |
+      | Contact Method         | Contact Methods              | 15 |
+      | Purpose Value          | Business                     | 16 |
+      | ContactTypeValue       | Email                        | 17 |
+      | ContactDetails         | margiewambui11@gmail.com     | 18 |
+      | EndYearMonth           | February                     | 19 |
+      | EndYeadDay             | 01                           | 20 |
+    And Enter Attachment Tab details
+      | Attachments                 | Attachments                        | 19 0 |
+      | Attachment Date             | 21082016                           | 20 1 |
+      | Attachment Pasport          | Certificate of Incorporation       | 21 2 |
+      | Reference number            | uh                                 | 22 3 |
+      | File upload                 | C:\id_doc.png                      | 23 4 |
+      | Attachments                 | Doccument                          | 24 5 |
+      | Attachments                 | Certificate of Incorporation       | 25 6 |
+      | Attachments                 | Approval Letter from Line Ministry | 26 7 |
+      | Attachment Reference number | 78c                                | 27 8 |
+      | Attachment Reference number | 98c                                | 28 9 |
+    And enters director "P0017167" and "startDate"
+    Then Click On Organization Page Submit Button
+    Then Verify save success message "Processing Completed - Reference Number"
+    Then Obtain reference number "Processing Completed - Reference Number - ARN"
+    Then Open CRM and close modal
+    Then Click on registration application link
+    Then switch to frame0
+    Then search for reference number
+    Then Click on reference number
     Then switch to frame
-    When enters reference number in search results
-    And Pick registration case
-    And Click on NextStage button
+    Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment
+    And Download the Attachment "C:\Users\v-maxmar\Downloads"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
-    Then switch to frame
     Then wait for duplicate check
-    And Click on NextStage button
     Then switch to frame
+    And Select Approval outcome dropdown value to Approve <Approve>
+    Then Click on Save button
+    Then switch to frame
+    And Verify the String "<Read>"
+    #  Change names and atttachment numbers after each run
+    Examples:
+      | Approve    | Read     |
+      | First Name | Approved |
+
+  @[SUC:01-01]
+  Scenario Outline: UAT_TCS 02.02.1	To verify the process of Approving Organisation Registration
+    Then Open CRM and close modal
+    Then Click on registration application link
+    Then switch to frame
+    Then search for reference number
+    Then Click on reference number
+    Then Click next stage button
+    Then Goto view AttachmentDetails screen
+    And Download the Attachment "C:\users\v-maxmar\downloads"
+#    Then switch to frame
+    Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
+    And Click on NextStage button
+#    Then switch to frame
+    Then wait for duplicate check
+#    And Click on NextStage button
+#    Then switch to frame
     And Select Approval outcome dropdown value to Approve <Approve>
     Then Click on Save button
     And Verify the String "<Read>"
 
     Examples:
-      | Approve    | Read    |
-      | First Name | Approve |
+      | Approve    | Read     |
+      | First Name | Approved |

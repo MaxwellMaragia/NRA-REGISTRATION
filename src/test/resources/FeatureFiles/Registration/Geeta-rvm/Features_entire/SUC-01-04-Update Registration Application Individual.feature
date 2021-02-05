@@ -4,52 +4,56 @@ Feature: SUC:01-04_Update Registration Application
   Scenario Outline: UAT_TCS-01.03.2-To verify the process of checking validation error
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
-    Then User should be logged in
-    Then Click on registration > register taxpayer > register individual
-    Then Select category as "<Category>"
-    Then Select title as "<title>"
-    Then Enter first name "<firstName>" and last name "<lastName>"
-    Then Select gender "<Gender>"
-    Then Select marital status "<MaritalStatus>"
-    Then Enter date of birth "<dob>"
-    Then Select nationality "<Nationality>"
-    Then Select country of residence "<Nationality>"
-    Then Enter place of birth "<placeOfBirth>"
-    Then Select reason for tin application "<reasonForApplication>"
-    And Click occupation - business interest tab
-    Then Select occupation status "<OccupationStatus>"
-    Then Select main category "<mainCategory>"
-    Then Select Precise category "<preciseCategory>"
-    And Click on identification tab
-    Then Click add "RegisterIndividual:individualAccordion:identificationTableHandler:AddIdentification"
-    Then Switch to frame
-    Then Select identification "<identification>"
-    Then Enter identification number "<idNumber>"
-    Then Enter date of issue "<dateOfIssue>"
-    Then Enter E-permit number "<eNumber>" and E-permit type
-    Then Select country of issue "Kenya"
-    Then Enter expiry date "<expiryDate>"
-    Then Click ok: xpath "//*[@id='Identification:Ok']"
-    Then Click employment details tab
-    Then Click add "RegisterIndividual:individualAccordion:employmentTableHandler:AddEmployment"
-    Then Switch to frame
-    Then Enter employers name "<employersName>" and employment start date "<startDate>"
-    Then Click ok: xpath "//*[@id='EmploymentDetails:Ok']"
-    Then Click address tab
-    Then Click add "RegisterIndividual:individualAccordion:addressTableHandler:AddAddress"
-    Then Switch to frame
-    Then Select address type "<addressType>"
-    Then Then enter town "<town>"
-    Then Select region "<region>" and district "<district>"
-    Then Click ok: xpath "//*[@id='AddressDetails:addOk']"
-    Then Click Contact methods tab
-    Then Click add "RegisterIndividual:individualAccordion:contactDetailsHandler:AddContacts"
-    Then Switch to frame
-    Then Select purpose
-    Then Enter contact details "<email>"
-    Then Click ok: xpath "//*[@id='ContactDetails:Ok']"
-    Then Click save "RegisterIndividual:Save"
+    When I Fill the Individual Taxpayer Registration form
+    And I enter valid data on the Individualpage and Submit
+      | First Name        | Max      | 0 |
+      | Last Name         | One      | 1 |
+      | CategoryValue     | Employee | 2 |
+      | Title Value       | MR       | 3 |
+      | Gender            | M        | 4 |
+      | MothersMaidenName | Wambui   | 5 |
+    And Enter Date Of Birth in additional info tab"<DOB>"
+      | Marital Status     | Married                        | 0 |
+      | Place Of Birth     | Mumbai                         | 1 |
+      | Country Value      | Albania                        | 2 |
+      | ReasonForTin Value | A Contractor or Sub-contractor | 3 |
+      | Nationality Value  | Albania                        | 4 |
+
+    Then Select residence permit identification with number "211257"
+    And Enter identification Date of Issue "<DOI>"
+      | Identification      | Identification       | 0 |
+      | Identification Type | Passport             | 1 |
+      | Identification num  | 1000h182             | 2 |
+      | Country of Issue    | Albania              | 3 |
+      | epermit num         | jhbak1256              | 4 |
+      | epermit type        | Asylum Seeker Permit | 5 |
+
+    And Enter identification Expiry Date "<IED>"
+      | Identification Type | Driving Licence    | 0 |
+      | Identification num  | account12894       | 1 |
+      | Register Ind        | Employment Details | 2 |
+      | Employment Position | Senior Executive   | 3 |
+      | Employer's Name     | SiddharthReddy     | 4 |
+    And Enter Employee details "<ESD>"
+      | Occupation               | Occupation/Business Interests                                           | 0     |
+      | Occupation status        | Employed                                                                | 1     |
+      | Occupation main category | AGRICULTURE, ANIMAL HUSBANDARY, FORESTRY WORKERS, FISHERMEN AND HUNTERS | 2     |
+      | Occupation precise value | Agriculture and Animal Husbandry Workers                                | 3     |
+      | Address Submodule        | Addresses                                                               | 4     |
+      | AddressValue             | Local Postal Address                                                    | 26 5  |
+      | SName                    | United States                                                           | 27 6  |
+      | City                     | United States                                                           | 28 7  |
+      | Mname                    | New jersey                                                              | 29 8  |
+      | ProvisionValue           | Bombali                                                                 | 30 9  |
+      | ReogonValue              | North                                                                   | 31 10 |
+      | Contact Method           | Contact Methods                                                         | 32 11 |
+      | Purpose Value            | Personal                                                                | 33 12 |
+      | ContactTypeValue         | Email                                                                   | 34 13 |
+      | ContactDetails           | margiewambui11@gmail.com                                                | 35 14 |
+#  And enters attachment details "National ID"  with number "00000003" and path "C:\Users\v-bakam\Downloads\id_doc.png"
+#    And enters attachment details "Passport"  with number "00100" and path "C:\id_doc.png"
+    Then Click On Individual Page Submit Button
     Then Verify error message " cannot be empty."
     Examples:
-      | Category | title | firstName | lastName | Gender | MaritalStatus | dob        | Nationality | placeOfBirth | OccupationStatus | mainCategory  | preciseCategory              | reasonForApplication | identification | idNumber | dateOfIssue | expiryDate | documentType | path            | addressType          | town     | region         | district | email                                | employersName | startDate  | eNumber |
-      | Employee | MR    | Maxwell   | Maragia  | M      | Single        | 25/09/1996 | Malawi      | Lilongwe     | Employed         | SALES WORKERS | Sales Supervisors and Buyers | Am an employee       | Passport       | 32355247 | 31/07/2014  | 31/07/2021 | National ID  | C:\\ronaldo.jpg | Local Postal Address | Lilongwe | Central Region | Lilongwe | v-maxwell.maragia@technobrainltd.com | TBL           | 24/05/2020 | 1234    |
+      | DOB      | DOI        | IED        | ESD        |
+      | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 |
