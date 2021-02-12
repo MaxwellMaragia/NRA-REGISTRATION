@@ -8,7 +8,7 @@ Feature: [SUC:01-10] De-Register Taxpayer_Organization
     And  Goto Manage taxpayer
     And Goto DeRegister
 
-  @SUC:01-10 @UAT_TCS-01.15.1
+  @SUC:01-10 @UAT_TCS-01.15.1 @Dereg--
   Scenario Outline: UAT_TCS 01.15.1 To verify the Process of Deregistering a Taxpayer
     And Select Taxpayer Classification Type "<ClasificationType>"
     And Enter TIN number "<TIN>"
@@ -24,20 +24,22 @@ Feature: [SUC:01-10] De-Register Taxpayer_Organization
     Then switch to frame0
     Then search for reference number
     Then Click on reference number
-    Then Click next stage button
     Then switch to frame
-    Then Wait for text "Reason for De-Registration" to load in frame "WebResource_RegistrationApplicationAngular"
-    Then Approve taxtype deregistration from dropdown
+    And Click on NextStage button
+    Then switch to frame
+    Then Goto view AttachmentDetails screen
+    Then switch to frame
+    Then clicks Approve from the dropdown <Approve>
     Then Click save CRM
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN         | EDD        | Reason      |Read|
-      | Individual        | N0000033456 | 06/04/2029 | Liquidation |Approved|
+      | ClasificationType | TIN         | EDD        | Reason      | Read     | Approve                    |
+      | Individual        | N0000036218 | 06/04/2029 | Liquidation | Approved | Reason for De-Registration |
 
   @SUC:01-10 @UAT_TCS-01.15.2
   Scenario: UAT_TCS-01.15.2-To verify the process of not finding a Taxpayer for Deregistration
-    Then Enter TIN number "N0000033456"
+    Then Enter TIN number "N0000019798"
     And Click on search
     Then Verify no data is found in table
 

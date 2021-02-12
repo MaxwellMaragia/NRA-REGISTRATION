@@ -1,6 +1,6 @@
 Feature: [SUC:02-06] Re-activate Tax Type-Individual
 
-  @UAT_TCS-01.29.1
+  @UAT_TCS-01.29.1-- @SuspReact
   Scenario Outline:  UAT_TCS 01.29.1-To verify the Process of Reactivating a Tax type
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -22,16 +22,18 @@ Feature: [SUC:02-06] Re-activate Tax Type-Individual
     Then search for reference number
     Then Click on reference number
     Then switch to frame
-    Then Click next stage button
-    Then Wait for text "Tax Type to Re-Activate" to load in frame "WebResource_RegistrationApplicationAngular"
-    Then Approve taxtype deregistration from dropdown
+    And Click on NextStage button
+    Then switch to frame
+    Then Goto view AttachmentDetails screen
+    Then switch to frame
+    Then clicks Approve from the dropdown <Approve>
     Then Click save CRM
     Then switch to frame
     And Verify the String "<Read>"
 
     Examples:
-      | Read     | ClasificationType | TIN         | EDD        | Reason                             | ARN                                           |
-      | Approved | Individual        | N0000020354 | 06/04/2029 | Taxable Turnover exceeds threshold | Processing Completed - Reference Number - ARN |
+      | Read     | ClasificationType | Approve                 | TIN         | EDD        | Reason                             | ARN                                           |
+      | Approved | Individual        | Tax Type to Re-Activate | N0000020354 | 06/04/2022 | Taxable Turnover exceeds threshold | Processing Completed - Reference Number - ARN |
 
   @UAT_TCS-01.29.2
   Scenario Outline:  UAT_TCS 01.29.2-UAT_TCS 01.29.3-UAT_TCS 01.29.6-To verify the Process of Reactivating a Tax type
@@ -116,5 +118,5 @@ Feature: [SUC:02-06] Re-activate Tax Type-Individual
 
 
     Examples:
-      | Read     | ClasificationType | TIN         | EDD        | Reason                             | ARN                                           | Reject              | Notes                 |
+      | Read     | ClasificationType | TIN         | EDD        | Reason                             | ARN                                           | Reject                  | Notes                 |
       | Rejected | Individual        | N0000020354 | 06/04/2029 | Taxable Turnover exceeds threshold | Processing Completed - Reference Number - ARN | Tax Type to Re-Activate | Error in data capture |

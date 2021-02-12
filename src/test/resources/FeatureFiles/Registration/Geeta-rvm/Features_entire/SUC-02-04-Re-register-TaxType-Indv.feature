@@ -1,6 +1,6 @@
 Feature: [SUC:02-04] Re-register Tax Type Individual: Reregister Tax Type
 
-  @UAT_TCS-01.23.1
+  @UAT_TCS-01.23.1 @Red-Dereg
   Scenario Outline: UAT_TCS 01.23.1	To verify the Process of Reregistering a Tax type
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -8,11 +8,11 @@ Feature: [SUC:02-04] Re-register Tax Type Individual: Reregister Tax Type
     When I enter valid data on the Re-RegisterTaxType Individual page
       | Re-Register Tax         | Re-Register Tax                    | 0 |
       | TaxpayerClassificationT | Individual                         | 1 |
-      | TaxPayer_TIN            | N0000033472                        | 2 |
+      | TaxPayer_TIN            | N0000036455                        | 2 |
       | Re-Reg Reason           | Taxable Turnover exceeds threshold | 3 |
       | EOR                     | 16092002                           | 4 |
       | Amend Reson             | Change of Additional Details       | 5 |
-      | Return Type             | Personal Income Tax                | 6 |
+      | Taxtype Type            | Personal Income Tax                | 6 |
     Then ReRegister ARN number will generate
       | ARN number | Processing Completed - Reference Number - ARN | 0 |
     Then Open CRM and close modal
@@ -20,17 +20,19 @@ Feature: [SUC:02-04] Re-register Tax Type Individual: Reregister Tax Type
     Then switch to frame0
     Then search for reference number
     Then Click on reference number
-    Then Click next stage button
     Then switch to frame
-    Then Wait for text "Tax Type To Re-Register" to load in frame "WebResource_RegistrationApplicationAngular"
-    Then Approve taxtype deregistration from dropdown
+    And Click on NextStage button
+    Then switch to frame
+    Then Goto view AttachmentDetails screen
+    Then switch to frame
+    Then clicks Approve from the dropdown <Approve>
     Then Click save CRM
     Then switch to frame
     And Verify the String "<Read>"
 
     Examples:
-      | Approve                            | Read     |
-      | Taxable Turnover exceeds threshold | Approved |
+      | Approve                            | Read     |Approve|
+      | Taxable Turnover exceeds threshold | Approved |Tax Type To Re-Register|
 
   @UAT_TCS-01.23.2
   Scenario: UAT_TCS 01.23.2 To verify the Process of checking Validation Error during Reregistration of Tax Type

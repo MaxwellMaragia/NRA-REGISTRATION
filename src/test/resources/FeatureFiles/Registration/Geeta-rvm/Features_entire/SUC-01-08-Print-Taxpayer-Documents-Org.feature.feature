@@ -8,11 +8,11 @@ Feature: [SUC:01-08] Print Taxpayer Documents
   @[SUC:01-08]
   Scenario Outline: UAT_TCS 01.09.1-To verify the process of printing Taxpayer TPIN certificate
     Given navigate to Reporting>>Report Reprint
-    When user enters module name "Registration" and TIN "V0013138"
+    When user enters module name "Registration" and TIN "V0017205"
     And clicks Find Reports search Button
     Then available reports table is displayed
     When clicks on report name "Taxpayer TIN Certificate"
-    Then Report Reprint page is displayed with name "Registration" and TIN "V0013138"
+    Then Report Reprint page is displayed with name "Registration" and TIN "V0017205"
     When clicks download Reports Reprint button
     Then Report download should be generate <donwloadPath> and <filename>
 
@@ -38,11 +38,11 @@ Feature: [SUC:01-08] Print Taxpayer Documents
   @[SUC:01-08]
   Scenario Outline: UAT_TCS 01.09.3-To verify the process of printing Taxpayer Amendment notification
     Given navigate to Reporting>>Report Reprint
-    When user enters module name "Registration" and TIN "V0013138"
+    When user enters module name "Registration" and TIN "V0017205"
     And clicks Find Reports search Button
     Then available reports table is displayed
     When clicks on report name "Taxpayer Registration Amendment Notification"
-    Then Report Reprint page is displayed with name "Registration" and TIN "V0013138"
+    Then Report Reprint page is displayed with name "Registration" and TIN "V0017205"
     When clicks download Reports Reprint button
     Then Report download should be generate <donwloadPath> and <filename>
 
@@ -53,11 +53,11 @@ Feature: [SUC:01-08] Print Taxpayer Documents
   @[SUC:01-08]
   Scenario Outline: UAT_TCS 01.09.4-To verify the process of printing Tax Type Amendment notification for Suspend Tax Type
     Given navigate to Reporting>>Report Reprint
-    When user enters module name "Registration" and TIN "V0013138"
+    When user enters module name "Registration" and TIN "C0000019461"
     And clicks Find Reports search Button
     Then available reports table is displayed
     When clicks on report name "Taxpayer Registration Amendment Notification"
-    Then Report Reprint page is displayed with name "Registration" and TIN "V0013138"
+    Then Report Reprint page is displayed with name "Registration" and TIN "C0000019461"
     When clicks download Reports Reprint button
     Then Report download should be generate <donwloadPath> and <filename>
 

@@ -1,6 +1,6 @@
 Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
 
-  #@SUC:01-09
+  @SUC:01-09
   Scenario Outline:  UAT_TCS 01.13.1	To verify the process of Transferring a Taxpayer
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -21,10 +21,10 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
 
     Examples:
 
-      | username  | password | ClasificationType | TIN      | NewOffice    | DateOfTransfer | Reason                                   | ARN                                           |
-      | tripsuser | Passw0rd | Organisation        | 	C0000032840 | Bo Tax Office (STO) | 06/04/2025     | Change in business sector of operation | Processing Completed - Reference Number - ARN |
+      | username  | password | ClasificationType | TIN         | NewOffice           | DateOfTransfer | Reason                                 | ARN                                           |
+      | tripsuser | Passw0rd | Organisation      | C0000036226 | Bo Tax Office (STO) | 06/04/2025     | Change in business sector of operation | Processing Completed - Reference Number - ARN |
 
-  #@SUC:01-09
+  @SUC:01-09
   Scenario Outline:  Trnsfer TaxPayer Organisation Taxpayer Approve Scenario
     Given Open CRM URL Module
     And Close Popup Window
@@ -44,7 +44,7 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
       | Read     | Approve            |
       | Approved | Current Tax Office |
 
-  #@SUC:01-09
+  @SUC:01-09
   Scenario Outline: UAT_TCS 01.11.2(UAT_TCS 01.17.1) To verify the process of Successful Registration application search,
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -59,10 +59,10 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
 
 
     Examples:
-      | username  | password | browser | ClasificationType | TIN      |
-      | tripsuser | Passw0rd | FireFox | Organisation        |  C0000032840|
+      | username  | password | browser | ClasificationType | TIN         |
+      | tripsuser | Passw0rd | FireFox | Organisation      | C0000036226 |
 
-  #@SUC:01-09
+  @SUC:01-09
   Scenario Outline:  UAT_TCS 01.13.2 To verify the process of Taxpayer not found for Transfer
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -76,10 +76,10 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
     Then System displays message Records Not Found
 
     Examples:
-      | username  | password | ClasificationType | TIN      |
-      | tripsuser | Passw0rd | Organisation        | C0000032840 |
+      | username  | password | ClasificationType | TIN         |
+      | tripsuser | Passw0rd | Organisation      | C0000032840 |
 
-  #@SUC:01-09
+  @SUC:01-09
   Scenario Outline:  UAT_TCS 01.13.3 To verify the process of checking Validation error during Transfer Taxpayer
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -98,11 +98,11 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
 
 
     Examples:
-      | username  | password | ClasificationType | TIN      | DateOfTransfer | Reason                                   |
-      | tripsuser | Passw0rd | Organisation        | C0000032840 | 06/04/2025     | Change in business sector of operation |
+      | username  | password | ClasificationType | TIN         | DateOfTransfer | Reason                                 |
+      | tripsuser | Passw0rd | Organisation      | C000003651X | 06/04/2025     | Change in business sector of operation |
 
 
-  #@SUC:01-09
+  @SUC:01-09
   Scenario Outline:  UAT_TCS 01.13.4 To verify the process of Abandoning Transfer of Taxpayer
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -120,10 +120,10 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
     Then Find Entity page should be displayed
 
     Examples:
-      | username  | password | ClasificationType | TIN      | NewOffice    | DateOfTransfer | Reason                                   |
-      | tripsuser | Passw0rd | Organisation        | C0000032840 | Bo Tax Office (STO) | 06/04/2025     | Change in business sector of operation |
+      | username  | password | ClasificationType | TIN         | NewOffice           | DateOfTransfer | Reason                                 |
+      | tripsuser | Passw0rd | Organisation      | C000003651X | Bo Tax Office (STO) | 06/04/2025     | Change in business sector of operation |
 
-  #@SUC:01-09
+  @SUC:01-09
   Scenario Outline:  UAT_TCS 01.13.5 To verify the process of Rejecting Transfer of a Taxpayer
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -143,10 +143,10 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
 
 
     Examples:
-      | username  | password | ClasificationType | TIN      | NewOffice    | DateOfTransfer | Reason                                   | ARN                                           |
-      | tripsuser | Passw0rd | Organisation        | C0000032840 | Bo Tax Office (STO) | 06/04/2025     | Change in business sector of operation | Processing Completed - Reference Number - ARN |
+      | username  | password | ClasificationType | TIN         | NewOffice           | DateOfTransfer | Reason                                 | ARN                                           |
+      | tripsuser | Passw0rd | Organisation      | C000003651X | Bo Tax Office (STO) | 06/04/2025     | Change in business sector of operation | Processing Completed - Reference Number - ARN |
 
-  #@SUC:01-09
+  @SUC:01-09
   Scenario Outline:  Trnsfer TaxPayer Organisation Taxpayer reject Scenario
     Given Open CRM URL Module
     And Close Popup Window
@@ -182,8 +182,8 @@ Feature: [SUC:01-09] Transfer Taxpayer	Organisation - Transfer Taxpayer
     Then System displays message Records Not Found
 
     Examples:
-      | username  | password | ClasificationType | TIN      |
-      | tripsuser | Passw0rd | Organisation        | C0000032840 |
+      | username  | password | ClasificationType | TIN         |
+      | tripsuser | Passw0rd | Organisation      | C000003651X |
 
 
 

@@ -4,7 +4,7 @@ Feature: SUC:02-01 Register Tax Type-Indv
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
 
-  @SUC:02-01 @UAT_TCS-01.20.2
+  @SUC:02-01 @UAT_TCS-01.20.2 @Taxtype
   Scenario Outline: UAT_TCS 01.19.1-UAT_TCS 01.19.2-To Verify the Process of Registering a Tax Type and approve CRM
     Given navigate to Registration>>Register Tax Type
     When Select Taxpayer Classification Type as <Type>
@@ -27,24 +27,6 @@ Feature: SUC:02-01 Register Tax Type-Indv
     Then search for reference number
     Then Click on reference number
     Then switch to frame
-    Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\users\Maxwell Maragia\downloads"
-    Then switch to frame
-    Then clicks Approve from the dropdown <Approve>
-    Then Click on Save button
-    And Verify the String "<Read>"
-    Examples:
-      | Type       | TIN         | Tax type        | Approve  | Read     |
-      | Individual | N0000036250 | Pay As You Earn | Tax Type | Approved |
-
-
-  Scenario Outline:  Register TaxType Individual Taxpayer Approve Scenario
-    Given Open CRM URL Module
-    And Close Popup Window
-    And Click start search
-    Then switch to frame
-    When enters reference number in search results
-    And Pick registration case
     And Click on NextStage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
@@ -55,7 +37,7 @@ Feature: SUC:02-01 Register Tax Type-Indv
     And Verify the String "<Read>"
     Examples:
       | Type       | TIN         | Tax type        | Approve  | Read     |
-      | Individual | N0000036099 | Pay As You Earn | Tax Type | Approved |
+      | Individual | N0000036455 | Capital Gains Tax | Tax Type | Approved |
 
   @UAT_TCS-01.19.3
   Scenario Outline: UAT_TCS 01.19.3-To Verify the Process of Registering a Tax Type which has multiple return type and all Exclusive amd approve
@@ -252,7 +234,7 @@ Feature: SUC:02-01 Register Tax Type-Indv
     Then message is displayed "Record Added"
 
     Examples:
-      | Type       | TIN      | Tax type            | Tax type2    | taxable Amount |
+      | Type       | TIN         | Tax type          | Tax type2         | taxable Amount |
       | Individual | N0000036099 | Capital Gains Tax | Rental Income Tax | 10000          |
 
   @UAT_TCS-01.19.8

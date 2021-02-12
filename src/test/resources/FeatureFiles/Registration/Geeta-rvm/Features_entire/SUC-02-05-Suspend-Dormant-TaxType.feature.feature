@@ -1,6 +1,6 @@
 Feature: SUC:02-05 Suspend/Dormant Tax Type
 
-  @SUC:02-05 @UAT_TCS-01.25.1 @UAT_TCS-01.25.6
+  @SUC:02-05 @UAT_TCS-01.25.1 @UAT_TCS-01.25.6 @SuspReact
   Scenario Outline: UAT_TCS 01.25.1 To verify the Process of Paper Application
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -23,17 +23,19 @@ Feature: SUC:02-05 Suspend/Dormant Tax Type
     Then switch to frame0
     Then search for reference number
     Then Click on reference number
-    Then Click next stage button
     Then switch to frame
-    Then Wait for text "Tax Type To Suspend" to load in frame "WebResource_RegistrationApplicationAngular"
-    Then Approve taxtype deregistration from dropdown
+    And Click on NextStage button
+    Then switch to frame
+    Then Goto view AttachmentDetails screen
+    Then switch to frame
+    Then clicks Approve from the dropdown <Approve>
     Then Click save CRM
     Then switch to frame
     And Verify the String "<Read>"
 
     Examples:
-      | Read     |
-      | Approved |
+      | Read     |Approve|
+      | Approved |Tax Type To Suspend|
 
   @SUC:02-05 @UAT_TCS-01.25.2
   Scenario: UAT_TCS 01.25.2 To verify the Process of suspending Tax Type whose status is Suspended

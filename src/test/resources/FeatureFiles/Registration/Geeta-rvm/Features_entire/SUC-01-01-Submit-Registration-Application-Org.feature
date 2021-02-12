@@ -95,11 +95,7 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
       | Address should have at least one primary indicator |
 
   @[SUC:01-01] @UAT_TCS-01.02.4
-<<<<<<< HEAD
   Scenario Outline: UAT_TCS 01.02.4 To verify the process of Registering an Organisation successfully with mandatory fields
-=======
-  Scenario Outline:UAT_TCS 01.02.4	To verify the process of Registering an Organisation successfully with mandatory fields
->>>>>>> 0e47447b65810dc21b3738ab669b5750fba21f32
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
     Then User should be logged in

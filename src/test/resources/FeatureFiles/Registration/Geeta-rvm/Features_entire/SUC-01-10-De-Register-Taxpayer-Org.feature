@@ -1,5 +1,14 @@
 Feature: [SUC:01-10] De-Register Taxpayer	Organisation - Deregister Taxpayer
 
+  Background:
+    Given User navigates to the login page
+    When Enters the username "tripsuser" and password "Passw0rd"
+    Then User should be logged in
+    And  Click on regisration link
+    And  Goto Manage taxpayer
+    And Goto DeRegister
+
+  @SUC:01-10 @Dereg
   Scenario Outline: UAT_TCS 01.16.1	To verify the process of Deregistering Taxpayer
     And Select Taxpayer Classification Type "<ClasificationType>"
     And Enter TIN number "<TIN>"
@@ -15,18 +24,20 @@ Feature: [SUC:01-10] De-Register Taxpayer	Organisation - Deregister Taxpayer
     Then switch to frame0
     Then search for reference number
     Then Click on reference number
-    Then Click next stage button
     Then switch to frame
-    Then Wait for text "Reason for De-Registration" to load in frame "WebResource_RegistrationApplicationAngular"
-    Then Approve taxtype deregistration from dropdown
+    And Click on NextStage button
+    Then switch to frame
+    Then Goto view AttachmentDetails screen
+    Then switch to frame
+    Then clicks Approve from the dropdown <Approve>
     Then Click save CRM
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN      | EDD        | Reason                  | Read     |
-      | Organisation      | V0028462 | 16/04/2029 | No longer liable to tax | Approved |
+      | ClasificationType | TIN         | EDD        | Reason                | Read     | Approve                    |
+      | Organisation      | C0000036234 | 06/04/2029 | Change of Return Type | Approved | Reason for De-Registration |
 
-
+  @SUC:01-10
   Scenario Outline: UAT_TCS 01.18.1	To verify the Process of Finding a Taxpayer by TPIN
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -40,7 +51,7 @@ Feature: [SUC:01-10] De-Register Taxpayer	Organisation - Deregister Taxpayer
     Then wait for webpage to load
     Examples:
       | ClasificationType | TIN      |
-      | Organisation      | V0026884 |
+      | Organisation      | V0017590 |
 
   @SUC:01-10 @UAT_TCS-01.15.5
   Scenario Outline: UAT_TCS 01.15.5 To verify the process of Rejecting Taxpayer Deregistration Application

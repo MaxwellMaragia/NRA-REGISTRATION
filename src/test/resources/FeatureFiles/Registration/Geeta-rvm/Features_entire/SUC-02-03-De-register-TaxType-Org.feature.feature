@@ -1,7 +1,6 @@
-
 Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
 
-  @SUC:02-03 @UAT_TCS-01.21.1
+  @SUC:02-03- @UAT_TCS-01.21.1 @Red-Dereg
   Scenario Outline: UAT_TCS 01.21.1	To verify the Process of Deregistering a Tax type
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -13,7 +12,7 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     And Enter TIN number "<TIN>"
     And Click on search
 #    And CLick on taxtype in grid
-    Then Click table column taxtype "Personal Income Tax"
+    Then Click table column taxtype "Capital Gains Tax"
     And Select EDD "<EDD>"
     And Select de register Reason "<Reason>"
     Then Click on DeRegister button
@@ -24,16 +23,18 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     Then switch to frame0
     Then search for reference number
     Then Click on reference number
-    Then Click next stage button
     Then switch to frame
-    Then Wait for text "Tax Type To De-Register" to load in frame "WebResource_RegistrationApplicationAngular"
-    Then Approve taxtype deregistration from dropdown
+    And Click on NextStage button
+    Then switch to frame
+    Then Goto view AttachmentDetails screen
+    Then switch to frame
+    Then clicks Approve from the dropdown <Approve>
     Then Click save CRM
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN      | EDD        | Reason      | Read     |
-      | Organisation        | N0000033472 | 06/04/2029 | Liquidation | Approved |
+      | ClasificationType | TIN         | EDD        | Reason                | Read     | Approve                 |
+      | Organisation      | C0000036358 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register |
 
   @SUC:02-03 @UAT_TCS-01.21.2
   Scenario: UAT_TCS-01.21.2	To verify the Process of Validation Error during Deregister Tax Type
@@ -84,8 +85,8 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN      | EDD        | Reason      |Read|
-      | Organisation        | P0015169 | 06/04/2029 | Liquidation |Rejected|
+      | ClasificationType | TIN      | EDD        | Reason      | Read     |
+      | Organisation      | P0015169 | 06/04/2029 | Liquidation | Rejected |
 
   @SUC:02-03 @UAT_TCS-01.21.4
   Scenario: UAT_TCS-01.21.4	To verify the Process of Deregistering Personal Income Tax when other Taxes are active
