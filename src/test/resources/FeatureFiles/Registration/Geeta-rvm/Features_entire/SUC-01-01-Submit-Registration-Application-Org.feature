@@ -105,7 +105,7 @@ Feature: [SUC:01-01] Submit Registration Application	Organisation - Register Tax
     When I Fill the Organization Taxpayer Registration form
     And I enter valid data on the pages of Organization
       | CategoryValue          | Co-operative Society (Other) | 0     |
-      | Organization Name      | CODEI ONE                    | 1     |
+      | Organization Name      | CODEI PORT                   | 1     |
       | RGD Number             | codei                        | 2     |
       | DOE                    | 12092018                     | 3     |
       | DOC                    | 12092020                     | 4     |

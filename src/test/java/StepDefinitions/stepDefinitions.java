@@ -52,15 +52,13 @@ public class stepDefinitions extends BaseClass {
     public void enters_the_username_and_password(String strArg1, String strArg2) throws Throwable {
         driver.findElement(By.id("loginForm:username")).sendKeys(strArg1);
         driver.findElement(By.id("loginForm:password")).sendKeys(strArg2);
-        driver.findElement(By.xpath("//*[@id=\"loginForm:j_idt18\"]")).click();
+        driver.findElement(By.id("loginForm:j_idt19")).click();
     }
 
     @Then("^User should be logged in$")
     public void user_should_be_logged_in() throws Throwable {
         String URL = driver.getCurrentUrl();
-
-
-        Assert.assertEquals(URL, "http://34.241.245.79:8080/trips-ui/faces/login/Welcome.xhtml");
+        Assert.assertEquals(URL, "https://backoffice.mra.mw:8443/trips-ui/faces/login/Welcome.xhtml");
     }
 
     @Then("^User logs out successfully$")
