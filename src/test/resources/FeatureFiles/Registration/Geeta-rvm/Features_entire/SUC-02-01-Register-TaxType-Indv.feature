@@ -3,7 +3,6 @@ Feature: SUC:02-01 Register Tax Type-Indv
   Background:
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
-    Then User should be logged in
 
   @SUC:02-01 @UAT_TCS-01.20.2
   Scenario Outline: UAT_TCS 01.19.1-UAT_TCS 01.19.2-To Verify the Process of Registering a Tax Type and approve CRM
@@ -28,6 +27,24 @@ Feature: SUC:02-01 Register Tax Type-Indv
     Then search for reference number
     Then Click on reference number
     Then switch to frame
+    Then Goto view AttachmentDetails screen
+    And Download the Attachment "C:\users\Maxwell Maragia\downloads"
+    Then switch to frame
+    Then clicks Approve from the dropdown <Approve>
+    Then Click on Save button
+    And Verify the String "<Read>"
+    Examples:
+      | Type       | TIN         | Tax type        | Approve  | Read     |
+      | Individual | N0000036250 | Pay As You Earn | Tax Type | Approved |
+
+
+  Scenario Outline:  Register TaxType Individual Taxpayer Approve Scenario
+    Given Open CRM URL Module
+    And Close Popup Window
+    And Click start search
+    Then switch to frame
+    When enters reference number in search results
+    And Pick registration case
     And Click on NextStage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
@@ -81,7 +98,7 @@ Feature: SUC:02-01 Register Tax Type-Indv
 
     Examples:
       | Type       | TIN         | Tax type            | Tax type2    | Approve  | Read     |
-      | Individual | N0000036099 | Personal Income Tax | Domestic VAT | Tax Type | Approved |
+      | Individual | N0000036250 | Personal Income Tax | Domestic VAT | Tax Type | Approved |
 
 
   @UAT_TCS-01.19.4

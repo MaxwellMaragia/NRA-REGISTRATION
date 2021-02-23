@@ -1,5 +1,7 @@
 Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpayer
 
+
+  #!!!!!!JUST CHANGE THE NAMES (lines 11 and 12) AFTER EACH RUN
   @SUC:01-01 @UAT_TCS-01.01.4
   Scenario Outline: UAT_TCS 01.01.4: To verify the process of Registering an individual successfully with mandatory fields
     Given User navigates to the login page
@@ -25,21 +27,17 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | ReasonForTin Value | A Contractor or Sub-contractor | 3 |
       | Nationality Value  | Albania                        | 4 |
 
-    Then Select residence permit identification with number "211258"
+    Then Select residence permit identification with number "321362"
     And Enter identification Date of Issue "<DOI>"
       | Identification      | Identification       | 0 |
       | Identification Type | Passport             | 1 |
       | Identification num  | 43534472             | 2 |
       | Country of Issue    | Albania              | 3 |
       | epermit num         | jhb1                 | 4 |
-      | Identification num  | 1000h183             | 2 |
-      | Country of Issue    | Albania              | 3 |
-      | epermit num         | jhbak1257            | 4 |
       | epermit type        | Asylum Seeker Permit | 5 |
 
     And Enter identification Expiry Date "<IED>"
       | Identification Type | Driving Licence    | 0 |
-      | Identification num  | uioj7233           | 1 |
       | Identification num  | account12895       | 1 |
       | Register Ind        | Employment Details | 2 |
       | Employment Position | Senior Executive   | 3 |
@@ -72,8 +70,8 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     #Then switch to frame
     When enters reference number in search results
 #  And enters attachment details "National ID"  with number "00000003" and path "C:\Users\v-bakam\Downloads\id_doc.png"
-    And enters attachment details "Passport"  with number "00101" and path "C:\id_doc.png"
-#    Then Click On Individual Page Submit Button
+    And enters attachment details "Passport"  with number "00106" and path "C:\id_doc.png"
+    Then Click On Individual Page Submit Button
     Then Verify save success message "Processing Completed - Reference Number"
     Then Obtain reference number "Processing Completed - Reference Number - ARN"
     Then Open CRM and close modal
@@ -85,18 +83,17 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\Users\barnaby.kamau\Downloads"
+    And Download the Attachment "C:\users\Maxwell Maragia\downloads"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
-#    Then switch to frame
     Then wait for duplicate check
     Then switch to frame
     And Select Approval outcome dropdown value to Approve <Approve>
     Then Click on Save button
     Then switch to frame
     And Verify the String "<Read>"
-    #  Change names and atttachment numbers after each run
+    #  Change names after each run
     Examples:
       | DOB      | DOI        | IED        | ESD        | Approve    | Read     |
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | First Name | Approved |

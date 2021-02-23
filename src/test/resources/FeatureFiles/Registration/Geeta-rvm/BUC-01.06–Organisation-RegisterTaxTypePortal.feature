@@ -14,7 +14,6 @@ Feature: [SUC:02-11] Taxpayer Portal Registration
     And enters taxtype taxable turnover <amount>
     And clicks taxtype registration Save Button
     Then Portal message is displayed "Your tax type registration request has been successfully submitted"
-
     Examples:
       | TaxType            | amount   |
       | Company Income Tax | 10000000 |
