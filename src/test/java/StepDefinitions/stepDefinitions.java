@@ -55,15 +55,13 @@ public class stepDefinitions extends BaseClass {
         driver.findElement(By.id("loginForm:username")).sendKeys(strArg1);
         driver.findElement(By.id("loginForm:password")).clear();
         driver.findElement(By.id("loginForm:password")).sendKeys(strArg2);
-        driver.findElement(By.xpath("//*[@id=\"loginForm:j_idt18\"]")).click();
+        driver.findElement(By.id("loginForm:j_idt19")).click();
     }
 
     @Then("^User should be logged in$")
     public void user_should_be_logged_in() throws Throwable {
         String URL = driver.getCurrentUrl();
-
-
-        Assert.assertEquals(URL, "http://34.241.245.79:8080/trips-ui/faces/login/Welcome.xhtml");
+        Assert.assertEquals(URL, "https://backoffice.mra.mw:8443/trips-ui/faces/login/Welcome.xhtml");
     }
 
     @Then("^User logs out successfully$")
@@ -1252,6 +1250,25 @@ public class stepDefinitions extends BaseClass {
         directorsTab.click();
     }
 
+    @And("^Click directors tab$")
+    public void click_on_directors() {
+        driver.findElement(By.xpath("//*[@id=\"OrganisationSummaryDetails:organisationAccordion\"]/ul/li[14]/a")).click();
+    }
+
+
+    @Then("^Switch to frame 2$")
+    public void shift_focus_to_second_frame() throws Throwable {
+        Thread.sleep(2000);
+        driver.switchTo().frame(1);
+    }
+
+    @Then("^Click table column \"([^\"]*)\"$")
+    public void click_table_column(String ColumnXpath) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ColumnXpath))).click();
+        Actions action = new Actions(driver);
+        action.sendKeys(Keys.ENTER);
+    }
 
     @Given("^user clicks organization details$")
     public void user_clicks_organization_details() throws Throwable {
@@ -5859,25 +5876,6 @@ public class stepDefinitions extends BaseClass {
 
     }
 
-    @Then("^Open CRM URL for Accounting Module$")
-    public void open_CRM_URL_for_Accounting_Module() throws Throwable {
-        driver.get(Pro.getProperty("CRM_NRA_Accounting_Module_URL"));
-    }
-
-
-//        @When("^Close Popup Window$")
-//        public void close_Popup_Window() throws Throwable {
-//
-//            driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-//            WebElement  specificframe= (driver.findElement(By.id(Pro.getProperty("CRM_ExploreCrmWindow_Frame__ID"))));
-//            driver.switchTo().frame(specificframe);
-//            WebDriverWait CloseWindow=new WebDriverWait(driver,60);
-//            CloseWindow.until(ExpectedConditions.elementToBeClickable(By.id(Pro.getProperty("CRM_ExploreCrmWindow_Frame_Close_ID")))).click();
-//
-//
-//
-//        }
-
     @When("^Click on Case management Sub module$")
     public void click_on_Case_management_Sub_module() throws Throwable {
         Actions action = new Actions(driver);
@@ -6080,6 +6078,8 @@ public class stepDefinitions extends BaseClass {
         boolean isPresent = false;
         File dir = new File(downloadpath);
         File[] dir_contents = dir.listFiles();
+
+        assert dir_contents != null;
 
         for (File dir_content : dir_contents) {
             if (dir_content.getName().equals("id_doc.png"))
@@ -7549,8 +7549,8 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025816/2021");
-        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
+        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025896/2021");
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
     }
 
@@ -7578,7 +7578,8 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Verify no data is found in table$")
     public void verify_no_data_is_found_in_table() throws Throwable {
-        WebElement noDataXpath = driver.findElement(By.xpath("//td[contains(text(),'No records found.')]"));
+        WebDriverWait wait = new WebDriverWait(driver,30);
+        WebElement noDataXpath = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'No records found.')]")));
         if (noDataXpath.isDisplayed()) {
             Assert.assertTrue("No data found in table", true);
         } else {
@@ -7683,7 +7684,7 @@ public class stepDefinitions extends BaseClass {
     }
 
     @Then("^switch to frame0$")
-    public void shift_focus_to_second_frame() throws Throwable {
+    public void shift_focus_to_zero_frame() throws Throwable {
         driver.switchTo().defaultContent();
         WebDriverWait wait = new WebDriverWait(driver, 30);
         WebElement specificframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("contentIFrame0")));
@@ -7923,7 +7924,6 @@ public class stepDefinitions extends BaseClass {
             Assert.assertFalse("Exit not successful", false);
         }
     }
-
 
     //................................Print Organization Reports................................................//
     @Then("^Click reporting > reports$")
@@ -8196,6 +8196,7 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(1500);
         driver.findElement(By.xpath("//li[contains(text(),'" + title + "')]")).click();
     }
+
 
     @Then("^Select gender \"([^\"]*)\"$")
     public void select_gender(String gender) throws Throwable {
