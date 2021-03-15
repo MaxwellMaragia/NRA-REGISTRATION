@@ -1,3 +1,5 @@
+
+
 Feature: SUC:01-24 Taxpayer Portal Registration (Individual)
 
   #  fresh taxpayer with PAYE and INCOME TAX already registered and portal credentials setup

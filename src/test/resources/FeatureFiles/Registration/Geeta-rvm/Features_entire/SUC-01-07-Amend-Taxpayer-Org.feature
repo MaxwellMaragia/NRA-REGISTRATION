@@ -7,7 +7,7 @@ Feature: [SUC:01-07] Amend Taxpayer	Organisation - Amend Taxpayer
     When I enter valid data on the Update Organizatio page
       | TaxpayerClassificationT | Organisation                 | 0 |
       | TaxPayer_TIN            | V0019427                     | 1 |
-      | Organization Name       | ABc Ltd                      | 2 |
+      | Organization Name       | CODEI THREE                  | 2 |
       | DOB                     | 16/09/1987                   | 3 |
       | Amend Reson             | Change of Additional Details | 4 |
 
@@ -180,8 +180,8 @@ Feature: [SUC:01-07] Amend Taxpayer	Organisation - Amend Taxpayer
     Then Verify duplicate check returns duplicates
     Then Delete case
     Examples:
-      | name               | amendmentReason | Notes        | SuccessMessage                          |
-      | Smart Bottles      | Change of Name  | Invalid data | Processing Completed - Reference Number |
+      | name          | amendmentReason | Notes        | SuccessMessage                          |
+      | Smart Bottles | Change of Name  | Invalid data | Processing Completed - Reference Number |
 
   @UAT_TCS-01.08.9 @SUC:01-08
   Scenario Outline: UAT_TCS 01.08.9-To verify the process of rejecting amendment task
