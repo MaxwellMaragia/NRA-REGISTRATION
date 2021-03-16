@@ -37,7 +37,7 @@ Feature: SUC:02-01 Register Tax Type-Indv
     And Verify the String "<Read>"
     Examples:
       | Type       | TIN         | Tax type        | Approve  | Read     |
-      | Individual | N0000036455 | Capital Gains Tax | Tax Type | Approved |
+      | Individual | 1000007804 | Capital Gains Tax | Tax Type | Approved |
 
   @UAT_TCS-01.19.3
   Scenario Outline: UAT_TCS 01.19.3-To Verify the Process of Registering a Tax Type which has multiple return type and all Exclusive amd approve

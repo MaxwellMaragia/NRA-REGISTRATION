@@ -1,44 +1,36 @@
 Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpayer
 
-
-  #!!!!!!JUST CHANGE THE NAMES (lines 11 and 12) AFTER EACH RUN
-  @SUC:01-01 @UAT_TCS-01.01.4
+   #!!!!!!NAMES ARE APPENDED WITH RANDOM DIGITS ,SO NO NEED TO MODIFY
+  #Change email download paths
+  @SUC:01-01 @UAT_TCS-01.01.4 @NRA @NRA-INDV
   Scenario Outline: UAT_TCS 01.01.4: To verify the process of Registering an individual successfully with mandatory fields
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
     When I Fill the Individual Taxpayer Registration form
     And I enter valid data on the Individualpage and Submit
-      | First Name        | Max                   | 0 |
-      | Last Name         | CreditAdjustmentCheck | 1 |
-      | CategoryValue     | Employee              | 2 |
-      | Title Value       | MR                    | 3 |
-      | Gender            | M                     | 4 |
-      | MothersMaidenName | Wambui                | 5 |
-      | First Name        | Max                   | 0 |
-      | Last Name         | SolePropOne           | 1 |
-      | CategoryValue     | Employee              | 2 |
-      | Title Value       | MR                    | 3 |
-      | Gender            | M                     | 4 |
-      | MothersMaidenName | Wambui                | 5 |
+      | First Name        | Max        | 0 |
+      | Last Name         | SecondName | 1 |
+      | CategoryValue     | Employee   | 2 |
+      | Title Value       | MR         | 3 |
+      | Gender            | M          | 4 |
+      | MothersMaidenName | Wambui     | 5 |
     And Enter Date Of Birth in additional info tab"<DOB>"
       | Marital Status     | Married                        | 0 |
       | Place Of Birth     | Mumbai                         | 1 |
       | Country Value      | Albania                        | 2 |
       | ReasonForTin Value | A Contractor or Sub-contractor | 3 |
       | Nationality Value  | Albania                        | 4 |
-
     Then Select residence permit identification with number "321362"
     And Enter identification Date of Issue "<DOI>"
       | Identification      | Identification       | 0 |
       | Identification Type | Passport             | 1 |
-      | Identification num  | 43534472             | 2 |
+      | Identification num  | 1000j188             | 2 |
       | Country of Issue    | Albania              | 3 |
-      | epermit num         | jhb1                 | 4 |
+      | epermit num         | jhbak1262            | 4 |
       | epermit type        | Asylum Seeker Permit | 5 |
-
     And Enter identification Expiry Date "<IED>"
       | Identification Type | Driving Licence    | 0 |
-      | Identification num  | account12895       | 1 |
+      | Identification num  | account128100      | 1 |
       | Register Ind        | Employment Details | 2 |
       | Employment Position | Senior Executive   | 3 |
       | Employer's Name     | SiddharthReddy     | 4 |
@@ -58,18 +50,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | Purpose Value            | Personal                                                                | 33 12 |
       | ContactTypeValue         | Email                                                                   | 34 13 |
       | ContactDetails           | margiewambui11@gmail.com                                                | 35 14 |
-
-#    And enters attachment details "National ID"  with number "5000670120" and path "C:\id_doc.png"
-    And enters attachment details "Passport"  with number "9870000004503" and path "C:\id_doc.png"
-    Then Click On Individual Page Submit Button
-    And  Verify the ARN number "<ARN>"
-#    Then wait for webpage to load
-    Given Open CRM URL Module
-    And Close Popup Window
-    And Click start search
-    #Then switch to frame
-    When enters reference number in search results
-#  And enters attachment details "National ID"  with number "00000003" and path "C:\Users\v-bakam\Downloads\id_doc.png"
+  And enters attachment details "National ID"  with number "00000003" and path "C:\id_doc.png"
     And enters attachment details "Passport"  with number "00106" and path "C:\id_doc.png"
     Then Click On Individual Page Submit Button
     Then Verify save success message "Processing Completed - Reference Number"
@@ -83,21 +64,26 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\users\Maxwell Maragia\downloads"
+    And Download the Attachment "C:\Users\barnaby.kamau\Downloads"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
-    Then wait for duplicate check
+    Then switch to frame
+    Then wait for duplicate check <Approve>
+    Then switch to frame
+    And Click on NextStage button
     Then switch to frame
     And Select Approval outcome dropdown value to Approve <Approve>
     Then Click on Save button
     Then switch to frame
     And Verify the String "<Read>"
-    #  Change names after each run
+    And Clicks on Taxpayer name CRM
+    And refresh page
+    Then switch to frame0
+    Then Taxpayer Tin is displayed
     Examples:
       | DOB      | DOI        | IED        | ESD        | Approve    | Read     |
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | First Name | Approved |
-
 
 
  #@[SUC:01-01]
@@ -157,33 +143,6 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Examples:
       | DOB      | DOI        | IED        | ESD        | Validate                                            |
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | Address should have at least one primary indicator. |
-
-
-  Scenario Outline: Individual - [SUC:01-02] Approve Taxpayer [SUC:01-02] Approve Taxpayer (UAT_TCS 02.01.1)To verify the process of Approving Taxpayer Registration
-    Given Open CRM URL Module
-    And Close Popup Window
-    And Click start search
-    Then switch to frame
-    When enters reference number in search results
-    And Pick registration case
-    And Click on NextStage button
-    Then switch to frame
-    Then Goto view AttachmentDetails screen
-    And Download the Attachment
-    Then switch to frame
-    Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
-    And Click on NextStage button
-    Then switch to frame
-    Then wait for duplicate check
-    And Click on NextStage button
-    Then switch to frame
-    And Select Approval outcome dropdown value to Approve <Approve>
-    Then Click on Save button
-    And Verify the String "<Read>"
-
-    Examples:
-      | Approve    | Read     |
-      | First Name | Approved |
 
 #  @[SUC:01-01]
   Scenario Outline: UAT_TCS 02.01.2: To verify the Process of Rejecting Application - Invalid Identification Details

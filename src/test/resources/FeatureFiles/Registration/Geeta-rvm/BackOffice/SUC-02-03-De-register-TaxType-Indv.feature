@@ -1,4 +1,5 @@
-Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
+
+Feature: SUC:02-03 De-register Tax Type	Individual - De-Register Tax Type
 
   @SUC:02-03- @UAT_TCS-01.21.1 @Red-Dereg
   Scenario Outline: UAT_TCS 01.21.1	To verify the Process of Deregistering a Tax type
@@ -12,7 +13,7 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     And Enter TIN number "<TIN>"
     And Click on search
 #    And CLick on taxtype in grid
-    Then Click table column taxtype "Capital Gains Tax"
+    Then Click table column taxtype "Withholding Tax(5.5% & 10.5%)"
     And Select EDD "<EDD>"
     And Select de register Reason "<Reason>"
     Then Click on DeRegister button
@@ -33,8 +34,8 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN         | EDD        | Reason                | Read     | Approve                 |
-      | Organisation      | C0000036358 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register |
+      | ClasificationType | TIN      | EDD        | Reason      | Read     |Approve|
+      | Individual        | 1000008207 | 06/04/2021 | Liquidation | Approved |Tax Type To De-Register|
 
   @SUC:02-03 @UAT_TCS-01.21.2
   Scenario: UAT_TCS-01.21.2	To verify the Process of Validation Error during Deregister Tax Type
@@ -44,7 +45,7 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     And Click on regisration link
     And Goto Manage taxpayer
     And Goto DeRegister
-    And Select Taxpayer Classification Type "Organisation"
+    And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "N0000033472"
     And Click on search
     And CLick on taxtype in grid
@@ -85,8 +86,8 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN      | EDD        | Reason      | Read     |
-      | Organisation      | P0015169 | 06/04/2029 | Liquidation | Rejected |
+      | ClasificationType | TIN      | EDD        | Reason      |Read|
+      | Individual        | N0000036455 | 06/04/2029 | Liquidation |Rejected|
 
   @SUC:02-03 @UAT_TCS-01.21.4
   Scenario: UAT_TCS-01.21.4	To verify the Process of Deregistering Personal Income Tax when other Taxes are active
@@ -96,7 +97,7 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     And Click on regisration link
     And Goto Manage taxpayer
     And Goto DeRegister
-    And Select Taxpayer Classification Type "Organisation"
+    And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "P0015169"
     And Click on search
     Then Click table column taxtype "Personal Income Tax"
@@ -113,7 +114,7 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     And Click on regisration link
     And Goto Manage taxpayer
     And Goto DeRegister
-    And Select Taxpayer Classification Type "Organisation"
+    And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "C0019788"
     And Click on search
     Then Click table column taxtype "Withholding Tax(WHT)"
@@ -130,7 +131,7 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     And Click on regisration link
     And Goto Manage taxpayer
     And Goto DeRegister
-    And Select Taxpayer Classification Type "Organisation"
+    And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "P0015169"
     And Click on search
     Then Click table column taxtype "Withholding Tax(WHT)"
@@ -147,7 +148,7 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     And Click on regisration link
     And Goto Manage taxpayer
     And Goto DeRegister
-    And Select Taxpayer Classification Type "Organisation"
+    And Select Taxpayer Classification Type "Individual"
     And Enter TIN number "P0020653"
     And Click on search
     Then Click table column taxtype "Capital Gain Tax(CGT)"

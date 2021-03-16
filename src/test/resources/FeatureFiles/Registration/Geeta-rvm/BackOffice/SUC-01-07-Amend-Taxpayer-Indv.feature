@@ -1,12 +1,12 @@
 Feature: [SUC:01-07] Amend Taxpayer	Individual - Amend Taxpayer
 
-  @SUC:01-07 @UAT_TCS-01.03.1 @UAT_TCS-01.07.1
+  @SUC:01-07- @UAT_TCS-01.03.1 @UAT_TCS-01.07.1
   Scenario Outline: UAT_TCS 01.07.1	To verify the process of Amend Taxpayer Data
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
     Then User should be logged in
     Then Go to registration > manage taxpayer > update taxpayer
-    Then Enter tin as "N0000036110"
+    Then Enter tin as "1000007200"
     Then Click search : id "SearchForm:j_idt40"
     Then Enter first name "<firstName>" and last name "<lastName>"
     Then Select reason for amendment "<amendmentReason>"

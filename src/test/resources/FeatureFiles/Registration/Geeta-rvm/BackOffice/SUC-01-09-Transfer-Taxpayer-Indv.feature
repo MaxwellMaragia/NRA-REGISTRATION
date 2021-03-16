@@ -1,6 +1,26 @@
 Feature: [SUC:01-09] Transfer Taxpayer	Individual - Transfer Taxpayer
 
   @SUC:01-09
+  Scenario Outline:  UAT_TCS 01.13.3 To verify the process of checking Validation error during Transfer Taxpayer
+    Given User navigates to the login page
+    When Enters the username "tripsuser" and password "Passw0rd"
+    Then User should be logged in
+    And  Click on regisration link
+    And  Goto Manage taxpayer
+    And Goto Transfer Taxpayer
+    And Select Taxpayer Classification Type "<ClasificationType>"
+    And Enter TIN number "<TIN>"
+    And Click on search
+    And Select Date of transfer "<DateOfTransfer>"
+    And Select Reason "<Reason>"
+    Then Click on tarnsfer
+    Then message is displayed "New Office: Validation Error: Value is required."
+
+    Examples:
+      | username  | password | ClasificationType | TIN         | DateOfTransfer | Reason                                   |
+      | tripsuser | Passw0rd | Individual        | N0000036455 | 06/04/2025     | The individual taxpayer location changed |
+
+  @SUC:01-09
   Scenario Outline:  UAT_TCS 01.13.1	To verify the process of Transferring a Taxpayer
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -79,27 +99,11 @@ Feature: [SUC:01-09] Transfer Taxpayer	Individual - Transfer Taxpayer
       | username  | password | ClasificationType | TIN         |
       | tripsuser | Passw0rd | Individual        | N0000024813 |
 
-  @SUC:01-09
-  Scenario Outline:  UAT_TCS 01.13.3 To verify the process of checking Validation error during Transfer Taxpayer
-    Given User navigates to the login page
-    When Enters the username "tripsuser" and password "Passw0rd"
-    Then User should be logged in
-    And  Click on regisration link
-    And  Goto Manage taxpayer
-    And Goto Transfer Taxpayer
-    And Select Taxpayer Classification Type "<ClasificationType>"
-    And Enter TIN number "<TIN>"
-    And Click on search
-    And Select Date of transfer "<DateOfTransfer>"
-    And Select Reason "<Reason>"
-    Then Click on tarnsfer
-    Then message is displayed "New Office: Validation Error: Value is required."
 
 
 
-    Examples:
-      | username  | password | ClasificationType | TIN         | DateOfTransfer | Reason                                   |
-      | tripsuser | Passw0rd | Individual        | N0000036455 | 06/04/2025     | The individual taxpayer location changed |
+
+
 
 
   @SUC:01-09

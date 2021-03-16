@@ -37,8 +37,8 @@ Feature: SUC:02-01 Register Tax Type-Org
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | Type         | TIN         | Tax type          | Approve  | Read     |
-      | Organisation | C0000036498 | Withholding Tax(5.5% & 10.5%) | Tax Type | Approved |
+      | Type         | TIN        | Tax type                      | Approve  | Read     |
+      | Organisation | 1000008207 | Withholding Tax(5.5% & 10.5%) | Tax Type | Approved |
 
 
   @UAT_TCS-01.20.3-org

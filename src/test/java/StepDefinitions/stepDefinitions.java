@@ -55,13 +55,13 @@ public class stepDefinitions extends BaseClass {
         driver.findElement(By.id("loginForm:username")).sendKeys(strArg1);
         driver.findElement(By.id("loginForm:password")).clear();
         driver.findElement(By.id("loginForm:password")).sendKeys(strArg2);
-        driver.findElement(By.id("loginForm:j_idt19")).click();
+        driver.findElement(By.xpath("//button[@type='submit' and span='Login']")).click();
     }
 
     @Then("^User should be logged in$")
     public void user_should_be_logged_in() throws Throwable {
         String URL = driver.getCurrentUrl();
-        Assert.assertEquals(URL, "https://backoffice.mra.mw:8443/trips-ui/faces/login/Welcome.xhtml");
+        Assert.assertEquals(URL, "http://34.241.245.79:8080/trips-ui/faces/login/Welcome.xhtml");
     }
 
     @Then("^User logs out successfully$")
@@ -1464,7 +1464,7 @@ public class stepDefinitions extends BaseClass {
         List<List<String>> data =table.asLists();
 
         driver.findElement(By.id(Pro.getProperty("FirstName_ID"))).sendKeys(data.get(0).get(1));
-        driver.findElement(By.id(Pro.getProperty("LastName_ID"))).sendKeys(data.get(1).get(1));
+        driver.findElement(By.id(Pro.getProperty("LastName_ID"))).sendKeys(data.get(1).get(1) + " " +BaseClass.getRandom(4));
         driver.findElement(By.id("RegisterIndividual:individualAccordion:MothersMaidenName")).sendKeys("Wambui");
         Thread.sleep(2000);
         Actions action = new Actions(driver);
@@ -1652,14 +1652,7 @@ public class stepDefinitions extends BaseClass {
             }
         }
         Thread.sleep(4000);
-//            List<WebElement> IdAdd=driver.findElements(By.id(Pro.getProperty("Identification_Add_ID")));
-//            for (WebElement ele : IdAdd)
-//            {
-//
-//                JavascriptExecutor js1 = (JavascriptExecutor) driver;
-//                js1.executeScript("arguments[0].scrollIntoView(true);",ele);
-//
-//            }
+
         WebDriverWait wait=new WebDriverWait(driver,50);
         WebElement Identification=wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(Pro.getProperty("Identification_Add_ID"))));
 
@@ -1671,7 +1664,7 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(2000);
         WebElement identificationNumber=driver.findElement(By.id(Pro.getProperty("Identification_Number_ID")));
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        identificationNumber.sendKeys(String.valueOf(timestamp.getTime()));
+        identificationNumber.sendKeys(BaseClass.getRandom(4));
 
         WebDriverWait Iwait=new WebDriverWait(driver,60);
         Iwait.until(ExpectedConditions.elementToBeClickable(By.xpath(Pro.getProperty("IdenificationType_CLICK_XPATH")))).click();
@@ -1725,20 +1718,10 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(2000);
         driver.findElement(By.id(Pro.getProperty("Identification_Frame_OK_ID"))).click();
 
-//            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//            driver.switchTo().defaultContent();
 
-//            Thread.sleep(2000);
-//            List<WebElement> recidentadd=driver.findElements(By.id(Pro.getProperty("Identification_Add_ID")));
-//            for (WebElement ele : recidentadd)
-//            {
-//
-//                JavascriptExecutor js1 = (JavascriptExecutor) driver;
-//                js1.executeScript("arguments[0].scrollIntoView(true);",ele);
-//
-//            }
+        WebDriverWait wait=new WebDriverWait(driver,60);
         Thread.sleep(5000);
-        WebElement Identification1=driver.findElement(By.id(Pro.getProperty("Identification_Add_ID")));
+        WebElement Identification1 =wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(Pro.getProperty("Identification_Add_ID"))));
         Identification1.click();
         Thread.sleep(5000);
         WebElement  idfnframe= driver.findElement(By.tagName("iframe"));
@@ -1920,6 +1903,7 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(2000);
         WebElement SName=driver.findElement(By.xpath(Pro.getProperty("Addresses_StreetName_XPATH")));
         action.sendKeys(SName,data.get(6).get(1)).build().perform();
+        Thread.sleep(2000);
         WebElement CName=driver.findElement(By.xpath(Pro.getProperty("Addresses_Town/City_XPATH")));
         action.sendKeys(CName,data.get(7).get(1)).build().perform();
 
@@ -6233,6 +6217,33 @@ public class stepDefinitions extends BaseClass {
 
     }
 
+    @And("^Clicks on Taxpayer name CRM$")
+    public void clicks_on_taxpayer_name_crm() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        Thread.sleep(9000);
+        WebElement NameLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header_tbg_taxpayer_lookupValue")));
+        NameLabel.click();
+    }
+
+    @And("^refresh page$")
+    public void refresh_page() throws Throwable {
+        driver.navigate().refresh();
+        Thread.sleep(5000);
+    }
+
+    @Then("^Taxpayer Tin is displayed$")
+    public void taxpayer_tin_is_displayed() throws Throwable {
+        Thread.sleep(3000);
+
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebElement tinLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("TIN Number_label")));
+        System.out.println("---------------------------------------------------------");
+        System.out.println("Taxpayer TIN is " + tinLabel.getText());
+        System.out.println("---------------------------------------------------------");
+    }
+
+
+
     @Then("^Click on Taxpayer name$")
     public void click_on_Taxpayer_name() throws Throwable {
 
@@ -6656,6 +6667,14 @@ public class stepDefinitions extends BaseClass {
         driver.switchTo().frame(specificframe);
         Thread.sleep(3000);
 
+    }
+
+    @Then("^wait for duplicate check (.+)$")
+    public void wait_for_duplicate_check(String approve) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_RegistrationApplicationAngular")));
+        driver.switchTo().frame(frame);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[text()='"+approve+"']")));
     }
 
     @When("^enters reference number in search results$")
@@ -7549,8 +7568,8 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025896/2021");
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025896/2021");
+        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
     }
 
@@ -7699,11 +7718,11 @@ public class stepDefinitions extends BaseClass {
         driver.switchTo().frame(Iframe);
     }
 
-    @Then("^Switch to frame 2$")
-    public void shift_focus_to_second_frame_two() throws Throwable {
-        Thread.sleep(2000);
-        driver.switchTo().frame(1);
-    }
+//    @Then("^Switch to frame 2$")
+//    public void shift_focus_to_second_frame_two() throws Throwable {
+//        Thread.sleep(2000);
+//        driver.switchTo().frame(1);
+//    }
 
     @Then("^Switch to default$")
     public void switch_to_default() throws Throwable {

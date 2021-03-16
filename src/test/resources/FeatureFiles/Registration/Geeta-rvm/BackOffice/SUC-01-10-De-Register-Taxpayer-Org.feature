@@ -35,7 +35,7 @@ Feature: [SUC:01-10] De-Register Taxpayer	Organisation - Deregister Taxpayer
     And Verify the String "<Read>"
     Examples:
       | ClasificationType | TIN         | EDD        | Reason                | Read     | Approve                    |
-      | Organisation      | C0000036234 | 06/04/2029 | Change of Return Type | Approved | Reason for De-Registration |
+      | Organisation      | 1000008207 | 06/04/2029 | Change of Return Type | Approved | Reason for De-Registration |
 
   @SUC:01-10
   Scenario Outline: UAT_TCS 01.18.1	To verify the Process of Finding a Taxpayer by TPIN

@@ -1,6 +1,6 @@
 Feature: SUC:01-04_Update Registration Application
 
-  @UAT_TCS-01.03.2
+  @UAT_TCS-01.03.2 @UAT_TCS-01.04.2
   Scenario Outline: UAT_TCS-01.03.2-To verify the process of checking validation error
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"

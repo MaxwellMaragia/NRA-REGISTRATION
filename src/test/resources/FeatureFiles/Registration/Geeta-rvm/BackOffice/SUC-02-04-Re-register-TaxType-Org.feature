@@ -1,6 +1,6 @@
 Feature: [SUC:02-04] Re-register Tax Type Organisation: Reregister Tax Type
 
-  @UAT_TCS-01.24.1-- @Red-Dereg
+  @UAT_TCS-01.24.1-- @Reg-Rereg
   Scenario Outline: UAT_TCS 01.24.1	To verify the Process of Reregistering a Tax type
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -8,11 +8,11 @@ Feature: [SUC:02-04] Re-register Tax Type Organisation: Reregister Tax Type
     When I enter valid data on the Re-RegisterTaxType Individual page
       | Re-Register Tax         | Re-Register Tax                    | 0 |
       | TaxpayerClassificationT | Organisation                       | 1 |
-      | TaxPayer_TIN            | C0000036358                        | 2 |
+      | TaxPayer_TIN            | 1000008207                         | 2 |
       | Re-Reg Reason           | Taxable Turnover exceeds threshold | 3 |
       | EOR                     | 16092030                           | 4 |
       | Amend Reson             | Change of Additional Details       | 5 |
-      | Taxtype Type            | Capital Gains Tax                  | 6 |
+      | Taxtype Type            | Withholding Tax(5.5% & 10.5%)      | 6 |
     Then ReRegister ARN number will generate
       | ARN number | Processing Completed - Reference Number - ARN | 0 |
     Then Open CRM and close modal
