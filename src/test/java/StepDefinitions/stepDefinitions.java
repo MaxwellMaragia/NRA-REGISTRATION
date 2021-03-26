@@ -1551,6 +1551,8 @@ public class stepDefinitions extends BaseClass {
         driver.findElement(By.xpath("//li[@data-label='"+data.get(0).get(1)+"']")).click();
 
 
+
+
         Thread.sleep(3000);
         driver.findElement(By.id(Pro.getProperty("PLACEOFBIRTH_LINK_ID"))).sendKeys(data.get(1).get(1));
         Thread.sleep(7000);
@@ -1600,6 +1602,14 @@ public class stepDefinitions extends BaseClass {
                 break;
             }
         }
+
+        Thread.sleep(4000);
+        WebElement officeAssigned=driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:AssignedOffice\"]/div[3]"));
+        officeAssigned.click();
+        Thread.sleep(4000);
+
+//        driver.findElement(By.xpath("//li[@data-label='"+data.get(5).get(1)+"']")).click();
+        driver.findElement(By.id("RegisterIndividual:individualAccordion:AssignedOffice_1")).click();
 
     }
 
@@ -1743,10 +1753,8 @@ public class stepDefinitions extends BaseClass {
                 break;
             }
         }
-
-        Thread.sleep(4000);
-        driver.findElement(By.id(Pro.getProperty("Identification_Frame_OK_ID"))).click();
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(Pro.getProperty("Identification_Frame_OK_ID")))).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.switchTo().defaultContent();
 
 
@@ -1784,7 +1792,8 @@ public class stepDefinitions extends BaseClass {
 
     @And("^enters attachment details \"([^\"]*)\"  with number \"([^\"]*)\" and path \"([^\"]*)\"$")
     public void enters_attachment_details_something_with_number_something_and_path_something(String strArg1, String strArg2, String strArg3) throws Throwable {
-        WebElement attachTab=driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[10]"));
+        Thread.sleep(3000);
+        WebElement attachTab=driver.findElement(By.xpath("//a[contains(text(),'Attachments')]"));
         attachTab.click();
         Thread.sleep(2000);
 
@@ -1825,43 +1834,135 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(5000);
     }
 
+    @And("^Enter Sole Proprietor Additional Details$")
+    public void enter_sole_proprietor_additional_details(DataTable AddTable) throws Throwable {
+        List<List<String>> data = AddTable.asLists();
+        Actions action = new Actions(driver);
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+
+        WebElement soleProprietorTab = driver.findElement(By.xpath("//a[contains(text(),'Sole Proprietor Additional Details')]"));
+        soleProprietorTab.click();
+
+        WebElement addBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("RegisterIndividual:individualAccordion:tradingNameTableHandler:AddTradingNameDetails")));
+        addBtn.click();
+
+        //Switch to NEW Trading Names frame
+        WebElement idframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
+        driver.switchTo().frame(idframe);
+
+        WebElement tradingNameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("TradingNameDetails:TradingName")));
+        tradingNameInput.sendKeys(data.get(0).get(1));
+
+        WebElement primaryTradingCheckBox = driver.findElement(By.xpath("//*[@id=\"TradingNameDetails:PrimaryTradingName\"]/div[2]"));
+        primaryTradingCheckBox.click();
+
+        Thread.sleep(2000);
+        WebElement effectiveDate = driver.findElement(By.id("TradingNameDetails:EffectiveDate_input"));
+        effectiveDate.sendKeys(Keys.ENTER);
+//        effectiveDate.sendKeys(Keys.ESCAPE);
+        Thread.sleep(2000);
+
+        WebElement capitalInvested = driver.findElement(By.id("TradingNameDetails:SourceOfCapitalInv"));
+        capitalInvested.sendKeys(data.get(1).get(1));
+
+        WebElement existingCapital = driver.findElement(By.id("TradingNameDetails:ExistBusinessCapital_input"));
+        existingCapital.sendKeys(data.get(2).get(1));
+
+        WebElement totalCapital = driver.findElement(By.id("TradingNameDetails:TotCapitalInvst_input"));
+        totalCapital.sendKeys(data.get(3).get(1));
+
+        WebElement natureOfBusiness = driver.findElement(By.id("TradingNameDetails:NatureOfBusiness"));
+        natureOfBusiness.sendKeys(data.get(4).get(1));
+
+        WebElement AccountYearEndDayDropdown = driver.findElement(By.xpath("//*[@id=\"TradingNameDetails:AccountYearEndDateDD\"]/div[3]"));
+        AccountYearEndDayDropdown.click();
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//li[@data-label='" + data.get(5).get(1) + "']")).click();
+        Thread.sleep(2000);
+        WebElement AccountYearEndMonthDropdown = driver.findElement(By.xpath("//*[@id=\"TradingNameDetails:AccountYearEndDateMM\"]/div[3]"));
+        AccountYearEndMonthDropdown.click();
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//li[@data-label='" + data.get(6).get(1) + "']")).click();
+
+        WebElement AddressBtn = driver.findElement(By.id("TradingNameDetails:AddTradingAddress"));
+        AddressBtn.click();
+
+        Thread.sleep(5000);
+
+
+        switch_to_default();
+        driver.switchTo().frame(1);
+
+        WebElement typeSolProprietorDropdown = driver.findElement(By.xpath("//*[@id=\"AddressDetails:AddressType\"]/div[3]"));
+        typeSolProprietorDropdown.click();
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//li[@data-label='" + data.get(7).get(1) + "']")).click();
+
+        Thread.sleep(2000);
+        WebElement citySolProprietor = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("AddressDetails:City")));
+        citySolProprietor.sendKeys(data.get(8).get(1));
+
+        WebElement regionProprietorDropdown = driver.findElement(By.xpath("//*[@id=\"AddressDetails:PostalRegion\"]/div[3]"));
+        regionProprietorDropdown.click();
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//li[@data-label='" + data.get(8).get(1) + "']")).click();
+
+        Thread.sleep(3000);
+        WebElement districtSolProprietorDropdown = driver.findElement(By.xpath("//*[@id=\"AddressDetails:District1\"]/div[3]"));
+        districtSolProprietorDropdown.click();
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//li[@data-label='" + data.get(9).get(1) + "']")).click();
+
+        Thread.sleep(2000);
+        WebElement okButton = driver.findElement(By.xpath("//button[@type='submit' and span='Ok']"));
+        okButton.click();
+
+
+        Thread.sleep(4000);
+        switch_to_default();
+        driver.switchTo().frame(0);
+        WebElement okButton2 = driver.findElement(By.xpath("//button[@type='submit' and span='Ok']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", okButton2);
+        Thread.sleep(500);
+        okButton2.click();
+
+
+    }
 
 
 
     @When("^Enter Employee details \"([^\"]*)\"$")
-    public void enter_Employee_details(String ESD , DataTable Employetable) throws Throwable {
+    public void enter_Employee_details(String ESD, DataTable Employetable) throws Throwable {
         Thread.sleep(3000);
 
-        List<List<String>> data =Employetable.asLists();
+        List<List<String>> data = Employetable.asLists();
         Actions action = new Actions(driver);
 	/*WebElement DateES=driver.findElement(By.xpath(Pro.getProperty("Employment_details_Employment_StartDate_XPATH")));
 		action.sendKeys(DateES, ESD).build().perform();*/
-        JavascriptExecutor js = (JavascriptExecutor)driver;
-        js.executeScript("document.getElementById('"+Pro.getProperty("Employment_details_Employment_StartDate_ID")+"').setAttribute('value', '"+ESD+"')");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.getElementById('" + Pro.getProperty("Employment_details_Employment_StartDate_ID") + "').setAttribute('value', '" + ESD + "')");
         Thread.sleep(2000);
 
-        WebDriverWait Empwait=new WebDriverWait(driver,60);
-        Empwait.until(ExpectedConditions.elementToBeClickable(By.id(Pro.getProperty("Employment_details_OK_ID")))).click();
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id(Pro.getProperty("Employment_details_OK_ID")))).click();
         driver.switchTo().defaultContent();
-        WebDriverWait Recordwait=new WebDriverWait(driver,50);
+        WebDriverWait Recordwait = new WebDriverWait(driver, 50);
         Recordwait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Employment_details_RecordAdded_XPATH"))));
         List<WebElement> Occupation = driver.findElements(By.xpath(Pro.getProperty("RegisterIndividual_ITEM_XPATH")));
-        for(WebElement option : Occupation){
-            String text2= option.getText();
-            if(text2.equalsIgnoreCase(data.get(0).get(1)))
-            {
+        for (WebElement option : Occupation) {
+            String text2 = option.getText();
+            if (text2.equalsIgnoreCase(data.get(0).get(1))) {
                 option.click();
                 break;
             }
         }
         Thread.sleep(4000);
-        WebDriverWait Occupationwait=new WebDriverWait(driver,100);
+        WebDriverWait Occupationwait = new WebDriverWait(driver, 100);
         Occupationwait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Occupation/Business_occupationStatus_XPATH")))).click();
         List<WebElement> Employed = driver.findElements(By.xpath(Pro.getProperty("Occupation/Business_occupationStatus_ITEM_XPATH")));
-        for(WebElement option : Employed){
-            String text2= option.getText();
-            if(text2.equalsIgnoreCase(data.get(1).get(1)))
-            {
+        for (WebElement option : Employed) {
+            String text2 = option.getText();
+            if (text2.equalsIgnoreCase(data.get(1).get(1))) {
                 Actions builder = new Actions(driver);
                 builder.moveToElement(option).click(option);
                 builder.perform();
@@ -1872,89 +1973,115 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(4000);
         driver.findElement(By.xpath(Pro.getProperty("Occupation/Business_MainCategory_XPATH"))).click();
         List<WebElement> OccupationValue = driver.findElements(By.xpath(Pro.getProperty("Occupation/Business_MainCategory_ITEM_XPATH")));
-        for(WebElement option : OccupationValue){
-            String text2= option.getText();
-            if(text2.equalsIgnoreCase(data.get(2).get(1)))
-            {
+        for (WebElement option : OccupationValue) {
+            String text2 = option.getText();
+            if (text2.equalsIgnoreCase(data.get(2).get(1))) {
                 option.click();
                 break;
             }
+        }
+        Thread.sleep(4000);
+//        WebElement preciseDropdown = driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion:PreciseCategory\"]/div[3]"));
+//        preciseDropdown.click();
+//        Thread.sleep(4000);
+//        driver.findElement(By.xpath("//li[@data-label='" + data.get(3).get(1) + "']")).click();
+
+
+        List<WebElement> turnover = driver.findElements(By.id("RegisterIndividual:individualAccordion:TotalSalesTurnoverPA_input"));
+        if (turnover.size() > 0) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", turnover.get(0));
+            Thread.sleep(500);
+            turnover.get(0).sendKeys("3000000");
         }
 
-//        WebElement Addressadd=driver.findElement(By.id(Pro.getProperty("Addresses_ADD_ID")));
-        WebElement Addressadd=driver.findElement(By.xpath("//*[@id=\"RegisterIndividual:individualAccordion\"]/ul/li[5]/a"));
+
+        WebElement businessSectorAdd = driver.findElement(By.id("RegisterIndividual:individualAccordion:businessDetailsHandler:AddBusinessSD"));
+        businessSectorAdd.click();
+
+        WebDriverWait Wait = new WebDriverWait(driver, 10);
+        WebElement Taxtypeframe = Wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
+        driver.switchTo().frame(Taxtypeframe);
+
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//*[@id=\"BusinessSectorDetails:BusinessCode\"]/div[3]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//li[contains(text(),'0112 - Growing of rice')]")).click();
+
+        WebElement primaryIndicator = driver.findElement(By.xpath("//*[@id=\"BusinessSectorDetails:PrimaryIndicator\"]/div[2]"));
+        primaryIndicator.click();
+
+        Thread.sleep(2000);
+        WebElement okButton = driver.findElement(By.xpath("//button[@type='submit' and span='Ok']"));
+        okButton.click();
+
+        Thread.sleep(5000);
+        Wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Addresses')]"))).click();
+
+
+        WebElement Addressadd = Wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(Pro.getProperty("Addresses_ADD_ID"))));
         action.click(Addressadd).build().perform();
-        driver.findElement(By.id("RegisterIndividual:individualAccordion:addressTableHandler:AddAddress")).click();
-        Thread.sleep(7000);
-        WebElement  Addressframe= driver.findElement(By.tagName("iframe"));
+
+        WebElement Addressframe = Wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
         driver.switchTo().frame(Addressframe);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        WebDriverWait AddressType=new WebDriverWait(driver,50);
+        WebDriverWait AddressType = new WebDriverWait(driver, 50);
         AddressType.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Addresses_Type_XPATH")))).click();
         List<WebElement> AddressValue = driver.findElements(By.xpath(Pro.getProperty("Addresses_Type_ITEM_XPATH")));
-        for(WebElement option : AddressValue){
-            String text2= option.getText();
-            if(text2.equalsIgnoreCase(data.get(5).get(1)))
-            {
+        for (WebElement option : AddressValue) {
+            String text2 = option.getText();
+            if (text2.equalsIgnoreCase(data.get(5).get(1))) {
                 option.click();
                 break;
             }
         }
         Thread.sleep(2000);
-        WebElement SName=driver.findElement(By.xpath(Pro.getProperty("Addresses_StreetName_XPATH")));
-        action.sendKeys(SName,data.get(6).get(1)).build().perform();
+        WebElement SName = driver.findElement(By.xpath(Pro.getProperty("Addresses_StreetName_XPATH")));
+        action.sendKeys(SName, data.get(6).get(1)).build().perform();
         Thread.sleep(2000);
-        WebElement CName=driver.findElement(By.xpath(Pro.getProperty("Addresses_Town/City_XPATH")));
-        action.sendKeys(CName,data.get(7).get(1)).build().perform();
+        WebElement CName = driver.findElement(By.id("AddressDetails:City"));
+        action.sendKeys(CName, data.get(7).get(1)).build().perform();
 
         Thread.sleep(4000);
         driver.findElement(By.xpath(Pro.getProperty("Addresses_region_XPATH"))).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//li[contains(text(),'"+data.get(10).get(1)+"')]")).click();
+        driver.findElement(By.xpath("//li[contains(text(),'" + data.get(10).get(1) + "')]")).click();
 
         Thread.sleep(4000);
-        driver.findElement(By.xpath("//*[@id=\"AddressDetails:District1\"]/div[3]")).click();
-        Thread.sleep(1500);
-        driver.findElement(By.xpath("//li[contains(text(),'"+data.get(9).get(1)+"')]")).click();
+        driver.findElement(By.xpath(Pro.getProperty("Addresses_District_XPATH"))).click();
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//li[contains(text(),'" + data.get(9).get(1) + "')]")).click();
 
-
-
-        List<WebElement> AddressOK=driver.findElements(By.id(Pro.getProperty("Address_Scroll_View_XPATH")));
-        for (WebElement ele : AddressOK)
-        {
+        List<WebElement> AddressOK = driver.findElements(By.id(Pro.getProperty("Address_Scroll_View_XPATH")));
+        for (WebElement ele : AddressOK) {
 
             JavascriptExecutor js1 = (JavascriptExecutor) driver;
-            js1.executeScript("arguments[0].scrollIntoView(true);",ele);
+            js1.executeScript("arguments[0].scrollIntoView(true);", ele);
 
         }
-        WebElement AddOK=driver.findElement(By.id(Pro.getProperty("Addresses_OK_ID")));
+        WebElement AddOK = driver.findElement(By.id(Pro.getProperty("Addresses_OK_ID")));
         action.doubleClick(AddOK).build().perform();
         AddOK.click();
         driver.switchTo().defaultContent();
-        WebDriverWait AddressRecord=new WebDriverWait(driver,50);
+        WebDriverWait AddressRecord = new WebDriverWait(driver, 50);
         AddressRecord.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Addresses_RecordAdded_XPATH"))));
         List<WebElement> ContactReg = driver.findElements(By.xpath(Pro.getProperty("RegisterIndividual_ITEM_XPATH")));
-        for(WebElement option : ContactReg){
-            String text2= option.getText();
-            if(text2.equalsIgnoreCase(data.get(11).get(1)))
-            {
+        for (WebElement option : ContactReg) {
+            String text2 = option.getText();
+            if (text2.equalsIgnoreCase(data.get(11).get(1))) {
                 option.click();
                 break;
             }
         }
         driver.findElement(By.xpath(Pro.getProperty("ContactMethods_ADD_XPATH"))).click();
         Thread.sleep(5000);
-        WebDriverWait Purpose=new WebDriverWait(driver,50);
-
-        WebElement  ContMethodframe= Purpose.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
+        WebElement ContMethodframe = driver.findElement(By.tagName("iframe"));
         driver.switchTo().frame(ContMethodframe);
-
+        WebDriverWait Purpose = new WebDriverWait(driver, 50);
         Purpose.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("ContactMethods_Purpose_XPATH")))).click();
         List<WebElement> PurposeValue = driver.findElements(By.xpath(Pro.getProperty("ContactMethods_Purpose_ITEM_XPATH")));
-        for(WebElement option : PurposeValue){
-            String text2= option.getText();
-            if(text2.equalsIgnoreCase(data.get(12).get(1)))
-            {
+        for (WebElement option : PurposeValue) {
+            String text2 = option.getText();
+            if (text2.equalsIgnoreCase(data.get(12).get(1))) {
                 option.click();
                 break;
             }
@@ -1962,13 +2089,8 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(4000);
         driver.findElement(By.xpath(Pro.getProperty("ContactMethods_Type_XPATH"))).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//li[contains(text(),'"+data.get(13).get(1)+"')]")).click();
+        driver.findElement(By.xpath("//li[contains(text(),'" + data.get(13).get(1) + "')]")).click();
 
-//            JavascriptExecutor jsp = (JavascriptExecutor)driver;
-//            jsp.executeScript("arguments[0].click();", (driver.findElement(By.xpath(Pro.getProperty("ContactMethods_PrimaryIdicator_XPATH")))));
-
-//            WebElement PrimInd=driver.findElement(By.xpath(Pro.getProperty("ContactMethods_PrimaryIdicator_XPATH")));
-//            action.click(PrimInd).build().perform();
 
         Thread.sleep(2000);
         driver.findElement(By.id(Pro.getProperty("ContactMethods_ContactMethodDetails_ID"))).sendKeys(data.get(14).get(1));
@@ -2095,176 +2217,6 @@ public class stepDefinitions extends BaseClass {
 
 //------UAT_TCS 01.01.3	To verify the process of checking Validation error in entered data---
 
-    @When("^Enter Employee details for Primary indicattor \"([^\"]*)\"$")
-    public void enter_Employee_details_for_Primary_indicattor(String ESD, DataTable Employetable) throws Throwable {
-        Thread.sleep(3000);
-
-        List<List<String>> data = Employetable.asLists();
-        Actions action = new Actions(driver);
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.getElementById('" + Pro.getProperty("Employment_details_Employment_StartDate_ID") + "').setAttribute('value', '" + ESD + "')");
-        Thread.sleep(2000);
-
-        WebDriverWait Empwait = new WebDriverWait(driver, 60);
-        Empwait.until(ExpectedConditions.elementToBeClickable(By.id(Pro.getProperty("Employment_details_OK_ID")))).click();
-        driver.switchTo().defaultContent();
-        WebDriverWait Recordwait = new WebDriverWait(driver, 50);
-        Recordwait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Employment_details_RecordAdded_XPATH"))));
-        List<WebElement> Occupation = driver.findElements(By.xpath(Pro.getProperty("RegisterIndividual_ITEM_XPATH")));
-        for (WebElement option : Occupation) {
-            String text2 = option.getText();
-            if (text2.equalsIgnoreCase(data.get(0).get(1))) {
-                option.click();
-                break;
-            }
-        }
-        Thread.sleep(4000);
-        WebDriverWait Occupationwait = new WebDriverWait(driver, 100);
-        Occupationwait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Occupation/Business_occupationStatus_XPATH")))).click();
-        List<WebElement> Employed = driver.findElements(By.xpath(Pro.getProperty("Occupation/Business_occupationStatus_ITEM_XPATH")));
-        for (WebElement option : Employed) {
-            String text2 = option.getText();
-            if (text2.equalsIgnoreCase(data.get(1).get(1))) {
-                Actions builder = new Actions(driver);
-                builder.moveToElement(option).click(option);
-                builder.perform();
-                //  option.click();
-                break;
-            }
-        }
-        Thread.sleep(2000);
-        driver.findElement(By.xpath(Pro.getProperty("Occupation/Business_MainCategory_XPATH"))).click();
-        List<WebElement> OccupationValue = driver.findElements(By.xpath(Pro.getProperty("Occupation/Business_MainCategory_ITEM_XPATH")));
-        for (WebElement option : OccupationValue) {
-            String text2 = option.getText();
-            if (text2.equalsIgnoreCase(data.get(2).get(1))) {
-                option.click();
-                break;
-            }
-        }
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//*[@id='RegisterIndividual:individualAccordion:PreciseCategory']/div[3]")).click();
-        List<WebElement> preciseValue = driver.findElements(By.id(Pro.getProperty("Occupation/Business_preciseCategory_ITEM_XPATH")));
-        for (WebElement option : preciseValue) {
-            String text2 = option.getText();
-            if (text2.equalsIgnoreCase(data.get(3).get(1))) {
-                option.click();
-                break;
-            }
-        }
-        Thread.sleep(9000);
-        List<WebElement> Addresses = driver.findElements(By.xpath(Pro.getProperty("RegisterIndividual_ITEM_XPATH")));
-        for (WebElement option : Addresses) {
-            String text2 = option.getText();
-            if (text2.equalsIgnoreCase(data.get(4).get(1))) {
-                option.click();
-                break;
-            }
-        }
-        WebElement Addressadd = driver.findElement(By.id(Pro.getProperty("Addresses_ADD_ID")));
-        action.click(Addressadd).build().perform();
-        Thread.sleep(7000);
-        WebElement Addressframe = driver.findElement(By.tagName("iframe"));
-        driver.switchTo().frame(Addressframe);
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-        WebDriverWait AddressType = new WebDriverWait(driver, 50);
-        AddressType.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Addresses_Type_XPATH")))).click();
-        List<WebElement> AddressValue = driver.findElements(By.xpath(Pro.getProperty("Addresses_Type_ITEM_XPATH")));
-        for (WebElement option : AddressValue) {
-            String text2 = option.getText();
-            if (text2.equalsIgnoreCase(data.get(5).get(1))) {
-                option.click();
-                break;
-            }
-        }
-        Thread.sleep(2000);
-        driver.findElement(By.xpath(Pro.getProperty("Addresses_PrimaryIndicator_XPATH"))).click();
-        Thread.sleep(1000);
-        WebElement SName = driver.findElement(By.xpath(Pro.getProperty("Addresses_StreetName_XPATH")));
-        action.sendKeys(SName, data.get(6).get(1)).build().perform();
-        WebElement CName = driver.findElement(By.xpath(Pro.getProperty("Addresses_Town/City_XPATH")));
-        action.sendKeys(CName, data.get(7).get(1)).build().perform();
-        Thread.sleep(4000);
-
-        driver.findElement(By.xpath(Pro.getProperty("Addresses_region_XPATH"))).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//li[contains(text(),'" + data.get(10).get(1) + "')]")).click();
-
-        Thread.sleep(4000);
-        driver.findElement(By.xpath(Pro.getProperty("Addresses_District_XPATH"))).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//li[contains(text(),'" + data.get(9).get(1) + "')]")).click();
-
-        // Thread.sleep(2000);
-
-        List<WebElement> AddressOK = driver.findElements(By.id(Pro.getProperty("Address_Scroll_View_XPATH")));
-        for (WebElement ele : AddressOK) {
-
-            JavascriptExecutor js1 = (JavascriptExecutor) driver;
-            js1.executeScript("arguments[0].scrollIntoView(true);", ele);
-
-        }
-        WebElement AddOK = driver.findElement(By.id(Pro.getProperty("Addresses_OK_ID")));
-        action.doubleClick(AddOK).build().perform();
-        AddOK.click();
-        driver.switchTo().defaultContent();
-        WebDriverWait AddressRecord = new WebDriverWait(driver, 50);
-        AddressRecord.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Addresses_RecordAdded_XPATH"))));
-        List<WebElement> ContactReg = driver.findElements(By.xpath(Pro.getProperty("RegisterIndividual_ITEM_XPATH")));
-        for (WebElement option : ContactReg) {
-            String text2 = option.getText();
-            if (text2.equalsIgnoreCase(data.get(11).get(1))) {
-                option.click();
-                break;
-            }
-        }
-        driver.findElement(By.xpath(Pro.getProperty("ContactMethods_ADD_XPATH"))).click();
-        Thread.sleep(9000);
-        WebElement ContMethodframe = driver.findElement(By.tagName("iframe"));
-        driver.switchTo().frame(ContMethodframe);
-        WebDriverWait Purpose = new WebDriverWait(driver, 50);
-        Purpose.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("ContactMethods_Purpose_XPATH")))).click();
-        List<WebElement> PurposeValue = driver.findElements(By.xpath(Pro.getProperty("ContactMethods_Purpose_ITEM_XPATH")));
-        for (WebElement option : PurposeValue) {
-            String text2 = option.getText();
-            if (text2.equalsIgnoreCase(data.get(12).get(1))) {
-                option.click();
-                break;
-            }
-        }
-        Thread.sleep(7000);
-//            WebDriverWait ContactType=new WebDriverWait(driver,50);
-//            ContactType.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("ContactMethods_Type_XPATH")))).click();
-//            List<WebElement> ContactTypeValue = driver.findElements(By.xpath(Pro.getProperty("ContactMethods_Type_ITEM_XPATH")));
-//            for(WebElement option : ContactTypeValue){
-//                String text2= option.getText();
-//                if(text2.equalsIgnoreCase(data.get(13).get(1)))
-//                {
-//
-//                    Actions builder = new Actions(driver);
-//                    builder.moveToElement(option).click(option);
-//                    builder.perform();
-//                    // option.click();
-//                    break;
-//                }
-//            }
-//            JavascriptExecutor jsp = (JavascriptExecutor)driver;
-//            jsp.executeScript("arguments[0].click();", (driver.findElement(By.xpath(Pro.getProperty("ContactMethods_PrimaryIdicator_XPATH")))));
-
-//            WebElement PrimInd=driver.findElement(By.xpath(Pro.getProperty("ContactMethods_PrimaryIdicator_XPATH")));
-//            action.click(PrimInd).build().perform();
-        WebDriverWait ContctDet = new WebDriverWait(driver, 50);
-        ContctDet.until(ExpectedConditions.visibilityOfElementLocated(By.id(Pro.getProperty("ContactMethods_ContactMethodDetails_ID")))).click();
-        WebElement email = driver.findElement(By.id(Pro.getProperty("ContactMethods_ContactMethodDetails_ID")));
-        email.clear();
-        email.sendKeys(data.get(14).get(1));
-        driver.findElement(By.xpath(Pro.getProperty("ContactMethods_OK_XPATH"))).click();
-        Thread.sleep(2000);
-        driver.switchTo().defaultContent();
-        Thread.sleep(1000);
-
-    }
 
     @Then("^Verify the Validation Error \"([^\"]*)\"$")
     public void verify_the_Validation_Error(String Validation) throws Throwable {
@@ -2542,24 +2494,24 @@ public class stepDefinitions extends BaseClass {
 
         Thread.sleep(2000);
         WebDriverWait District = new WebDriverWait(driver, 50);
+
         District.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("Addresses_District_XPATH")))).click();
-
-        Thread.sleep(7000);
+        Thread.sleep(4000);
         driver.findElement(By.xpath("//li[@data-label='"+data.get(13).get(1)+"']")).click();
-
+        Thread.sleep(2000);
         driver.findElement(By.id("AddressDetails:addOk")).click();
 
 
 
 
-        Thread.sleep(6000);
+        Thread.sleep(3000);
         driver.findElement(By.xpath(Pro.getProperty("ContactMethods_ADD_ID"))).click();
         driver.findElement(By.id("OrganisationSummaryDetails:organisationAccordion:contactDetailsHandler:AddContacts")).click();
 
         Thread.sleep(3000);
         WebElement ContMethodframe = driver.findElement(By.tagName("iframe"));
         driver.switchTo().frame(ContMethodframe);
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebDriverWait Purpose = new WebDriverWait(driver, 50);
         Purpose.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("ContactMethods_Purpose_XPATH")))).click();
         List<WebElement> PurposeValue = driver.findElements(By.xpath(Pro.getProperty("ContactMethods_Purpose_ITEM_XPATH")));
@@ -2572,7 +2524,7 @@ public class stepDefinitions extends BaseClass {
             }
         }
 
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Thread.sleep(2000);
 //            WebDriverWait ContactType=new WebDriverWait(driver,50);
 //            ContactType.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Pro.getProperty("ContactMethods_Type_XPATH")))).click();
@@ -6141,7 +6093,6 @@ public class stepDefinitions extends BaseClass {
 
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
-        driver.switchTo().defaultContent();
     }
 
     @Then("^Select Revise outcome dropdown value to Approve\"([^\"]*)\"$")
@@ -6198,6 +6149,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click on Save button$")
     public void click_on_Save_button() throws Throwable {
         Thread.sleep(2000);
+        driver.switchTo().defaultContent();
         driver.findElement(By.id("tbg_registrationapplication|NoRelationship|Form|Mscrm.Form.tbg_registrationapplication.Save")).click();
 
 
@@ -6238,7 +6190,8 @@ public class stepDefinitions extends BaseClass {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         WebElement tinLabel = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("TIN Number_label")));
         System.out.println("---------------------------------------------------------");
-        System.out.println("Taxpayer TIN is " + tinLabel.getText());
+        sharedata.Taxpayer_TIN_INDV=tinLabel.getText();
+        System.out.println("Taxpayer TIN is " + sharedata.Taxpayer_TIN_INDV);
         System.out.println("---------------------------------------------------------");
     }
 
@@ -7568,7 +7521,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^search for reference number$")
     public void search_for_reference_number() throws Throwable {
         Thread.sleep(3000);
-//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00025896/2021");
+//        driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys("ARN/00026550/2021");
         driver.findElement(By.id(Pro.getProperty("Search_Field_ID"))).sendKeys(sharedatastep.A_CRMARN);
         driver.findElement(By.id(Pro.getProperty("Search_Field_Submit_ID"))).click();
     }
