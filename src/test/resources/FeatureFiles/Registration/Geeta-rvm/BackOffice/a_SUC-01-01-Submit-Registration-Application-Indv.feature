@@ -2,7 +2,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
 
    #!!!!!!NAMES ARE APPENDED WITH RANDOM DIGITS ,SO NO NEED TO MODIFY
   #Change email download paths
-  @SUC:01-01 @UAT_TCS-01.01.4 @NRA @NRA-INDV @combine-
+  @SUC:01-01 @UAT_TCS-01.01.4 @NRA @NRA-INDV @combine
   Scenario Outline: UAT_TCS 01.01.4: To verify the process of Registering an individual successfully with mandatory fields
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -65,7 +65,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\Users\Bakam\Downloads"
+    And Download the Attachment "C:\Users\barnaby.kamau\Downloads\id_doc.png"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
@@ -86,7 +86,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | DOB      | DOI        | IED        | ESD        | Approve    | Read     |
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | First Name | Approved |
 
-  @[SUC:01-01] @UAT_TCS-01.01.3 @combine-
+  @[SUC:01-01] @UAT_TCS-01.01.3 @combine
   Scenario Outline: UAT_TCS 01.01.3	To verify the process of checking Validation error in entered data
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -141,7 +141,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | DOB      | DOI        | IED        | ESD        | Validate                                            |
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | Address should have at least one primary indicator. |
 
-  @[SUC:01-01] @UAT_TCS-02.01.2 @combine-
+  @[SUC:01-01] @UAT_TCS-02.01.2 @combine
   Scenario Outline: UAT_TCS 02.01.20-UAT_TCS 02.01.4-UAT_TCS 02.01.5: To verify the Process of Rejecting Application - Invalid Identification Details
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -204,7 +204,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\Users\Bakam\Downloads"
+    And Download the Attachment "C:\Users\barnaby.kamau\Downloads"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
@@ -272,8 +272,8 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | Contact Method           | Contact Methods                                                         | 32 11 |
       | Purpose Value            | Personal                                                                | 33 12 |
       | ContactTypeValue         | Email                                                                   | 34 13 |
-      | ContactDetails           | v-bakam@microsoft.com                                                   | 35 14 |
-    And enters attachment details "Business Registration Certificate"  with number "00000007" and path "C:\Users\Bakam\Desktop\id_doc.png"
+      | ContactDetails           | v-barnaby.kamau@microsoft.com                                                   | 35 14 |
+    And enters attachment details "Business Registration Certificate"  with number "00000007" and path "C:\Users\barnaby.kamau\Desktop\id_doc.png"
     And Enter Sole Proprietor Additional Details
       | Trading Name        | Trader1              | 0 |
       | Invested Capital    | 2000                 | 1 |
@@ -285,7 +285,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | Address Type        | Local Postal Address | 7 |
       | Region              | East                 | 8 |
       | District            | Kono                 | 9 |
-    And enters attachment details "Passport"  with number "00000007" and path "C:\Users\Bakam\Desktop\id_doc.png"
+    And enters attachment details "Passport"  with number "00000007" and path "C:\Users\barnaby.kamau\Desktop\id_doc.png"
     Then Click On Individual Page Submit Button
     And  Verify the ARN number "<ARN>"
     Then Open CRM and close modal
@@ -297,7 +297,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Then Click next stage button
     Then switch to frame
     Then Goto view AttachmentDetails screen
-    And Download the Attachment "C:\Users\Bakam\Downloads"
+    And Download the Attachment "C:\Users\barnaby.kamau\Downloads"
     Then switch to frame
     Then Select Identification Outcome dropdown value for Individual Taxpayer Approval
     And Click on NextStage button
@@ -321,32 +321,6 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
 
 
 
-
-
-#  @UAT_TCS-01.02.1
-#  Scenario Outline: UAT_TCS 01.02.1-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
-#    Given User navigates to the login page
-#    When Enters the username "tripsuser" and password "Passw0rd"
-#    Then Click on registration > register taxpayer > register organization
-#    Then Select category : organization "<Category>"
-#    Then Enter Organization name "<name>"
-#    Then Select Account end day "<endDay>"
-#    Then Select Account end month "<endMonth>"
-#    Then Enter source of capital "<sourceOfCapital>"
-#    Then Select place of incorporation "<Nationality>"
-#    Then Select reason for tin application : organization "<reasonForApplication>"
-#    And Click attachments tab : organization
-#    Then Click add "OrganisationSummaryDetails:organisationAccordion:attachmentTableHandler:AddAttachment"
-#    Then Switch to frame
-#    Then Select document type "<documentType>"
-#    Then Enter document number "<idNumber>"
-#    Then Browse for attachment "<path>"
-#    Then Click ok: xpath "//*[@id='AttachmentDetails:Ok']"
-#    Then Click save "OrganisationSummaryDetails:Save"
-#    Then Verify error message "Address should have at least one primary indicator"
-#    Examples:
-#      | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital |
-#      | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           |
 
   @UAT_TCS-01.02.2
   Scenario Outline: UAT_TCS 01.02.2-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
@@ -381,57 +355,5 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
     Examples:
       | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital | addressType          | town     | region         | district |
       | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           | Local Postal Address | Lilongwe | Central Region | Lilongwe |
-#
-#
-#  @UAT_TCS-01.02.3
-#  Scenario Outline: UAT_TCS 01.02.3-To verify the process of unsuccessful Registration for organization due to incomplete mandatory fields
-#    Given Browser is launched and trips URL loaded in address bar
-#    And User logged in as revenue officer
-#      | tripsuser | Passw0rd |
-#    Then Click on registration > register taxpayer > register organization
-#    Then Select category : organization "<Category>"
-#    Then Enter Organization name "<name>"
-#    Then Select Account end day "<endDay>"
-#    Then Select Account end month "<endMonth>"
-#    Then Enter source of capital "<sourceOfCapital>"
-#    Then Select place of incorporation "<Nationality>"
-#    Then Select reason for tin application : organization "<reasonForApplication>"
-#    Then Click add "OrganisationSummaryDetails:organisationAccordion:businessDetailsHandler:AddBusinessSD"
-#    Then Switch to frame
-#    Then Select business sector
-#    Then Click primary indicator checkbox "BusinessSectorDetails:PrimaryIndicator"
-#    And Click attachments tab : organization
-#    Then Click add "OrganisationSummaryDetails:organisationAccordion:attachmentTableHandler:AddAttachment"
-#    Then Switch to frame
-#    Then Select document type "<documentType>"
-#    Then Enter document number "<idNumber>"
-#    Then Browse for attachment "<path>"
-#    Then Click ok: xpath "//*[@id='AttachmentDetails:Ok']"
-#    Then Click address tab : organization
-#    Then Click add "OrganisationSummaryDetails:organisationAccordion:addressTableHandler:AddAddress"
-#    Then Switch to frame
-#    Then Select address type "<addressType>"
-#    Then Uncheck primary indicator checkbox
-#    Then Then enter town "<town>"
-#    Then Select region "<region>" and district "<district>"
-#    Then Click ok: xpath "//*[@id='AddressDetails:addOk']"
-#    And Click directors tab
-#    Then Click add "OrganisationSummaryDetails:organisationAccordion:directorsTableHandler:AddDirectors"
-#    Then Switch to frame
-#    Then Click find "DirectorsDetails:FindTin"
-#    Then Switch to default
-#    Then Switch to frame 2
-#    Then Click search : id "SearchForm:j_idt21"
-#    Then Click table column "//*[@id='SearchForm:resultsDataTable_data']/tr[1]/td[4]"
-#    Then Click continue "SearchForm:j_id16"
-#    Then Switch to frame
-#    Then Enter director start date "<directorStartDate>"
-#    Then Click save "OrganisationSummaryDetails:Save"
-#    Then Verify error message "Address should have at least one primary indicator"
-#    Examples:
-#      | Category     | name     | Nationality | reasonForApplication | idNumber | documentType            | path            | endDay | endMonth | sourceOfCapital | addressType          | town     | region         | district | directorStartDate |
-#      | Club Farmers | CODEI v1 | MALAWI      | Am an employer       | 32355247 | Letter Of Authorization | C:\\ronaldo.jpg | 04     | June     | sales           | Local Postal Address | Lilongwe | Central Region | Lilongwe | 11/07/2019        |
-#
-#
-#
+
     

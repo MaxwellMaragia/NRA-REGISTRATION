@@ -5,7 +5,7 @@ Feature: SUC:01-04-Update Registration Application Organization
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
     Then User should be logged in
-    Then Click on registration > register taxpayer > register organization
+    When I Fill the Organization Taxpayer Registration form
     Then Select category : organization "<Category>"
     Then Enter Organization name "<name>"
     Then Select Account end day "<endDay>"
@@ -40,7 +40,7 @@ Feature: SUC:01-04-Update Registration Application Organization
     Then Click save "OrganisationSummaryDetails:Save"
 
 
-  @UAT_TCS-01.04.2
+  @UAT_TCS-01.04.2 @SUC:01-04 @Reports
   Scenario: UAT_TCS 01.04.2-To verify the process of checking validation error
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"

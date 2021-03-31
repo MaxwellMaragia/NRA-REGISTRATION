@@ -1,6 +1,6 @@
 Feature: [SUC:02-04] Re-register Tax Type Individual: Reregister Tax Type
 
-  @UAT_TCS-01.23.1 @Red-Dereg
+  @UAT_TCS-01.23.1 @Red-Rereg
   Scenario Outline: UAT_TCS 01.23.1	To verify the Process of Reregistering a Tax type
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"

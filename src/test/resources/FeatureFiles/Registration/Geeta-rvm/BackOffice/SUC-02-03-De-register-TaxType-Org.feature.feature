@@ -1,5 +1,21 @@
 Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
 
+  @SUC:02-03 @UAT_TCS-01.21.2 @Reg-Dereg
+  Scenario: UAT_TCS-01.21.2	To verify the Process of Validation Error during Deregister Tax Type
+    Given User navigates to the login page
+    When Enters the username "tripsuser" and password "Passw0rd"
+    Then User should be logged in
+    And Click on regisration link
+    And Goto Manage taxpayer
+    And Goto DeRegister
+    And Select Taxpayer Classification Type "Organisation"
+    And Enter TIN number "1000022803"
+    And Click on search
+    And CLick on taxtype in grid
+    And Select EDD "06/04/2029"
+    Then Click on DeRegister button
+    Then Verify error message "Reason: Validation Error: Value is required"
+
   @SUC:02-03- @UAT_TCS-01.21.1 @Reg-Dereg
   Scenario Outline: UAT_TCS 01.21.1	To verify the Process of Deregistering a Tax type
     Given User navigates to the login page
@@ -12,7 +28,7 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     And Enter TIN number "<TIN>"
     And Click on search
 #    And CLick on taxtype in grid
-    Then Click table column taxtype "Withholding Tax(5.5% & 10.5%)"
+    Then Click table column taxtype <Taxtypes>
     And Select EDD "<EDD>"
     And Select de register Reason "<Reason>"
     Then Click on DeRegister button
@@ -33,24 +49,14 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
     Then switch to frame
     And Verify the String "<Read>"
     Examples:
-      | ClasificationType | TIN         | EDD        | Reason                | Read     | Approve                 |
-      | Organisation      | 1000008207 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register |
+      | ClasificationType | TIN        | EDD        | Reason                | Read     | Approve                 | Taxtypes                      |
+#      | Organisation      | 1000022803 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register | Capital Gains Tax             |
+      | Organisation      | 1000022803 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register | Goods and Services Tax        |
+      | Organisation      | 1000022803 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register | Pay As You Earn               |
+      | Organisation      | 1000022803 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register | Payroll Tax                   |
+      | Organisation      | 1000022803 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register | Rental Income Tax             |
+      | Organisation      | 1000022803 | 06/04/2029 | Change of Return Type | Approved | Tax Type To De-Register | Withholding Tax(5.5% & 10.5%) |
 
-  @SUC:02-03 @UAT_TCS-01.21.2
-  Scenario: UAT_TCS-01.21.2	To verify the Process of Validation Error during Deregister Tax Type
-    Given User navigates to the login page
-    When Enters the username "tripsuser" and password "Passw0rd"
-    Then User should be logged in
-    And Click on regisration link
-    And Goto Manage taxpayer
-    And Goto DeRegister
-    And Select Taxpayer Classification Type "Organisation"
-    And Enter TIN number "N0000033472"
-    And Click on search
-    And CLick on taxtype in grid
-    And Select EDD "06/04/2029"
-    Then Click on DeRegister button
-    Then Verify error message "Reason: Validation Error: Value is required"
 
   @SUC:02-03 @UAT_TCS-01.21.3
   Scenario Outline: UAT_TCS 01.21.3	To verify the Process of Supervisor rejecting deregistration application
@@ -88,22 +94,6 @@ Feature: SUC:02-03 De-register Tax Type	Organisation - De-Register Tax Type
       | ClasificationType | TIN      | EDD        | Reason      | Read     |
       | Organisation      | P0015169 | 06/04/2029 | Liquidation | Rejected |
 
-  @SUC:02-03 @UAT_TCS-01.21.4
-  Scenario: UAT_TCS-01.21.4	To verify the Process of Deregistering Personal Income Tax when other Taxes are active
-    Given User navigates to the login page
-    When Enters the username "tripsuser" and password "Passw0rd"
-    Then User should be logged in
-    And Click on regisration link
-    And Goto Manage taxpayer
-    And Goto DeRegister
-    And Select Taxpayer Classification Type "Organisation"
-    And Enter TIN number "P0015169"
-    And Click on search
-    Then Click table column taxtype "Personal Income Tax"
-    And Select EDD "06/04/2029"
-    And Select de register Reason "Liquidation"
-    Then Click on DeRegister button
-    Then Verify error message "Personal Income Tax should be the last"
 
   @SUC:02-03 @UAT_TCS-01.21.5
   Scenario: UAT_TCS-01.21.5	To verify the Process of Deregistering a Tax Type when Balance is greater than Zero

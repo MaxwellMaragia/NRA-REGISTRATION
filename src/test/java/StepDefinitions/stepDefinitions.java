@@ -6936,10 +6936,13 @@ public class stepDefinitions extends BaseClass {
 
     //......................................SUSPEND DORMANT TAXTYPE.............................................................//
 
-    @Then("^Click table column taxtype \"([^\"]*)\"$")
-    public void click_table_column_taxtype(String TaxType) throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'"+TaxType+"')]"))).click();
+    @Then("^Click table column taxtype (.+)$")
+    public void click_table_column_taxtype(String taxtypes) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[@id='DeregisterRegime:deregTable_data' and contains(...., '"+taxtypes+"')]"))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"DeregisterRegime:deregTable_data\"]/tr[2]"))).click();
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ENTER);
     }
@@ -8148,9 +8151,9 @@ public class stepDefinitions extends BaseClass {
     @Then("^Click on registration > register taxpayer > register organization$")
     public void openOrganizationRegistration() {
         WebDriverWait wait = new WebDriverWait(driver,30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[1]"))).click();
-        driver.findElement(By.xpath("//*[@id=\"MenuForm:j_idt29\"]/ul/li[1]/ul/li[1]")).click();
-        driver.findElement(By.xpath("//*[@id=\"sub1\"]/ul/li[2]")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Registration')]"))).click();
+        driver.findElement(By.xpath("//span[contains(text(),'Register Taxpayer')]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'Register Organisation')]")).click();
     }
 
     @Then("^Select category : organization \"([^\"]*)\"$")
