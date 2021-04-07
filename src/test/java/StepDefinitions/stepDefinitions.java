@@ -1823,7 +1823,11 @@ public class stepDefinitions extends BaseClass {
         docNumber.sendKeys(String.valueOf(timestamp.getTime()));
 
         Thread.sleep(2000);
-        driver.findElement(By.id("AttachmentDetails:AttachmentPath_input")).sendKeys(strArg3);
+        // set download path dynamically
+        String path =System.getProperty("user.dir")+ File.separator +"src\\test\\resources"+File.separator+strArg3;
+        WebElement El = driver.findElement(By.id("AttachmentDetails:AttachmentPath_input"));
+        El.sendKeys(path);
+
 
         Thread.sleep(2000);
         WebElement verifiedCheckbox=driver.findElement(By.xpath("//*[@id='AttachmentDetails:Verified']/div[2]/span"));
@@ -6005,26 +6009,19 @@ public class stepDefinitions extends BaseClass {
 
     @Then("^Download the Attachment \"([^\"]*)\"$")
     public void download_the_Attachment(String downloadpath) throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 150);
-
+        WebDriverWait wait = new WebDriverWait(driver, 100);
         WebElement downloadAttach = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Download']")));
         downloadAttach.click();
         Thread.sleep(9000);
-
-        boolean isPresent = false;
-        File dir = new File(downloadpath);
-        File[] dir_contents = dir.listFiles();
-
-        assert dir_contents != null;
-
-        for (File dir_content : dir_contents) {
-            if (dir_content.getName().equals("id_doc.png"))
-                isPresent = true;
-            dir_content.delete();
+        String downloadPath = "C:\\Users\\barnaby.kamau\\Downloads";
+        String fileName = downloadpath;
+        Thread.sleep(5000);
+        if (isFileDownloaded(downloadPath, fileName)) {
+            System.out.println(fileName + ": has been downloaded");
+            Assert.assertTrue(true);
+        } else {
+            Assert.assertFalse(fileName + ": has not been downloaded", false);
         }
-        Thread.sleep(4000);
-        Assert.assertTrue(isPresent);
-        driver.switchTo().defaultContent();
     }
 
     @And("^click validate documentation screen$")
@@ -7027,13 +7024,12 @@ public class stepDefinitions extends BaseClass {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         Actions action = new Actions(driver);
-        WebElement Outcome = driver.findElement(By.xpath("//*[@id=\"header_process_tbg_approvaloutcome3\"]/div[1]"));
-        WebElement hasLoaded = driver.findElement(By.id("header_process_tbg_approvaloutcome_lock"));
+        WebElement Outcome = driver.findElement(By.id("header_process_tbg_approvaloutcome3"));
+        List <WebElement> hasLoaded = driver.findElements(By.id("header_process_tbg_approvaloutcome_lock"));
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         Thread.sleep(7000);
-        if (hasLoaded.isDisplayed()) {
+        if (hasLoaded.size()>0) {
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            Thread.sleep(5000);
         } else {
             action.doubleClick(Outcome).build().perform();
             Outcome.click();
@@ -7600,6 +7596,7 @@ public class stepDefinitions extends BaseClass {
     @Then("^Enter tin as \"([^\"]*)\"$")
     public void enter_tin_as(String tin) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver,30);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SearchForm:accountNumber"))).sendKeys(sharedata.Taxpayer_TIN_INDV);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SearchForm:accountNumber"))).sendKeys(tin);
     }
 
@@ -7724,7 +7721,7 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(3000);
         driver.findElement(By.id("RegisterIndividual:LastName")).clear();
         Thread.sleep(3000);
-        driver.findElement(By.id("RegisterIndividual:LastName")).sendKeys(lastName);
+        driver.findElement(By.id("RegisterIndividual:LastName")).sendKeys(lastName + " " + BaseClass.getRandom(4));
         Thread.sleep(2000);
     }
 
@@ -7764,11 +7761,11 @@ public class stepDefinitions extends BaseClass {
     }
 
     @Then("^Check if changes reflect \"([^\"]*)\"$")
-    public void check_if_changes_reflect_something(String firstName) throws Throwable {
+    public void check_if_changes_reflect_something(String lastName) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver,100);
         String original = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("RegisterIndividual:FirstName"))).getText();
 
-        if (original.equals(firstName)) {
+        if (original.contains(lastName)) {
             Assert.assertTrue("Changes have reflected", true);
         } else {
             Assert.assertFalse("Changes not reflected", false);

@@ -1,12 +1,12 @@
 Feature: [SUC:01-07] Amend Taxpayer	Individual - Amend Taxpayer
 
-  @SUC:01-07- @UAT_TCS-01.03.1 @UAT_TCS-01.07.1
+  @SUC:01-07- @UAT_TCS-01.03.1 @UAT_TCS-01.07.1 @combine
   Scenario Outline: UAT_TCS 01.07.1	To verify the process of Amend Taxpayer Data
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
     Then User should be logged in
     Then Go to registration > manage taxpayer > update taxpayer
-    Then Enter tin as "1000007200"
+    Then Enter tin as "1000032000"
     Then Click search : id "SearchForm:j_idt40"
     Then Enter first name "<firstName>" and last name "<lastName>"
     Then Select reason for amendment "<amendmentReason>"
@@ -23,6 +23,8 @@ Feature: [SUC:01-07] Amend Taxpayer	Individual - Amend Taxpayer
     Then switch to frame
     Then Click next stage button
     Then switch to frame
+    Then Click next stage button
+    Then switch to frame
     Then approve transaction
     Then Click save CRM
     Then Status should be "<Status>"
@@ -32,7 +34,7 @@ Feature: [SUC:01-07] Amend Taxpayer	Individual - Amend Taxpayer
     Then Go to registration > manage taxpayer > update taxpayer
     Then Enter tin as "N0000036110"
     Then Click search : id "SearchForm:j_idt40"
-    Then Check if changes reflect "<firstName>"
+    Then Check if changes reflect "<lastName>"
     Examples:
       | firstName | lastName     | amendmentReason | Status   | SuccessMessage                          |
       | Max       | AmendTestOne | Change of Name  | Approved | Processing Completed - Reference Number |
