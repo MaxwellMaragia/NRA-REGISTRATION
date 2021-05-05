@@ -26,7 +26,7 @@ public class BaseClass {
 	
 	public static WebDriver getDriver() throws IOException
 	{
-		System.setProperty("webdriver.chrome.driver", "Browsers\\chromedriver_88.exe");
+		System.setProperty("webdriver.chrome.driver", "Browsers\\chromedriver_89.exe");
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();

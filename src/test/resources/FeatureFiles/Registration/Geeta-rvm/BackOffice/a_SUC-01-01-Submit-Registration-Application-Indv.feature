@@ -1,7 +1,7 @@
 Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpayer
 
   #Change email download paths
-  @SUC:01-01 @UAT_TCS-01.01.4 @NRA @NRA-INDV @combine--
+  @SUC:01-01 @UAT_TCS-01.01.4 @NRA @NRA-INDV @combine
   Scenario Outline: UAT_TCS 01.01.4: To verify the process of Registering an individual successfully with mandatory fields
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -85,7 +85,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | DOB      | DOI        | IED        | ESD        | Approve    | Read     |
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | First Name | Approved |
 
-  @[SUC:01-01] @UAT_TCS-01.01.3 @combine-
+  @[SUC:01-01] @UAT_TCS-01.01.3 @combine
   Scenario Outline: UAT_TCS 01.01.3	To verify the process of checking Validation error in entered data
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -140,7 +140,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | DOB      | DOI        | IED        | ESD        | Validate                                            |
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | Address should have at least one primary indicator. |
 
-  @[SUC:01-01] @UAT_TCS-02.01.2 @combine-
+  @[SUC:01-01] @UAT_TCS-02.01.2 @combine
   Scenario Outline: UAT_TCS 02.01.20-UAT_TCS 02.01.4-UAT_TCS 02.01.5: To verify the Process of Rejecting Application - Invalid Identification Details
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
@@ -224,7 +224,7 @@ Feature: [SUC:01-01] Submit Registration Application	Individual - Register Taxpa
       | 26091989 | 11/04/2010 | 11/04/2022 | 11/02/2000 | Processing Completed - Reference Number - ARN | First Name | Rejected |
 
 
-  @[SUC:01-01] @UAT_TCS-01.01.4 @NRA  @NRA-INDV @NRA-INDV-PROP @combine-
+  @[SUC:01-01] @UAT_TCS-01.01.4 @NRA  @NRA-INDV @NRA-INDV-PROP @combine
   Scenario Outline: UAT_TCS 01.01.4: To verify the process of Registering an individual successfully (Sole Proprietor)
     Given User navigates to the login page
     When Enters the username "tripsuser" and password "Passw0rd"
